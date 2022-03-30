@@ -7,22 +7,32 @@ Created on Tue Mar 15 14:54:55 2022
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as spio
+import os
 
 '''
 Loading EMG data
 '''
+no_electrodes = 12 #number of electrodes
+sampling_rate = 2000 #Hz
+classes = [3, 5, 6] #how many movement to classify
+subjects = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] #subjects to extract
+subjects_labels = [str(s) for s in subjects]
 
-#loads matlab data into an array
-mat = spio.loadmat('S11_E1_A1.mat', squeeze_me=True)
+script_path = os.path.abspath('Data_Extraction.py') #absolute path to script
+script_dir = os.path.split(script_path)[0] #absolute path into current directory
+script_dir = script_dir[:script_dir.rfind('\\')+1]
+#extract data for each subject
+rel_path = 'Data/'+'S1_E1_A1.mat' #relative path from current script directory to data file
+abs_file_path = os.path.join(script_dir, rel_path) #absolute path to data file
+#load data from MATLAB file
+mat = (spio.loadmat(abs_file_path, squeeze_me=True))
 emg = np.array(mat['emg'])
 stimulus = np.array(mat['stimulus'])
 index = np.where(stimulus==1) #finds time index of pose 1
 emg_pose_1 = emg[index]
 #for more electrodes
 emg_labelled = [emg[np.where(stimulus==i)] for i in range(2)]
-no_electrodes = np.shape(emg_pose_1)[1] #number of electrodes
 
-sampling_rate = 2000 #Hz
 time_pose_1 = len(emg_pose_1)/sampling_rate #data collection time interval in seconds
 
 
