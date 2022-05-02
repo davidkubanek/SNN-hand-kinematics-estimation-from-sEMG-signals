@@ -183,53 +183,67 @@ Extracting and transformting data
 '''
 no_electrodes = 12
 sampling_rate = 2000 #Hz
-classes = [3] #which movements to classify based on ID
+classes = [c+1 for c in range(17)] #which movements to classify based on ID
 subjects = [1] #subjects to extract
-emg_labelled, y, time_pose, _, _, restimulus, _ = load_data(subjects, classes, sampling_rate, no_electrodes)
-#single subject, single class repetition: data structure with 12 channels (electrodes)
-#shape (12, samples)
-#convert to microVolts
-emg_data = emg_labelled[0]*1000000
-emg_data = np.swapaxes(emg_data, 0, 1)
 
-pc_electrodes = []
-histograms = np.zeros(np.shape(classes))
-for c in [1]:
-    emg_labelled, y, time_pose, _, _, _, _ = load_data(subjects, [c], sampling_rate, no_electrodes)
+#ADD COMMENTS
+#stores the histograms for all classes
+histograms = np.zeros((len(classes)+1,len(h)))
+global_pc_electrodes = []
+no_pce = []
+y = []
+#for s in subjects:
+for c in classes:
+    pc_electrodes = []
+    emg_labelled, y_temp, time_pose, _, _, _, _ = load_data(subjects, [c], sampling_rate, no_electrodes)
+    y += y_temp
     for rep in range(len(emg_labelled)):
         #shape (12, samples)
         #convert to microVolts
         emg_data = emg_labelled[rep]*1000000
         emg_data = np.swapaxes(emg_data, 0, 1)
-        print(pc_electrodes)
-        pc_electrodes += np.ndarray.tolist(PCA_reduction(emg_data, no_electrodes, sampling_rate, ex_var=0.90, visual=0))
-    h = np.histogram(pc_electrodes, bins=bins_custom)[0]
-    
+        pce = PCA_reduction(emg_data, no_electrodes, sampling_rate, ex_var=0.90, visual=0)
+        no_pce += [len(pce)]
+        pc_electrodes += np.ndarray.tolist(pce)
+    #pc_histogram(pc_electrodes, no_electrodes, 'Principal Electrodes Histogram: Class {}'.format(c))
+    histograms[c] = np.histogram(pc_electrodes, bins=[b for b in range(no_electrodes+1)])[0]
+    global_pc_electrodes += pc_electrodes
+global_hist = np.sum(histograms, axis=0)
+pc_histogram(global_pc_electrodes, no_electrodes, 'Global Principal Electrodes Histogram')
+fig = plt.figure(figsize=(10,7))
+plt.scatter(y, no_pce, color='#52AD89', marker='+')
+plt.hlines(np.average(no_pce),0.5, max(y)+0.5,color='#AD5276', label='mean')
+plt.hlines(np.average(no_pce)+np.std(no_pce),0.5, max(y)+0.5,color='#AD5276',linestyles='dashed', label='std')
+plt.hlines(np.average(no_pce)-np.std(no_pce),0.5, max(y)+0.5, color='#AD5276', linestyles='dashed')
+plt.xlabel('Class ID [dimensionless]', fontname="Cambria", fontsize=12)
+plt.ylabel('Principal Electrodes Count [dimensionless]',fontname="Cambria", fontsize=12)
+plt.title('No. of Principal Electrodes',fontname="Cambria", fontsize=12)
+plt.xlim(0,len(classes)+1)
+#save
+# fig.savefig('pc_electrodes_S1.svg', format='svg', dpi=1200)
+
 
 #%%
-bins_custom = [b for b in range(no_electrodes+1)]
-data = pc_electrodes
-
-
 #histogram
-fig = plt.figure(figsize=(10,7))
-plt.subplot()
+def pc_histogram(data, no_electrodes, title):
+    bins_custom = [b for b in range(no_electrodes+1)]
+    fig = plt.figure(figsize=(10,7))
+    plt.subplot()
+    n, bins, patches = plt.hist(x=data, bins=bins_custom,   color='#52AD89',
+                                alpha=0.7, rwidth=0.85)
 
-n, bins, patches = plt.hist(x=data, bins=bins_custom,   color='#52AD89',
-                            alpha=0.7, rwidth=0.85)
+    plt.grid(axis='y', alpha=0.75)
+    plt.xlabel('Electrode ID [dimensionless]', fontname="Cambria", fontsize=12)
+    plt.ylabel('Count [dimensionless]',fontname="Cambria", fontsize=12)
+    plt.title(title,fontname="Cambria", fontsize=12)
+    plt.xticks([t+0.5 for t in range(no_electrodes)],[t for t in range(no_electrodes)])
+    #plt.text(23, 45, r'$\mu=15, b=3$')
+    maxfreq = n.max()
+    # Set a clean upper y-axis limit.
+    plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
 
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Electrode ID [dimensionless]', fontname="Cambria", fontsize=12)
-plt.ylabel('Count [dimensionless]',fontname="Cambria", fontsize=12)
-plt.title('Principal Electrodes Histogram',fontname="Cambria", fontsize=12)
-plt.xticks([t+0.5 for t in range(no_electrodes)],[t for t in range(no_electrodes)])
-#plt.text(23, 45, r'$\mu=15, b=3$')
-maxfreq = n.max()
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
+    #save
+    # fig.savefig('pc_electrodes_hist_S1.svg', format='svg', dpi=1200)
 
-#save
-# fig.savefig('angle_pmf.svg', format='svg', dpi=1200)
-
-plt.show()
+    plt.show()
 # %%

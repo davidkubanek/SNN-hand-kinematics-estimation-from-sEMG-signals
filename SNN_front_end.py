@@ -7,15 +7,15 @@ import matplotlib.pyplot as plt
 from sympy import npartitions, total_degree
 import Load_Data
 import Support_Functions
-import PCA
+#import PCA
 import importlib
 #this method of import ensures that when support scripts are updated, the changes are imported in this script
 importlib.reload(Load_Data)
 importlib.reload(Support_Functions)
-importlib.reload(PCA)
+#importlib.reload(PCA)
 from Load_Data import *
 from Support_Functions import *
-from PCA import *
+#from PCA import *
 import cProfile
 
 #Instantiate the plotter class
@@ -46,7 +46,7 @@ PCA
 '''
 Front-end
 '''
-front_end_data = Front_End(emg_data, time_pose, no_electrodes=len(pc_electrodes))
+front_end_data = Front_End(emg_data, time_pose, no_electrodes=no_electrodes)#no_electrodes=len(pc_electrodes))
 print('No. of front-end channels:', front_end_data.shape[0])
 
 # %%

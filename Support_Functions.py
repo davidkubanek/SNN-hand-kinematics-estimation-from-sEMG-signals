@@ -224,7 +224,7 @@ class Plots:
 
         plt.show()
 
-    def plot_EMG(self, data, time_pose, plt_title):
+    def plot_EMG(self, data, time_pose, plt_title, ylabel=None):
         '''
         Input:
             - data: 1D array (single class, single electrode)
@@ -233,8 +233,10 @@ class Plots:
         fig = plt.figure(figsize=(10,7))
         plt.plot(np.linspace(0,time_pose,len(data)), data, color='#52AD89')
         plt.title(plt_title)
-        plt.xlabel('Time (seconds)')
+        plt.xlabel('Time [seconds]')
         plt.ylabel('Voltage (\u03BCV)')
+        if ylabel is not None:
+            plt.ylabel(ylabel)
         plt.grid(True)
         plt.axis('tight')
         plt.legend(loc='upper left')
