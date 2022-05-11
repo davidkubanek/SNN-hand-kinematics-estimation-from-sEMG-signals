@@ -7,7 +7,7 @@ Can load data for all subjects for all classes.
 Can also load data for a single subject in a single class.
 Can do data extraction straight on after data load.
 """
-
+#%%
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as spio
@@ -76,7 +76,8 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     # abs_file_path = os.path.join(script_dir, rel_path) #absolute path to data file
 
     #explicit path to data folder
-    data_path = 'C:\\Users\\David\\Projects\\Data'
+    #data_path = 'C:\\Users\\David\\Projects\\Data'
+    data_path = 'Y:\\Downloads'
 
     subjects_labels = [str(s) for s in subjects]
     #target variable stores class ID for each EMG data stream
@@ -100,30 +101,19 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
         restimulus  = np.array(mat['restimulus'])
         #'repetition of the stimulus'
         repetition  = np.array(mat['repetition'])
+
         emg_labelled = []
+        #number of repetitions of class
+        reps = 6
+        g = np.gradient(restimulus)
+        g = np.where(g!=0)[0]
         for c in classes:
-            rep = [0] #initialize first search
-            #find start and end indeces of time slice where repetitions of movements occur
-            #initially, we search for all repetitions
-            start = 0
-            end = np.where(restimulus==c)[0][-1] + 1
-            while True:
-                #As we extract repetitions, the search space contracts by updating 'start'
-                #note that when using np.where on a slice of array, we get indeces relative to the slice, not of the full array
-                #update start position of search window by the time slots of the extracted repetition and the consecutive rest period
-                start = start + rep[0] + np.where(restimulus[start+rep[0]:end]==c)[0][0]
-                #find after how many timesteps repetition ends (i.e., where next rest starts)
-                rep = np.where(restimulus[start:end]==0)[0]
+            for r in range(reps):
+                #append single repetition of movement
+                rep_emg = emg[g[4*reps*(c-1)+4*r+1]:g[4*reps*(c-1)+4*r+2]+1]
+                emg_labelled.append(rep_emg)
                 #target variables (class ID)
                 y += [c]
-                #if last rep (i.e., no rest after since slice ends with rep) break loop
-                if len(rep)==0:
-                    rep_emg = emg[start:end]
-                    emg_labelled.append(rep_emg)
-                    break
-                #append single repetition of movement (defined by start of search window and the time steps until next rest) 
-                rep_emg = emg[start:start+rep[0]]
-                emg_labelled.append(rep_emg)
         
         time_pose = [len(emg_labelled[i])/sampling_rate for i in range(np.shape(emg_labelled)[0])] 
        

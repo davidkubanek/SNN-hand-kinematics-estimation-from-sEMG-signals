@@ -4,20 +4,19 @@
 import numpy as np
 from scipy.signal import butter, lfilter, resample
 import matplotlib.pyplot as plt
-from sympy import npartitions, total_degree
 import Load_Data
 import Support_Functions
 #import PCA
-import Brian_Input
+# import Brian_Input
 import importlib
 #this method of import ensures that when support scripts are updated, the changes are imported in this script
 importlib.reload(Load_Data)
 importlib.reload(Support_Functions)
 #importlib.reload(PCA)
-importlib.reload(Brian_Input)
+# importlib.reload(Brian_Input)
 from Load_Data import *
 from Support_Functions import *
-from Brian_Input import *
+# from Brian_Input import *
 #from PCA import *
 import cProfile
 
@@ -28,11 +27,14 @@ p = Plots()
 '''
 Extracting and transformting data
 '''
+
 no_electrodes = 12
 sampling_rate = 2000 #Hz
-classes = [3] #which movements to classify based on ID
+classes = [3,5] #which movements to classify based on ID
 subjects = [1] #subjects to extract
+
 emg_labelled, y, time_pose, _, _, restimulus, _ = load_data(subjects, classes, sampling_rate, no_electrodes)
+
 #single subject, single class repetition: data structure with 12 channels (electrodes)
 #shape (12, samples)
 #convert to microVolts
@@ -56,17 +58,18 @@ print('No. of front-end channels:', front_end_data.shape[0])
 LIF Input Layer Spike Encoding
 '''
 #Extracting input spike trains
-sim_run_time = 200
-inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
+# sim_run_time = 200
+# inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
+# 
+# 
+# #raster plot
+# fig = plt.figure(figsize=(10,7))
+# plt.plot(inp_spike_times, inp_indeces, '.k')
+# plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+# plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+# plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+# plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
 
-
-#raster plot
-fig = plt.figure(figsize=(10,7))
-plt.plot(inp_spike_times, inp_indeces, '.k')
-plt.title('Input Spikes', fontname="Cambria", fontsize=12)
-plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
-plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
 # %%
 '''
 Plot band-pass filter gain
@@ -133,4 +136,18 @@ Plot EMG data of repetitions of the same movement
 if __name__=='__main__':
     for rep in range(6):
         p.plot_EMG(emg_labelled[rep][:,1], time_pose[rep], 'EMG for repetition {}'.format(rep+1))
+# %%
+if __name__=='__main__':
+    '''
+    Check if two methods for parsing samples from raw EMG output equivalent samples
+    '''
+    m = 0
+    for i in range(len(classes)*reps):
+        t = emg_labelled_1[i] == emg_labelled_2[i]
+        if len(np.where(t==0)[0])!=0:
+            print('Conflicts:')
+            print(np.where(t==0)[0])
+            m = 1
+    if m == 0:
+        print('No clashes, methods are identical')
 # %%
