@@ -3,33 +3,10 @@ import SNN_front_end
 import importlib
 importlib.reload(SNN_front_end)
 from SNN_front_end import *
-#%%
-'''
-Defining input current and downsampling
-'''
-if __name__ == '__main__':
-
-    input_current = front_end_data[:,]/1000 # Volts
-    p = Plots()
-    p.plot_EMG(input_current[0], np.shape(input_current)[1]*1/2000, 'Input current')
-
-    R = 2
-    if R>1:
-        input_current_ds = down_sample(input_current, R)
-        p.plot_EMG(input_current_ds[0], np.shape(input_current)[1]*1/2000, 'Input current Downsampled')
-        input_current = input_current_ds
-        del(input_current_ds)
-    
-    #plotting the actual input current registered by the neuron according to the sim time
-    dt = 1/sampling_rate*1000*R
-    sim_run_time = 100 #ms
-    p.plot_EMG(input_current[0,:int(sim_run_time/dt)], sim_run_time/1000, 'Input current during simulation')
-
 # %%
 '''
 Custom LIF generator
 '''
-
 def default_pars(**kwargs):
   '''
   Setting up a dictionary with model parameters
@@ -68,7 +45,7 @@ def run_LIF(pars, Iinj, stop=False):
     stop       : boolean. If True, use a current pulse
   Returns:
     v      : membrane potential over simulation period
-    rec_spikes_times     : spike times
+    rec_spike_times     : spike times
     rec_spikes     : time index of spikes
   
   Comments:
@@ -120,59 +97,123 @@ def run_LIF(pars, Iinj, stop=False):
 
   # Get spike times in ms
   rec_spikes = np.array(rec_spikes)
-  rec_spikes_times = rec_spikes * dt
+  rec_spike_times = rec_spikes * dt
 
-  return v, rec_spikes_times, rec_spikes
+  return v, rec_spike_times, rec_spikes
+
+def Input_Spikes(input_current, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=None):
+  '''
+  Input:
+    - input_current: time_series of the input current to each neuron cahnnel, shape=(no_inp_channels, samples)
+    - sim_run_time: how long is neuron receiving input [ms]
+    - R: downsample factor
+    - sampling_rate of input_current time-series
+    - scale: factor by which divide input_current to produce meaningful spiking behaviour
+    - if visual is True: we have to put in a plotting object
+  Output:
+    - inp_spike_times
+    - inp_indeces
+  '''
+  input_current = down_sample(input_current, R)
+  inp_indeces = []
+  inp_spike_times = []
+  pars = default_pars(T=sim_run_time, dt=1/sampling_rate*R*1000)
+  #no. of input channels
+  no_inp_ch = input_current.shape[0]
+  for ch in range(no_inp_ch):
+    #Test stimulus
+    # stimulus_test = np.ones(input_current[:2].shape)
+    # stimulus_test[:, 25:75] = 500
+    # stimulus_test = stimulus_test/1000000
+
+    # stimulus = stimulus_test[0]
+    stimulus = input_current[ch]/scale #scaled by a factor to produce meaningful spiking behaviour
+
+    # Simulate LIF model
+    v, rec_spike_times, rec_spikes = run_LIF(pars, Iinj=stimulus)
+
+    index = np.ones(rec_spike_times.shape)*ch
+    inp_indeces += index.tolist()
+    #appends recorded spike times to global list of spike times for all neurons (this is the preferred input to brian spike generator)
+    inp_spike_times += rec_spike_times.tolist()
+
+    if visual is True:
+      print('V_th [mV]:', pars['V_th'], '\nV_reset [mV]:', pars['V_reset'], '\ntau [ms]:',pars['tau_m'], '\nrefractory [ms]:',pars['tref'], '\nTime [ms]:', pars['T'])
+
+      #plot the stimulus injected current
+      Plots_object.plot_EMG(stimulus[:int(sim_run_time/dt)], sim_run_time/1000, 'Injected Current', ylabel='Ampere [\u03BCA]')
+
+      #plot the neuron excitation and spikes
+      fig = plt.figure(figsize=(10,7))
+      plt.plot(pars['range_t'],v, color='#52AD89')
+      plt.title('Neuron Excitation', fontname="Cambria", fontsize=12)
+      plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+      plt.ylabel('Voltage [mV]', fontname="Cambria", fontsize=12)
+      for spike in rec_spike_times:
+          plt.axvline(spike, ls='--', lw=3, color='#AD5276')
+      plt.show()
+      
+  return np.array(inp_spike_times), np.array(inp_indeces)
 
 # %%
-# Get parameters
-sim_run_time = 200
-pars = default_pars(T=sim_run_time, dt=1/sampling_rate*R*1000)
-print(pars)
+if __name__ == '__main__':
+  #Extracting input spike trains
+  sim_run_time = 200
+  p = Plots()
+  inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
 
-#Test stimulus
-# stimulus_test = np.ones(input_current[:2].shape)
-# stimulus_test[:, 25:75] = 500
-# stimulus_test = stimulus_test/1000000
 
-# stimulus = stimulus_test[0]
-stimulus = input_current[0]/10000 #scaled by a factor to produce meaningful spiking behaviour
+  #raster plot
+  fig = plt.figure(figsize=(10,7))
+  plot(inp_spike_times, inp_indeces, '.k')
+  plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+  plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
 
-# Simulate LIF model
-v, rec_spikes_times, rec_spikes = run_LIF(pars, Iinj=stimulus)
 
-#plot the stimulus injected current
-p.plot_EMG(stimulus[:int(sim_run_time/dt)], sim_run_time/1000, 'Injected Current', ylabel='Ampere [\u03BCA]')
-
-#plot the neuron excitation and spikes
-fig = plt.figure(figsize=(10,7))
-plt.plot(pars['range_t'],v, color='#52AD89')
-plt.title('Neuron Excitation', fontname="Cambria", fontsize=12)
-plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-plt.ylabel('Voltage [mV]', fontname="Cambria", fontsize=12)
-for spike in rec_spikes_times:
-    plt.axvline(spike, ls='--', lw=3, color='#AD5276')
-plt.show()
 
 # %%
-'''
-Plotting original EMG signal and the final spike encoding
-'''
-data_sample = emg_data[0]
-fig, (ax1, ax2) = plt.subplots(2,1,figsize=(10,7), sharex=True)
-# fig.tight_layout()
-#raw EMG data
-ax1.plot(np.linspace(0, sim_run_time, int(sim_run_time/dt)), data_sample[:int(sim_run_time/dt)], color='black') #in microVolts
-ax1.set_title('Raw EMG Data', fontname="Cambria", fontsize=12)
-ax1.set_ylabel('Voltage (\u03BCV)', fontname="Cambria", fontsize=12)
-#spike raster plot
-ax2.eventplot([rec_spikes_times], color= 'black', linelengths = 0.5)
-ax2.set_title('Spike Encoding Raster Plot', fontname="Cambria", fontsize=12)
-ax2.set_yticks([])
-ax2.set_yticklabels([])
-ax2.set_ylabel('Neuron Activation', fontname="Cambria", fontsize=12)
-# ax2.set_xlabel('Spike time (s)')
-plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-# fig.savefig('EMG_spike_encoding_example2.svg', format='svg', dpi=1200)
-plt.show()
+  '''
+  Plotting original EMG signal and the final spike encoding
+  '''
+  data_sample = emg_data[0]
+  fig, (ax1, ax2) = plt.subplots(2,1,figsize=(10,7), sharex=True)
+  # fig.tight_layout()
+  #raw EMG data
+  ax1.plot(np.linspace(0, sim_run_time, int(sim_run_time/dt)), data_sample[:int(sim_run_time/dt)], color='black') #in microVolts
+  ax1.set_title('Raw EMG Data', fontname="Cambria", fontsize=12)
+  ax1.set_ylabel('Voltage [\u03BCV]', fontname="Cambria", fontsize=12)
+  #spike raster plot
+  ax2.eventplot([rec_spike_times], color= 'black', linelengths = 0.5)
+  ax2.set_title('Spike Encoding Raster Plot', fontname="Cambria", fontsize=12)
+  ax2.set_yticks([])
+  ax2.set_yticklabels([])
+  ax2.set_ylabel('Neuron Activation', fontname="Cambria", fontsize=12)
+  # ax2.set_xlabel('Spike time (s)')
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  # fig.savefig('EMG_spike_encoding_example2.svg', format='svg', dpi=1200)
+  plt.show()
+# %%
+  '''
+  Brian2 Input Layer
+  '''
+  from brian2 import *
+
+  start_scope()
+  #no. of input channels
+  no_inp_ch = int(max(inp_indeces))+1
+  #defining the input spikes explicitly
+  G = SpikeGeneratorGroup(no_inp_ch, inp_indeces, inp_spike_times*ms)
+  spikemon = SpikeMonitor(G)
+
+  run(200*ms)
+
+  #raster plot
+  fig = plt.figure(figsize=(10,7))
+  plot(spikemon.t/ms, spikemon.i, '.k')
+  plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+  plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
 # %%

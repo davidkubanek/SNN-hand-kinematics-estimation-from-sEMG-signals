@@ -8,13 +8,16 @@ from sympy import npartitions, total_degree
 import Load_Data
 import Support_Functions
 #import PCA
+import Brian_Input
 import importlib
 #this method of import ensures that when support scripts are updated, the changes are imported in this script
 importlib.reload(Load_Data)
 importlib.reload(Support_Functions)
 #importlib.reload(PCA)
+importlib.reload(Brian_Input)
 from Load_Data import *
 from Support_Functions import *
+from Brian_Input import *
 #from PCA import *
 import cProfile
 
@@ -49,6 +52,21 @@ Front-end
 front_end_data = Front_End(emg_data, time_pose, no_electrodes=no_electrodes)#no_electrodes=len(pc_electrodes))
 print('No. of front-end channels:', front_end_data.shape[0])
 
+'''
+LIF Input Layer Spike Encoding
+'''
+#Extracting input spike trains
+sim_run_time = 200
+inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
+
+
+#raster plot
+fig = plt.figure(figsize=(10,7))
+plt.plot(inp_spike_times, inp_indeces, '.k')
+plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
 # %%
 '''
 Plot band-pass filter gain
