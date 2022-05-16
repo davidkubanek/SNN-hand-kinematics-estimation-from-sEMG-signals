@@ -1,0 +1,10 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libjpeg
+Description: Reads and writes JPEG files
+Version: 9.5.0
+Libs: -L${libdir} -ljpeg
+Cflags: -I${includedir}

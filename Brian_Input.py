@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
   #raster plot
   fig = plt.figure(figsize=(10,7))
-  plot(inp_spike_times, inp_indeces, '.k')
+  plt.plot(inp_spike_times, inp_indeces, '.k')
   plt.title('Input Spikes', fontname="Cambria", fontsize=12)
   plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
   plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)

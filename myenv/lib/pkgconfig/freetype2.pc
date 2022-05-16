@@ -1,0 +1,14 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+libdir=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib
+includedir=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.0.18
+Requires:
+Requires.private: 
+Libs: -L${libdir} -lfreetype
+Libs.private: -lz -L/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib -lpng16 -lz
+Cflags: -I${includedir}/freetype2

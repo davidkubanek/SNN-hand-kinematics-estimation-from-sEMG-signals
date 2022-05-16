@@ -1,0 +1,13 @@
+# Package Information for pkg-config
+
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: SQLite
+Description: SQL database engine
+Version: 3.38.3
+Libs: -L${libdir} -lsqlite3
+Libs.private: -lz 
+Cflags: -I${includedir}

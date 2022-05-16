@@ -1,0 +1,13 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+libdir=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib
+sharedlibdir=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib
+includedir=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.12
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

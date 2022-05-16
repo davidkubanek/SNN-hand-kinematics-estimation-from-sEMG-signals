@@ -76,8 +76,10 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     # abs_file_path = os.path.join(script_dir, rel_path) #absolute path to data file
 
     #explicit path to data folder
-    #data_path = 'C:\\Users\\David\\Projects\\Data'
-    data_path = 'Y:\\Downloads'
+    #  windows
+    # data_path = 'C:\\Users\\David\\Projects\\Data'
+    #  mac
+    data_path = '/Users/david/Documents/Code/Data'
 
     subjects_labels = [str(s) for s in subjects]
     #target variable stores class ID for each EMG data stream
@@ -86,7 +88,10 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     global_el = [[] for i in range(12)]
     for idx, subject in enumerate(subjects):
         #extract data for each subject
-        file_name = '\\S'+str(subject)+'_E1_A1.mat' #relative path from current script directory to data file
+        #  windows
+        # file_name = '\\S'+str(subject)+'_E1_A1.mat' #relative path from current script directory to data file
+        #  mac
+        file_name = '/S'+str(subject)+'_E1_A1.mat' #relative path from current script directory to data file
         abs_file_path = data_path + file_name #absolute path to data file
         #load data from MATLAB file
         mat = (spio.loadmat(abs_file_path, squeeze_me=True))

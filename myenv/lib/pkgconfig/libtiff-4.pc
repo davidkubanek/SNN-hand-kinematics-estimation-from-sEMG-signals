@@ -1,0 +1,11 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libtiff
+Description:  Tag Image File Format (TIFF) library.
+Version: 4.2.0
+Libs: -L${libdir} -ltiff
+Libs.private: -lwebp -lzstd -llzma -ljpeg -lz 
+Cflags: -I${includedir}

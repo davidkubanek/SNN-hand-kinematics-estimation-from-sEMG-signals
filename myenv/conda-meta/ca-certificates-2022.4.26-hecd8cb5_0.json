@@ -1,0 +1,50 @@
+{
+  "build": "hecd8cb5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [],
+  "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/ca-certificates-2022.4.26-hecd8cb5_0",
+  "features": "",
+  "files": [
+    "ssl/cacert.pem",
+    "ssl/cert.pem"
+  ],
+  "fn": "ca-certificates-2022.4.26-hecd8cb5_0.conda",
+  "legacy_bz2_md5": "83d50d8307dc9518dbc938c552e098c5",
+  "license": "MPL-2.0",
+  "license_family": "Other",
+  "link": {
+    "source": "/Users/david/opt/anaconda3/pkgs/ca-certificates-2022.4.26-hecd8cb5_0",
+    "type": 1
+  },
+  "md5": "dd4c1cfc3606b56486f7af0a99e80fa3",
+  "name": "ca-certificates",
+  "package_tarball_full_path": "/Users/david/opt/anaconda3/pkgs/ca-certificates-2022.4.26-hecd8cb5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "ssl/cacert.pem",
+        "path_type": "hardlink",
+        "sha256": "08df40e8f528ed283b0e480ba4bcdbfdd2fdcf695a7ada1668243072d80f8b6f",
+        "sha256_in_prefix": "08df40e8f528ed283b0e480ba4bcdbfdd2fdcf695a7ada1668243072d80f8b6f",
+        "size_in_bytes": 215352
+      },
+      {
+        "_path": "ssl/cert.pem",
+        "path_type": "softlink",
+        "sha256": "08df40e8f528ed283b0e480ba4bcdbfdd2fdcf695a7ada1668243072d80f8b6f",
+        "size_in_bytes": 215352
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "11323c155780177c86be6046392a0b03297040b590acd2a4781d2f8c360e1356",
+  "size": 126628,
+  "subdir": "osx-64",
+  "timestamp": 1651525683409,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/ca-certificates-2022.4.26-hecd8cb5_0.conda",
+  "version": "2022.4.26"
+}

@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: numexpr
+Version: 2.8.1
+Summary: Fast numerical expression evaluator for NumPy
+Home-page: https://github.com/pydata/numexpr
+Author: David M. Cooke, Francesc Alted, and others
+Author-email: 
+Requires-Dist: numpy (>=1.13.3)
+Requires-Dist: packaging
+
+david.m.cooke@gmail.com
+faltet@gmail.com
+Maintainer: Robert A. McLeod
+Maintainer-email: robbmcleod@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 6 - Mature
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: MacOS
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+License-File: AUTHORS.txt
+
+UNKNOWN
+

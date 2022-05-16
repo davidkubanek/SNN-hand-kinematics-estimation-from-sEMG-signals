@@ -1,0 +1,105 @@
+#%%
+from brian2 import *
+%matplotlib inline
+
+# %%
+start_scope()
+inp_N = 5 #no. of input neurons
+N = 20 #no. of neurons in network
+frac_ex = 0.8 #fraction of excitatory in the population 
+#sparsities of the input connections and of the net
+inp_sparsity = 0.2
+net_sparsity = 0.3
+ex = int(N*frac_ex) #no. of excitatory neurons
+inh = N-ex #no. of inhibiroty neurons
+
+#neuron model equations
+tau=10*ms
+eqs = '''
+dv/dt = (v)/tau : 1
+'''
+
+#input neurons
+P = PoissonGroup(inp_N, np.arange(inp_N)*Hz + 10*Hz)
+#Excitatory and inhibitory neuron groups
+Ex = NeuronGroup(ex, eqs, threshold='v>1', reset='v = 0', method='euler')
+In = NeuronGroup(inh, eqs, threshold='v>1', reset='v = 0', method='euler')
+#connecting input to excitatory
+S = Synapses(P, Ex, 'w : 1', on_pre='v_post += w')
+S.connect(p=inp_sparsity)
+#setting random weights
+S.w = np.random.rand(1,np.sum(S.N_outgoing_pre))
+
+def visualise_connectivity(S):
+    Ns = len(S.source)
+    Nt = len(S.target)
+    figure(figsize=(10, 4))
+    subplot(121)
+    plot(zeros(Ns), arange(Ns), 'ok', ms=10)
+    plot(ones(Nt), arange(Nt), 'ok', ms=10)
+    for i, j in zip(S.i, S.j):
+        plot([0, 1], [i, j], '-k')
+    xticks([0, 1], ['Source', 'Target'])
+    ylabel('Neuron index')
+    xlim(-0.1, 1.1)
+    ylim(-1, max(Ns, Nt))
+    subplot(122)
+    plot(S.i, S.j, 'ok')
+    xlim(-1, Ns)
+    ylim(-1, Nt)
+    xlabel('Source neuron index')
+    ylabel('Target neuron index')
+    
+visualise_connectivity(S)
+
+#Excitatory to Excitatory connections
+S_ee = Synapses(Ex, Ex, 'w : 1', on_pre='v_post += w')
+S_ee.connect(condition='i!=j', p=net_sparsity)
+visualise_connectivity(S_ee)
+S_ee.w = np.random.rand(1,np.sum(S_ee.N_outgoing_pre))
+#Excitatory to Inhibitory connections
+S_ei = Synapses(Ex, In, 'w : 1', on_pre='v_post += w')
+S_ei.connect(p=net_sparsity)
+visualise_connectivity(S_ei)
+S_ei.w = np.random.rand(1,np.sum(S_ei.N_outgoing_pre))
+#Inhibitory to Excitatory connections
+S_ie = Synapses(In, Ex, 'w : 1', on_pre='v_post -= w')
+S_ie.connect(p=net_sparsity)
+visualise_connectivity(S_ie)
+S_ie.w = np.random.rand(1,np.sum(S_ie.N_outgoing_pre))
+
+#plot connectivity with scalled points by weight
+scatter(S.i, S.j, S.w*20)
+xlabel('Source neuron ID')
+ylabel('Target neuron ID');
+
+M_in = SpikeMonitor(P)
+M = StateMonitor(Ex, 'v', record=True)
+M_spike = SpikeMonitor(Ex)
+
+run(50*ms)
+
+plot(M.t/ms, M.v[0], label='Neuron 0')
+plot(M.t/ms, M.v[1], label='Neuron 1')
+plot(M.t/ms, M.v[2], label='Neuron 2')
+xlabel('Time (ms)')
+ylabel('v')
+legend();
+# %%
+
+#raster plot
+fig = plt.figure(figsize=(10,7))
+plot(M_spike.t/ms, M_spike.i, '.k')
+plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+#plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+# %%
+#raster plot
+fig = plt.figure(figsize=(10,7))
+plot(M_in.t/ms, M_in.i, '.k')
+plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+#plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+# %%

@@ -1,0 +1,14 @@
+{
+ "argv": [
+  "/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/bin/python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ],
+ "display_name": "Python 3 (ipykernel)",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ }
+}

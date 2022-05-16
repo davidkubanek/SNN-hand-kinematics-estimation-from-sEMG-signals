@@ -1,0 +1,103 @@
+==> 2022-05-11 17:35:54 <==
+# cmd: /Users/david/opt/anaconda3/bin/conda create -p /Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv python
+# conda version: 4.12.0
++defaults/noarch::certifi-2020.6.20-pyhd3eb1b0_3
++defaults/noarch::tzdata-2022a-hda174b7_0
++defaults/noarch::wheel-0.37.1-pyhd3eb1b0_0
++defaults/osx-64::bzip2-1.0.8-h1de35cc_0
++defaults/osx-64::ca-certificates-2022.4.26-hecd8cb5_0
++defaults/osx-64::libcxx-12.0.0-h2f01273_0
++defaults/osx-64::libffi-3.3-hb1e8313_2
++defaults/osx-64::ncurses-6.3-hca72f7f_2
++defaults/osx-64::openssl-1.1.1o-hca72f7f_0
++defaults/osx-64::pip-21.2.4-py310hecd8cb5_0
++defaults/osx-64::python-3.10.4-hdfd78df_0
++defaults/osx-64::readline-8.1.2-hca72f7f_1
++defaults/osx-64::setuptools-61.2.0-py310hecd8cb5_0
++defaults/osx-64::sqlite-3.38.3-h707629a_0
++defaults/osx-64::tk-8.6.11-h3fd3227_1
++defaults/osx-64::xz-5.2.5-hca72f7f_1
++defaults/osx-64::zlib-1.2.12-h4dc903c_2
+# update specs: ['python']
+==> 2022-05-11 17:48:30 <==
+# cmd: /Users/david/opt/anaconda3/bin/conda install ipykernel
+# conda version: 4.12.0
++defaults/noarch::asttokens-2.0.5-pyhd3eb1b0_0
++defaults/noarch::backcall-0.2.0-pyhd3eb1b0_0
++defaults/noarch::decorator-5.1.1-pyhd3eb1b0_0
++defaults/noarch::executing-0.8.3-pyhd3eb1b0_0
++defaults/noarch::matplotlib-inline-0.1.2-pyhd3eb1b0_2
++defaults/noarch::parso-0.8.3-pyhd3eb1b0_0
++defaults/noarch::pexpect-4.8.0-pyhd3eb1b0_3
++defaults/noarch::pickleshare-0.7.5-pyhd3eb1b0_1003
++defaults/noarch::prompt-toolkit-3.0.20-pyhd3eb1b0_0
++defaults/noarch::ptyprocess-0.7.0-pyhd3eb1b0_2
++defaults/noarch::pure_eval-0.2.2-pyhd3eb1b0_0
++defaults/noarch::pygments-2.11.2-pyhd3eb1b0_0
++defaults/noarch::python-dateutil-2.8.2-pyhd3eb1b0_0
++defaults/noarch::six-1.16.0-pyhd3eb1b0_1
++defaults/noarch::stack_data-0.2.0-pyhd3eb1b0_0
++defaults/noarch::traitlets-5.1.1-pyhd3eb1b0_0
++defaults/noarch::wcwidth-0.2.5-pyhd3eb1b0_0
++defaults/osx-64::appnope-0.1.2-py310hecd8cb5_1001
++defaults/osx-64::debugpy-1.5.1-py310he9d5cce_0
++defaults/osx-64::entrypoints-0.4-py310hecd8cb5_0
++defaults/osx-64::ipykernel-6.9.1-py310hecd8cb5_0
++defaults/osx-64::ipython-8.3.0-py310hecd8cb5_0
++defaults/osx-64::jedi-0.18.1-py310hecd8cb5_1
++defaults/osx-64::jupyter_client-7.2.2-py310hecd8cb5_0
++defaults/osx-64::jupyter_core-4.10.0-py310hecd8cb5_0
++defaults/osx-64::libsodium-1.0.18-h1de35cc_0
++defaults/osx-64::nest-asyncio-1.5.5-py310hecd8cb5_0
++defaults/osx-64::pyzmq-22.3.0-py310he9d5cce_2
++defaults/osx-64::tornado-6.1-py310hca72f7f_0
++defaults/osx-64::zeromq-4.3.4-h23ab428_0
+# update specs: ['ipykernel']
+==> 2022-05-11 17:49:40 <==
+# cmd: /Users/david/opt/anaconda3/bin/conda install scipy
+# conda version: 4.12.0
++defaults/osx-64::blas-1.0-mkl
++defaults/osx-64::intel-openmp-2021.4.0-hecd8cb5_3538
++defaults/osx-64::libgfortran-3.0.1-h93005f0_2
++defaults/osx-64::mkl-2021.4.0-hecd8cb5_637
++defaults/osx-64::mkl-service-2.4.0-py310hca72f7f_0
++defaults/osx-64::mkl_fft-1.3.1-py310hf879493_0
++defaults/osx-64::mkl_random-1.2.2-py310hc081a56_0
++defaults/osx-64::numpy-1.21.5-py310hdcd3fac_2
++defaults/osx-64::numpy-base-1.21.5-py310hfd2de13_2
++defaults/osx-64::scipy-1.7.3-py310h3dd3380_0
+# update specs: ['scipy']
+==> 2022-05-11 17:53:27 <==
+# cmd: /Users/david/opt/anaconda3/bin/conda install pandas
+# conda version: 4.12.0
++defaults/noarch::packaging-21.3-pyhd3eb1b0_0
++defaults/noarch::pyparsing-3.0.4-pyhd3eb1b0_0
++defaults/noarch::pytz-2021.3-pyhd3eb1b0_0
++defaults/osx-64::bottleneck-1.3.4-py310h4e76f89_0
++defaults/osx-64::numexpr-2.8.1-py310hdcd3fac_1
++defaults/osx-64::pandas-1.4.2-py310he9d5cce_0
+# update specs: ['pandas']
+==> 2022-05-11 17:56:57 <==
+# cmd: /Users/david/opt/anaconda3/bin/conda install matplotlib
+# conda version: 4.12.0
+-defaults/noarch::certifi-2020.6.20-pyhd3eb1b0_3
++defaults/noarch::cycler-0.11.0-pyhd3eb1b0_0
++defaults/noarch::fonttools-4.25.0-pyhd3eb1b0_0
++defaults/noarch::munkres-1.1.4-py_0
++defaults/osx-64::brotli-1.0.9-hb1e8313_2
++defaults/osx-64::certifi-2021.5.30-py310hecd8cb5_0
++defaults/osx-64::freetype-2.11.0-hd8bbffd_0
++defaults/osx-64::giflib-5.2.1-haf1e3a3_0
++defaults/osx-64::jpeg-9e-hca72f7f_0
++defaults/osx-64::kiwisolver-1.3.1-py310he9d5cce_0
++defaults/osx-64::lcms2-2.12-hf1fd2bf_0
++defaults/osx-64::libpng-1.6.37-ha441bb4_0
++defaults/osx-64::libtiff-4.2.0-h87d7836_0
++defaults/osx-64::libwebp-1.2.2-h56c3ce4_0
++defaults/osx-64::libwebp-base-1.2.2-hca72f7f_0
++defaults/osx-64::lz4-c-1.9.3-h23ab428_1
++defaults/osx-64::matplotlib-3.5.1-py310hecd8cb5_1
++defaults/osx-64::matplotlib-base-3.5.1-py310hfb0c5b7_1
++defaults/osx-64::pillow-9.0.1-py310hde71d04_0
++defaults/osx-64::zstd-1.4.9-h322a384_0
+# update specs: ['matplotlib']

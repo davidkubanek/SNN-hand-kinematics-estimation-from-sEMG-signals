@@ -1,0 +1,131 @@
+{
+  "build": "h56c3ce4_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "giflib >=5.2.1,<5.3.0a0",
+    "jpeg >=9d,<10a",
+    "libpng >=1.6.37,<1.7.0a0",
+    "libtiff >=4.1.0,<5.0a0",
+    "libwebp-base"
+  ],
+  "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/libwebp-1.2.2-h56c3ce4_0",
+  "features": "",
+  "files": [
+    "bin/cwebp",
+    "bin/dwebp",
+    "bin/gif2webp",
+    "bin/img2webp",
+    "include/webp/demux.h",
+    "lib/libwebpdemux.2.dylib",
+    "lib/libwebpdemux.a",
+    "lib/libwebpdemux.dylib",
+    "lib/pkgconfig/libwebpdemux.pc",
+    "share/man/man1/gif2webp.1",
+    "share/man/man1/img2webp.1"
+  ],
+  "fn": "libwebp-1.2.2-h56c3ce4_0.conda",
+  "legacy_bz2_md5": "e5a5ff19677d4dc490d54ae33b99ff31",
+  "legacy_bz2_size": 84275,
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/david/opt/anaconda3/pkgs/libwebp-1.2.2-h56c3ce4_0",
+    "type": 1
+  },
+  "md5": "027d2450b64e251b8169798f6121b47a",
+  "name": "libwebp",
+  "package_tarball_full_path": "/Users/david/opt/anaconda3/pkgs/libwebp-1.2.2-h56c3ce4_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/cwebp",
+        "path_type": "hardlink",
+        "sha256": "ce18e4c0b19409379fb868ae7ebcd47f07ac221c7e4781de2de63114f1824776",
+        "sha256_in_prefix": "ce18e4c0b19409379fb868ae7ebcd47f07ac221c7e4781de2de63114f1824776",
+        "size_in_bytes": 67076
+      },
+      {
+        "_path": "bin/dwebp",
+        "path_type": "hardlink",
+        "sha256": "3c760784fd43602ccaf6a6c087afde310d298181b9d66f2b317a8647c789b3e9",
+        "sha256_in_prefix": "3c760784fd43602ccaf6a6c087afde310d298181b9d66f2b317a8647c789b3e9",
+        "size_in_bytes": 33376
+      },
+      {
+        "_path": "bin/gif2webp",
+        "path_type": "hardlink",
+        "sha256": "62ddc3cb823bf763bc380a079e3308d90fa37c2daca23d0d96ee8b5c0660b33d",
+        "sha256_in_prefix": "62ddc3cb823bf763bc380a079e3308d90fa37c2daca23d0d96ee8b5c0660b33d",
+        "size_in_bytes": 33584
+      },
+      {
+        "_path": "bin/img2webp",
+        "path_type": "hardlink",
+        "sha256": "b7f70a46cadd234bb543267c1ef72784f6d555f11d1476d79a145499727a65bc",
+        "sha256_in_prefix": "b7f70a46cadd234bb543267c1ef72784f6d555f11d1476d79a145499727a65bc",
+        "size_in_bytes": 50356
+      },
+      {
+        "_path": "include/webp/demux.h",
+        "path_type": "hardlink",
+        "sha256": "c37bd27299d984b7d9ee564bf25873f6620a0a6a0975e44adf0abeed628999af",
+        "sha256_in_prefix": "c37bd27299d984b7d9ee564bf25873f6620a0a6a0975e44adf0abeed628999af",
+        "size_in_bytes": 15603
+      },
+      {
+        "_path": "lib/libwebpdemux.2.dylib",
+        "path_type": "hardlink",
+        "sha256": "60209a6ffbcbdea05ecd783d4b09880333de92120286fac37e7af676ef8d5438",
+        "sha256_in_prefix": "60209a6ffbcbdea05ecd783d4b09880333de92120286fac37e7af676ef8d5438",
+        "size_in_bytes": 22692
+      },
+      {
+        "_path": "lib/libwebpdemux.a",
+        "path_type": "hardlink",
+        "sha256": "c0437a3d218106390e599dd8fbc0003e9ccc87ca78fe8edf75e8fdb39e63ab32",
+        "sha256_in_prefix": "c0437a3d218106390e599dd8fbc0003e9ccc87ca78fe8edf75e8fdb39e63ab32",
+        "size_in_bytes": 14480
+      },
+      {
+        "_path": "lib/libwebpdemux.dylib",
+        "path_type": "softlink",
+        "sha256": "60209a6ffbcbdea05ecd783d4b09880333de92120286fac37e7af676ef8d5438",
+        "size_in_bytes": 22692
+      },
+      {
+        "_path": "lib/pkgconfig/libwebpdemux.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/opt/concourse/worker/volumes/live/a894d301-213b-410c-59e0-93024220eba2/volume/libwebp_1645441086214/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeho",
+        "sha256": "68fce74b1537aaf76e11894e537870e31c72b162da15819f98aba61249aed730",
+        "sha256_in_prefix": "85d58ddd633e1840085c586de332a90a4ae89278fe8386a36f2c930f42a6bb28",
+        "size_in_bytes": 524
+      },
+      {
+        "_path": "share/man/man1/gif2webp.1",
+        "path_type": "hardlink",
+        "sha256": "19c208659f284d4c815849df21b046b3040c3059fc8d8b67b1fa6ee2d242c0ab",
+        "sha256_in_prefix": "19c208659f284d4c815849df21b046b3040c3059fc8d8b67b1fa6ee2d242c0ab",
+        "size_in_bytes": 5564
+      },
+      {
+        "_path": "share/man/man1/img2webp.1",
+        "path_type": "hardlink",
+        "sha256": "ccc475f73c52e7b4f43917f9e65c7cb0d3cd4376bb057d8d9a812d2383bcde82",
+        "sha256_in_prefix": "ccc475f73c52e7b4f43917f9e65c7cb0d3cd4376bb057d8d9a812d2383bcde82",
+        "size_in_bytes": 3385
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "85e9b259e51d342cce7ddedb4214864a117e288061e60128748c0d058395f0b9",
+  "size": 74202,
+  "subdir": "osx-64",
+  "timestamp": 1645441205060,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/libwebp-1.2.2-h56c3ce4_0.conda",
+  "version": "1.2.2"
+}
