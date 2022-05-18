@@ -12,24 +12,24 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/stack_data-0.2.0-pyhd3eb1b0_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/LICENSE.txt",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/METADATA",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/RECORD",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/WHEEL",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/stack_data-0.2.0.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/stack_data/__init__.py",
-    "lib/python3.10/site-packages/stack_data/core.py",
-    "lib/python3.10/site-packages/stack_data/formatting.py",
-    "lib/python3.10/site-packages/stack_data/utils.py",
-    "lib/python3.10/site-packages/stack_data/version.py",
-    "lib/python3.10/site-packages/stack_data/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/stack_data/__pycache__/core.cpython-310.pyc",
-    "lib/python3.10/site-packages/stack_data/__pycache__/formatting.cpython-310.pyc",
-    "lib/python3.10/site-packages/stack_data/__pycache__/utils.cpython-310.pyc",
-    "lib/python3.10/site-packages/stack_data/__pycache__/version.cpython-310.pyc"
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/LICENSE.txt",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/stack_data-0.2.0.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/stack_data/__init__.py",
+    "lib/python3.9/site-packages/stack_data/core.py",
+    "lib/python3.9/site-packages/stack_data/formatting.py",
+    "lib/python3.9/site-packages/stack_data/utils.py",
+    "lib/python3.9/site-packages/stack_data/version.py",
+    "lib/python3.9/site-packages/stack_data/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/stack_data/__pycache__/core.cpython-39.pyc",
+    "lib/python3.9/site-packages/stack_data/__pycache__/formatting.cpython-39.pyc",
+    "lib/python3.9/site-packages/stack_data/__pycache__/utils.cpython-39.pyc",
+    "lib/python3.9/site-packages/stack_data/__pycache__/version.cpython-39.pyc"
   ],
   "fn": "stack_data-0.2.0-pyhd3eb1b0_0.conda",
   "legacy_bz2_md5": "fa3edcfd4c2c0d744bc177cbfcd77626",
@@ -138,23 +138,23 @@
         "size_in_bytes": 22
       },
       {
-        "_path": "lib/python3.10/site-packages/stack_data/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/stack_data/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/stack_data/__pycache__/core.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/stack_data/__pycache__/core.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/stack_data/__pycache__/formatting.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/stack_data/__pycache__/formatting.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/stack_data/__pycache__/utils.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/stack_data/__pycache__/utils.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/stack_data/__pycache__/version.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/stack_data/__pycache__/version.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

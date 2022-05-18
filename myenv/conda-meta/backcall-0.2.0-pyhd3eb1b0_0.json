@@ -9,19 +9,19 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/backcall-0.2.0-pyhd3eb1b0_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/LICENSE",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/METADATA",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/RECORD",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/WHEEL",
-    "lib/python3.10/site-packages/backcall-0.2.0.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/backcall/__init__.py",
-    "lib/python3.10/site-packages/backcall/_signatures.py",
-    "lib/python3.10/site-packages/backcall/backcall.py",
-    "lib/python3.10/site-packages/backcall/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/backcall/__pycache__/_signatures.cpython-310.pyc",
-    "lib/python3.10/site-packages/backcall/__pycache__/backcall.cpython-310.pyc"
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/LICENSE",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/backcall-0.2.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/backcall/__init__.py",
+    "lib/python3.9/site-packages/backcall/_signatures.py",
+    "lib/python3.9/site-packages/backcall/backcall.py",
+    "lib/python3.9/site-packages/backcall/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/backcall/__pycache__/_signatures.cpython-39.pyc",
+    "lib/python3.9/site-packages/backcall/__pycache__/backcall.cpython-39.pyc"
   ],
   "fn": "backcall-0.2.0-pyhd3eb1b0_0.tar.bz2",
   "license": "BSD-3-Clause",
@@ -108,15 +108,15 @@
         "size_in_bytes": 3752
       },
       {
-        "_path": "lib/python3.10/site-packages/backcall/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/backcall/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/backcall/__pycache__/_signatures.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/backcall/__pycache__/_signatures.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/backcall/__pycache__/backcall.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/backcall/__pycache__/backcall.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

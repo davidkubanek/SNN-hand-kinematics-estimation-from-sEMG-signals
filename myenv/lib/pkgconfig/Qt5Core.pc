@@ -1,0 +1,14 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+host_bins=${prefix}/bin
+qt_config=shared rpath release c++11 c++14 c++1z concurrent dbus no-pkg-config reduce_exports stl properties animation textcodec big_codecs codecs textdate datestring doubleconversion filesystemiterator filesystemwatcher gestures itemmodel proxymodel identityproxymodel library mimetype process statemachine regularexpression settings sharedmemory sortfilterproxymodel stringlistmodel systemsemaphore temporaryfile translation xmlstream xmlstreamreader xmlstreamwriter
+
+Name: Qt5 Core
+Description: Qt Core module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5Core 
+Cflags: -I${includedir}/QtCore -I${includedir}
+

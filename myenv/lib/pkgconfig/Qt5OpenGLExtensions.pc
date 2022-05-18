@@ -1,0 +1,14 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+
+Name: Qt5 OpenGLExtensions
+Description: Qt OpenGLExtensions module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5OpenGLExtensions 
+Libs.private: -L/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib -L/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv/lib -lQt5Gui -framework DiskArbitration -framework IOKit -lQt5Core -framework OpenGL -framework AGL 
+Cflags: -I${includedir}/QtOpenGLExtensions -I${includedir}
+Requires: Qt5Core Qt5Gui
+

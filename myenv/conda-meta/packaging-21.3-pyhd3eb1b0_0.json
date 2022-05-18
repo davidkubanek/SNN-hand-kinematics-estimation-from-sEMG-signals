@@ -10,39 +10,39 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/packaging-21.3-pyhd3eb1b0_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/LICENSE",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/LICENSE.APACHE",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/LICENSE.BSD",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/METADATA",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/RECORD",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/WHEEL",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/packaging-21.3.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/packaging/__about__.py",
-    "lib/python3.10/site-packages/packaging/__init__.py",
-    "lib/python3.10/site-packages/packaging/_manylinux.py",
-    "lib/python3.10/site-packages/packaging/_musllinux.py",
-    "lib/python3.10/site-packages/packaging/_structures.py",
-    "lib/python3.10/site-packages/packaging/markers.py",
-    "lib/python3.10/site-packages/packaging/py.typed",
-    "lib/python3.10/site-packages/packaging/requirements.py",
-    "lib/python3.10/site-packages/packaging/specifiers.py",
-    "lib/python3.10/site-packages/packaging/tags.py",
-    "lib/python3.10/site-packages/packaging/utils.py",
-    "lib/python3.10/site-packages/packaging/version.py",
-    "lib/python3.10/site-packages/packaging/__pycache__/__about__.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/_manylinux.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/_musllinux.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/_structures.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/markers.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/requirements.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/specifiers.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/tags.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/utils.cpython-310.pyc",
-    "lib/python3.10/site-packages/packaging/__pycache__/version.cpython-310.pyc"
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/LICENSE",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/LICENSE.APACHE",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/LICENSE.BSD",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/METADATA",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/RECORD",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/WHEEL",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/packaging-21.3.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/packaging/__about__.py",
+    "lib/python3.9/site-packages/packaging/__init__.py",
+    "lib/python3.9/site-packages/packaging/_manylinux.py",
+    "lib/python3.9/site-packages/packaging/_musllinux.py",
+    "lib/python3.9/site-packages/packaging/_structures.py",
+    "lib/python3.9/site-packages/packaging/markers.py",
+    "lib/python3.9/site-packages/packaging/py.typed",
+    "lib/python3.9/site-packages/packaging/requirements.py",
+    "lib/python3.9/site-packages/packaging/specifiers.py",
+    "lib/python3.9/site-packages/packaging/tags.py",
+    "lib/python3.9/site-packages/packaging/utils.py",
+    "lib/python3.9/site-packages/packaging/version.py",
+    "lib/python3.9/site-packages/packaging/__pycache__/__about__.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/_manylinux.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/_musllinux.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/_structures.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/markers.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/requirements.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/specifiers.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/tags.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/utils.cpython-39.pyc",
+    "lib/python3.9/site-packages/packaging/__pycache__/version.cpython-39.pyc"
   ],
   "fn": "packaging-21.3-pyhd3eb1b0_0.conda",
   "legacy_bz2_md5": "e482aa236f5541461d285cc979323035",
@@ -214,47 +214,47 @@
         "size_in_bytes": 14665
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/__about__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/__about__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/_manylinux.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/_manylinux.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/_musllinux.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/_musllinux.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/_structures.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/_structures.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/markers.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/markers.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/requirements.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/requirements.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/specifiers.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/specifiers.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/tags.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/tags.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/utils.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/utils.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/packaging/__pycache__/version.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/packaging/__pycache__/version.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

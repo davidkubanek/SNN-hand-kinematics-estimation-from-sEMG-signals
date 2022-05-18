@@ -9,20 +9,20 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/executing-0.8.3-pyhd3eb1b0_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/LICENSE.txt",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/METADATA",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/RECORD",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/WHEEL",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/executing-0.8.3.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/executing/__init__.py",
-    "lib/python3.10/site-packages/executing/executing.py",
-    "lib/python3.10/site-packages/executing/version.py",
-    "lib/python3.10/site-packages/executing/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/executing/__pycache__/executing.cpython-310.pyc",
-    "lib/python3.10/site-packages/executing/__pycache__/version.cpython-310.pyc"
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/LICENSE.txt",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/METADATA",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/RECORD",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/WHEEL",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/executing-0.8.3.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/executing/__init__.py",
+    "lib/python3.9/site-packages/executing/executing.py",
+    "lib/python3.9/site-packages/executing/version.py",
+    "lib/python3.9/site-packages/executing/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/executing/__pycache__/executing.cpython-39.pyc",
+    "lib/python3.9/site-packages/executing/__pycache__/version.cpython-39.pyc"
   ],
   "fn": "executing-0.8.3-pyhd3eb1b0_0.conda",
   "legacy_bz2_md5": "1bdd5a02233d229e76081a73659e9405",
@@ -117,15 +117,15 @@
         "size_in_bytes": 21
       },
       {
-        "_path": "lib/python3.10/site-packages/executing/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/executing/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/executing/__pycache__/executing.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/executing/__pycache__/executing.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/executing/__pycache__/version.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/executing/__pycache__/version.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

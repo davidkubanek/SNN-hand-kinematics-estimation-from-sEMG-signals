@@ -9,16 +9,16 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/six-1.16.0-pyhd3eb1b0_1",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/LICENSE",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/METADATA",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/RECORD",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/WHEEL",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/six-1.16.0.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/six.py",
-    "lib/python3.10/site-packages/__pycache__/six.cpython-310.pyc"
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/LICENSE",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/six-1.16.0.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/six.py",
+    "lib/python3.9/site-packages/__pycache__/six.cpython-39.pyc"
   ],
   "fn": "six-1.16.0-pyhd3eb1b0_1.conda",
   "legacy_bz2_md5": "0a3ab834ba49016e183e715bff48a2b6",
@@ -99,7 +99,7 @@
         "size_in_bytes": 34549
       },
       {
-        "_path": "lib/python3.10/site-packages/__pycache__/six.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/__pycache__/six.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

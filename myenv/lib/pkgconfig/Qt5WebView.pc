@@ -1,0 +1,12 @@
+prefix=/Users/david/Documents/Code/SNN-hand-kinematics-estimation-from-sEMG-signals/myenv
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+
+Name: Qt5 WebView
+Description: Qt WebView module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5WebView 
+Cflags: -I${includedir}/QtWebView -I${includedir}
+

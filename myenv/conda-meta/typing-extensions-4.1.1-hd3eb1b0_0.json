@@ -1,0 +1,37 @@
+{
+  "build": "hd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "typing_extensions 4.1.1 pyh06a4308_0"
+  ],
+  "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/typing-extensions-4.1.1-hd3eb1b0_0",
+  "features": "",
+  "files": [],
+  "fn": "typing-extensions-4.1.1-hd3eb1b0_0.conda",
+  "legacy_bz2_md5": "3a523cbd2605bb714101d7eda734c40b",
+  "license": "PSF-2.0",
+  "license_family": "PSF",
+  "link": {
+    "source": "/Users/david/opt/anaconda3/pkgs/typing-extensions-4.1.1-hd3eb1b0_0",
+    "type": 1
+  },
+  "md5": "0b535dfd0618653dd772c78c9c2b56a8",
+  "name": "typing-extensions",
+  "noarch": "python",
+  "package_tarball_full_path": "/Users/david/opt/anaconda3/pkgs/typing-extensions-4.1.1-hd3eb1b0_0.conda",
+  "package_type": "noarch_python",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "ffd342f3df10d3690d3c8abe53f411828bcb9b55ad7eadede2ae476bc9be0a22",
+  "size": 7949,
+  "subdir": "noarch",
+  "timestamp": 1647553100260,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/typing-extensions-4.1.1-hd3eb1b0_0.conda",
+  "version": "4.1.1"
+}

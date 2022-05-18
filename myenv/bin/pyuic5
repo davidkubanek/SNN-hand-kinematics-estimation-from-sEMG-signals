@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python3.9 -m PyQt5.uic.pyuic ${1+"$@"}

@@ -254,3 +254,5 @@ class Plots:
         plt.xlabel('Frequency (Hz)')
         plt.ylabel('Power')
         plt.show()
+
+

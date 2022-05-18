@@ -67,7 +67,9 @@ def run_LIF(pars, Iinj, stop=False):
   v[0] = V_init
 
   # Set current time in pA (conversion from microA to pA)
-  Iinj = Iinj *1000000
+  Iinj = Iinj * 1000000
+  #zero pad the current injection
+  Iinj = np.append(Iinj, np.zeros(len(range_t)-len(Iinj)))
 
   # If current pulse, set beginning and end to 0
   if stop:

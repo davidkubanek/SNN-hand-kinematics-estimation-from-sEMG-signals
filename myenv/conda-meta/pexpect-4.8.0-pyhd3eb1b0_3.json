@@ -10,45 +10,45 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/pexpect-4.8.0-pyhd3eb1b0_3",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/LICENSE",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/METADATA",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/RECORD",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/WHEEL",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/pexpect-4.8.0.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/pexpect/ANSI.py",
-    "lib/python3.10/site-packages/pexpect/FSM.py",
-    "lib/python3.10/site-packages/pexpect/__init__.py",
-    "lib/python3.10/site-packages/pexpect/_async.py",
-    "lib/python3.10/site-packages/pexpect/bashrc.sh",
-    "lib/python3.10/site-packages/pexpect/exceptions.py",
-    "lib/python3.10/site-packages/pexpect/expect.py",
-    "lib/python3.10/site-packages/pexpect/fdpexpect.py",
-    "lib/python3.10/site-packages/pexpect/popen_spawn.py",
-    "lib/python3.10/site-packages/pexpect/pty_spawn.py",
-    "lib/python3.10/site-packages/pexpect/pxssh.py",
-    "lib/python3.10/site-packages/pexpect/replwrap.py",
-    "lib/python3.10/site-packages/pexpect/run.py",
-    "lib/python3.10/site-packages/pexpect/screen.py",
-    "lib/python3.10/site-packages/pexpect/spawnbase.py",
-    "lib/python3.10/site-packages/pexpect/utils.py",
-    "lib/python3.10/site-packages/pexpect/__pycache__/ANSI.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/FSM.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/_async.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/exceptions.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/expect.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/fdpexpect.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/popen_spawn.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/pty_spawn.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/pxssh.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/replwrap.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/run.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/screen.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/spawnbase.cpython-310.pyc",
-    "lib/python3.10/site-packages/pexpect/__pycache__/utils.cpython-310.pyc"
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/LICENSE",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/pexpect-4.8.0.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/pexpect/ANSI.py",
+    "lib/python3.9/site-packages/pexpect/FSM.py",
+    "lib/python3.9/site-packages/pexpect/__init__.py",
+    "lib/python3.9/site-packages/pexpect/_async.py",
+    "lib/python3.9/site-packages/pexpect/bashrc.sh",
+    "lib/python3.9/site-packages/pexpect/exceptions.py",
+    "lib/python3.9/site-packages/pexpect/expect.py",
+    "lib/python3.9/site-packages/pexpect/fdpexpect.py",
+    "lib/python3.9/site-packages/pexpect/popen_spawn.py",
+    "lib/python3.9/site-packages/pexpect/pty_spawn.py",
+    "lib/python3.9/site-packages/pexpect/pxssh.py",
+    "lib/python3.9/site-packages/pexpect/replwrap.py",
+    "lib/python3.9/site-packages/pexpect/run.py",
+    "lib/python3.9/site-packages/pexpect/screen.py",
+    "lib/python3.9/site-packages/pexpect/spawnbase.py",
+    "lib/python3.9/site-packages/pexpect/utils.py",
+    "lib/python3.9/site-packages/pexpect/__pycache__/ANSI.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/FSM.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/_async.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/exceptions.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/expect.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/fdpexpect.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/popen_spawn.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/pty_spawn.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/pxssh.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/replwrap.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/run.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/screen.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/spawnbase.cpython-39.pyc",
+    "lib/python3.9/site-packages/pexpect/__pycache__/utils.cpython-39.pyc"
   ],
   "fn": "pexpect-4.8.0-pyhd3eb1b0_3.conda",
   "legacy_bz2_md5": "5122a68ef2c53409eda11f07f1c3d7c7",
@@ -234,63 +234,63 @@
         "size_in_bytes": 6019
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/ANSI.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/ANSI.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/FSM.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/FSM.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/_async.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/_async.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/exceptions.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/exceptions.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/expect.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/expect.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/fdpexpect.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/fdpexpect.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/popen_spawn.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/popen_spawn.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/pty_spawn.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/pty_spawn.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/pxssh.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/pxssh.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/replwrap.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/replwrap.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/run.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/run.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/screen.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/screen.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/spawnbase.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/spawnbase.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/pexpect/__pycache__/utils.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/pexpect/__pycache__/utils.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

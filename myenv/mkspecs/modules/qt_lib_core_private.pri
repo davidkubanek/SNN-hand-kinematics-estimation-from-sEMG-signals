@@ -1,0 +1,14 @@
+QT.core_private.VERSION = 5.9.7
+QT.core_private.name = QtCore
+QT.core_private.module =
+QT.core_private.libs = $$QT_MODULE_LIB_BASE
+QT.core_private.includes = $$QT_MODULE_INCLUDE_BASE/QtCore/5.9.7 $$QT_MODULE_INCLUDE_BASE/QtCore/5.9.7/QtCore
+QT.core_private.frameworks =
+QT.core_private.depends = core
+QT.core_private.uses =
+QT.core_private.module_config = v2 internal_module
+QT.core_private.enabled_features = datetimeparser dlopen doubleconversion icu poll_poll sha3-fast
+QT.core_private.disabled_features = clock-gettime glib gnu-libiconv iconv inotify journald poll_ppoll poll_pollts poll_select posix-libiconv slog2 syslog system-doubleconversion system-pcre2
+QMAKE_LIBS_LIBDL = 
+QMAKE_LIBS_ICU = -licui18n -licuuc -licudata
+QMAKE_LIBS_LIBATOMIC = 

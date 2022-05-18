@@ -1,0 +1,494 @@
+{
+  "build": "py39hecd8cb5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.9,<3.10.0a0",
+    "soupsieve >=1.2"
+  ],
+  "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/beautifulsoup4-4.11.1-py39hecd8cb5_0",
+  "features": "",
+  "files": [
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/COPYING.txt",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/LICENSE",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/METADATA",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/RECORD",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/WHEEL",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/bs4/__init__.py",
+    "lib/python3.9/site-packages/bs4/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/__pycache__/dammit.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/__pycache__/diagnose.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/__pycache__/element.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/__pycache__/formatter.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/builder/__init__.py",
+    "lib/python3.9/site-packages/bs4/builder/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/builder/__pycache__/_html5lib.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/builder/__pycache__/_htmlparser.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/builder/__pycache__/_lxml.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/builder/_html5lib.py",
+    "lib/python3.9/site-packages/bs4/builder/_htmlparser.py",
+    "lib/python3.9/site-packages/bs4/builder/_lxml.py",
+    "lib/python3.9/site-packages/bs4/dammit.py",
+    "lib/python3.9/site-packages/bs4/diagnose.py",
+    "lib/python3.9/site-packages/bs4/element.py",
+    "lib/python3.9/site-packages/bs4/formatter.py",
+    "lib/python3.9/site-packages/bs4/tests/__init__.py",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_builder.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_builder_registry.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_dammit.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_docs.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_element.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_formatter.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_html5lib.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_htmlparser.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_lxml.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_navigablestring.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_pageelement.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_soup.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_tag.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/__pycache__/test_tree.cpython-39.pyc",
+    "lib/python3.9/site-packages/bs4/tests/test_builder.py",
+    "lib/python3.9/site-packages/bs4/tests/test_builder_registry.py",
+    "lib/python3.9/site-packages/bs4/tests/test_dammit.py",
+    "lib/python3.9/site-packages/bs4/tests/test_docs.py",
+    "lib/python3.9/site-packages/bs4/tests/test_element.py",
+    "lib/python3.9/site-packages/bs4/tests/test_formatter.py",
+    "lib/python3.9/site-packages/bs4/tests/test_html5lib.py",
+    "lib/python3.9/site-packages/bs4/tests/test_htmlparser.py",
+    "lib/python3.9/site-packages/bs4/tests/test_lxml.py",
+    "lib/python3.9/site-packages/bs4/tests/test_navigablestring.py",
+    "lib/python3.9/site-packages/bs4/tests/test_pageelement.py",
+    "lib/python3.9/site-packages/bs4/tests/test_soup.py",
+    "lib/python3.9/site-packages/bs4/tests/test_tag.py",
+    "lib/python3.9/site-packages/bs4/tests/test_tree.py"
+  ],
+  "fn": "beautifulsoup4-4.11.1-py39hecd8cb5_0.conda",
+  "legacy_bz2_md5": "ad26238fccbb8c1bf15f469678316de2",
+  "license": "MIT",
+  "license_family": "MIT",
+  "link": {
+    "source": "/Users/david/opt/anaconda3/pkgs/beautifulsoup4-4.11.1-py39hecd8cb5_0",
+    "type": 1
+  },
+  "md5": "0d29a185bc45f4dcc693be9feb4174a1",
+  "name": "beautifulsoup4",
+  "package_tarball_full_path": "/Users/david/opt/anaconda3/pkgs/beautifulsoup4-4.11.1-py39hecd8cb5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/COPYING.txt",
+        "path_type": "hardlink",
+        "sha256": "9e41dab3a48f5c734a9d5446557b28a6616e4924ee51d205598e4416bb93ce25",
+        "sha256_in_prefix": "9e41dab3a48f5c734a9d5446557b28a6616e4924ee51d205598e4416bb93ce25",
+        "size_in_bytes": 1447
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "9e41dab3a48f5c734a9d5446557b28a6616e4924ee51d205598e4416bb93ce25",
+        "sha256_in_prefix": "9e41dab3a48f5c734a9d5446557b28a6616e4924ee51d205598e4416bb93ce25",
+        "size_in_bytes": 1447
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "ba407597ed73088e9ca094e23342cc4622b87c34782517e521fce4fd9226adba",
+        "sha256_in_prefix": "ba407597ed73088e9ca094e23342cc4622b87c34782517e521fce4fd9226adba",
+        "size_in_bytes": 3529
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "ca57b65ab68c13c515e1ea0edd533b17ad11826abed11584ba343c3e20575075",
+        "sha256_in_prefix": "ca57b65ab68c13c515e1ea0edd533b17ad11826abed11584ba343c3e20575075",
+        "size_in_bytes": 3998
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "1b5e87e00dc87a84269cead8578b9e6462928e18a95f1f3373c9eef451a5bcc0",
+        "sha256_in_prefix": "1b5e87e00dc87a84269cead8578b9e6462928e18a95f1f3373c9eef451a5bcc0",
+        "size_in_bytes": 92
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "7932c8bf470ef1d75ab4c34444f01b8b4a43726bed4663d74cb32da195591123",
+        "sha256_in_prefix": "7932c8bf470ef1d75ab4c34444f01b8b4a43726bed4663d74cb32da195591123",
+        "size_in_bytes": 143
+      },
+      {
+        "_path": "lib/python3.9/site-packages/beautifulsoup4-4.11.1.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "82951525c4f05b7abbf901a9ead004a2666cb249279a04aa55eeb19f50b48c92",
+        "sha256_in_prefix": "82951525c4f05b7abbf901a9ead004a2666cb249279a04aa55eeb19f50b48c92",
+        "size_in_bytes": 26
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "bf956e42a7a00333776e8e248ece9f4f4dfdd73bca40686f06557ce35689f3a0",
+        "sha256_in_prefix": "bf956e42a7a00333776e8e248ece9f4f4dfdd73bca40686f06557ce35689f3a0",
+        "size_in_bytes": 32832
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "d231b330c91a4c68701a11236f11e36db3701b124db91513778d93b95037235d",
+        "sha256_in_prefix": "d231b330c91a4c68701a11236f11e36db3701b124db91513778d93b95037235d",
+        "size_in_bytes": 24107
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__pycache__/dammit.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "9c5522bd3610f50ab543169aa215be27a6df405e3f79bf0687c0b653574fe351",
+        "sha256_in_prefix": "9c5522bd3610f50ab543169aa215be27a6df405e3f79bf0687c0b653574fe351",
+        "size_in_bytes": 25468
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__pycache__/diagnose.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "d71d98643d9d4131c511490c2d35e2b69e55e631bdc7eec332c6d93490b65f76",
+        "sha256_in_prefix": "d71d98643d9d4131c511490c2d35e2b69e55e631bdc7eec332c6d93490b65f76",
+        "size_in_bytes": 8548
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__pycache__/element.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4aaa1b9de818c808c22024e7ae4567fe5bb6cad64827823b8469fa04f713b708",
+        "sha256_in_prefix": "4aaa1b9de818c808c22024e7ae4567fe5bb6cad64827823b8469fa04f713b708",
+        "size_in_bytes": 66637
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/__pycache__/formatter.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "c4bc5e06c25de4d833246bdd8c626100963b37ad07aaa72325ae0550cbb7725d",
+        "sha256_in_prefix": "c4bc5e06c25de4d833246bdd8c626100963b37ad07aaa72325ae0550cbb7725d",
+        "size_in_bytes": 6778
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "372ecd999bb75c39dda7f7a50abcf65bc2bd3948eb0231d0b9889a9c947a4433",
+        "sha256_in_prefix": "372ecd999bb75c39dda7f7a50abcf65bc2bd3948eb0231d0b9889a9c947a4433",
+        "size_in_bytes": 24378
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "460054b7f2338666ef48b45ba2c14973f39c24063f4573bb8cff2786c34d88cc",
+        "sha256_in_prefix": "460054b7f2338666ef48b45ba2c14973f39c24063f4573bb8cff2786c34d88cc",
+        "size_in_bytes": 19043
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/__pycache__/_html5lib.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "d5df956476336c5f17427e17580d14441cd38c1a7f6174ab3026dccf653969c5",
+        "sha256_in_prefix": "d5df956476336c5f17427e17580d14441cd38c1a7f6174ab3026dccf653969c5",
+        "size_in_bytes": 12552
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/__pycache__/_htmlparser.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8d883652a4059a5c1e5faa8b7d0f4bce121ef34484f51f32fc2f88cc4a5b6f75",
+        "sha256_in_prefix": "8d883652a4059a5c1e5faa8b7d0f4bce121ef34484f51f32fc2f88cc4a5b6f75",
+        "size_in_bytes": 13198
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/__pycache__/_lxml.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "e21f0eba9624f6c2fda985865dfada92023f478eed43722603f790be04de2b97",
+        "sha256_in_prefix": "e21f0eba9624f6c2fda985865dfada92023f478eed43722603f790be04de2b97",
+        "size_in_bytes": 10107
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/_html5lib.py",
+        "path_type": "hardlink",
+        "sha256": "60538a65fdc4db6004a7f576938f54e4b985dba6e94998b166b6464b033f8825",
+        "sha256_in_prefix": "60538a65fdc4db6004a7f576938f54e4b985dba6e94998b166b6464b033f8825",
+        "size_in_bytes": 18946
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/_htmlparser.py",
+        "path_type": "hardlink",
+        "sha256": "e9162c01759bfe9a4c64607eee5a4498943bdeda734aefc227940f685709bbe6",
+        "sha256_in_prefix": "e9162c01759bfe9a4c64607eee5a4498943bdeda734aefc227940f685709bbe6",
+        "size_in_bytes": 19169
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/builder/_lxml.py",
+        "path_type": "hardlink",
+        "sha256": "8a4e811469f1033576fb6d52fd673eed9780d7be26b9203f6619a99c07b78341",
+        "sha256_in_prefix": "8a4e811469f1033576fb6d52fd673eed9780d7be26b9203f6619a99c07b78341",
+        "size_in_bytes": 14904
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/dammit.py",
+        "path_type": "hardlink",
+        "sha256": "1b47107ec12a7f027e14840c917802270487327eedf6f3dea42aee77a7d910a9",
+        "sha256_in_prefix": "1b47107ec12a7f027e14840c917802270487327eedf6f3dea42aee77a7d910a9",
+        "size_in_bytes": 41158
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/diagnose.py",
+        "path_type": "hardlink",
+        "sha256": "3116cdd9b252a5af1516df077a6a8ff012bd84be6ba270b1666adf191658c018",
+        "sha256_in_prefix": "3116cdd9b252a5af1516df077a6a8ff012bd84be6ba270b1666adf191658c018",
+        "size_in_bytes": 7911
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/element.py",
+        "path_type": "hardlink",
+        "sha256": "8e33fe708037a1626b021932eb5c1aca8b7dd924052b324c104f0ccbab933c33",
+        "sha256_in_prefix": "8e33fe708037a1626b021932eb5c1aca8b7dd924052b324c104f0ccbab933c33",
+        "size_in_bytes": 86753
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/formatter.py",
+        "path_type": "hardlink",
+        "sha256": "7f9501b6f5bdb70aeb41e2e305e2da2a9e27b59a540e650163c8c5dc188bada3",
+        "sha256_in_prefix": "7f9501b6f5bdb70aeb41e2e305e2da2a9e27b59a540e650163c8c5dc188bada3",
+        "size_in_bytes": 7206
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "c85bdf843bf9bce7a1a3a34465c234008a66b847bd6ef0bb4eca8da778431b14",
+        "sha256_in_prefix": "c85bdf843bf9bce7a1a3a34465c234008a66b847bd6ef0bb4eca8da778431b14",
+        "size_in_bytes": 49185
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4f56154315576a8b0741e2d3bce5fdcec1dd5804c30d3e445ed0e23dcdfe0a49",
+        "sha256_in_prefix": "4f56154315576a8b0741e2d3bce5fdcec1dd5804c30d3e445ed0e23dcdfe0a49",
+        "size_in_bytes": 46667
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_builder.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "08d850eddb4879ab1af51fb68c261b43b81af336ef61091087db4d9ac8cd4da1",
+        "sha256_in_prefix": "08d850eddb4879ab1af51fb68c261b43b81af336ef61091087db4d9ac8cd4da1",
+        "size_in_bytes": 1171
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_builder_registry.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "362eac27fce3265e59f0be5a3dac483c2249f2e437c659ff5411004daacc56bb",
+        "sha256_in_prefix": "362eac27fce3265e59f0be5a3dac483c2249f2e437c659ff5411004daacc56bb",
+        "size_in_bytes": 4919
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_dammit.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "6f5cbbc19b6b83886c83e7b26d08434fc93aa49f076490f8a63c0c715a1124fa",
+        "sha256_in_prefix": "6f5cbbc19b6b83886c83e7b26d08434fc93aa49f076490f8a63c0c715a1124fa",
+        "size_in_bytes": 13184
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_docs.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "b30f79376a6f5d86918ee79a6e53cf3b19e574653460cd1e169a18d9b32c5a95",
+        "sha256_in_prefix": "b30f79376a6f5d86918ee79a6e53cf3b19e574653460cd1e169a18d9b32c5a95",
+        "size_in_bytes": 410
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_element.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "570da2ed65c4c5646787650714546746f2099eaf5897fd84703a8aae342f7b5a",
+        "sha256_in_prefix": "570da2ed65c4c5646787650714546746f2099eaf5897fd84703a8aae342f7b5a",
+        "size_in_bytes": 2713
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_formatter.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "13cb0aff981ed36ed3377f6706d0ba3272ac9665e67d4f01fb9c2e74a1180d16",
+        "sha256_in_prefix": "13cb0aff981ed36ed3377f6706d0ba3272ac9665e67d4f01fb9c2e74a1180d16",
+        "size_in_bytes": 3159
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_html5lib.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4ddecb3d62db5debd9548e49f848e507115f7ea971861cdb7371a37741c4301b",
+        "sha256_in_prefix": "4ddecb3d62db5debd9548e49f848e507115f7ea971861cdb7371a37741c4301b",
+        "size_in_bytes": 7927
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_htmlparser.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8c877439928ec3178b3e10cbba9bce01a434d4a7ed16e91c06c5ae3c5ead06a7",
+        "sha256_in_prefix": "8c877439928ec3178b3e10cbba9bce01a434d4a7ed16e91c06c5ae3c5ead06a7",
+        "size_in_bytes": 5000
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_lxml.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "3b3d6d0e731be875a35cdf1467e8d17a379bae36ae9837b715901d81914cfa5d",
+        "sha256_in_prefix": "3b3d6d0e731be875a35cdf1467e8d17a379bae36ae9837b715901d81914cfa5d",
+        "size_in_bytes": 5402
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_navigablestring.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "cbf17a58210e0507381eb99a2642fa380ee8989ed9a71ec1058a0e2e7458bd02",
+        "sha256_in_prefix": "cbf17a58210e0507381eb99a2642fa380ee8989ed9a71ec1058a0e2e7458bd02",
+        "size_in_bytes": 4887
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_pageelement.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "90cb1c0ccf0451aefb1265b0c82f41d7e24219433e2bad68c3b314ce644f530f",
+        "sha256_in_prefix": "90cb1c0ccf0451aefb1265b0c82f41d7e24219433e2bad68c3b314ce644f530f",
+        "size_in_bytes": 30938
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_soup.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "2934af1e9ad9ee7a6b148bac7a6ddf1899761bc1905048842b51546c88eef6b9",
+        "sha256_in_prefix": "2934af1e9ad9ee7a6b148bac7a6ddf1899761bc1905048842b51546c88eef6b9",
+        "size_in_bytes": 18325
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_tag.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "f2f9c89d5b24a6d00172d4f5b26c8c9f0a4fa7ad9c14f309543f463719a14ff5",
+        "sha256_in_prefix": "f2f9c89d5b24a6d00172d4f5b26c8c9f0a4fa7ad9c14f309543f463719a14ff5",
+        "size_in_bytes": 8623
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/__pycache__/test_tree.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "8c20daeda663b72e239a69f1da5d76d9447c3e3ae6a38050defe3fa081b80c49",
+        "sha256_in_prefix": "8c20daeda663b72e239a69f1da5d76d9447c3e3ae6a38050defe3fa081b80c49",
+        "size_in_bytes": 50557
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_builder.py",
+        "path_type": "hardlink",
+        "sha256": "9dcd8913910cac47fea76e2a85fd91f2a015e4fa4588eb8da580a6b660a39532",
+        "sha256_in_prefix": "9dcd8913910cac47fea76e2a85fd91f2a015e4fa4588eb8da580a6b660a39532",
+        "size_in_bytes": 1115
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_builder_registry.py",
+        "path_type": "hardlink",
+        "sha256": "fd58760b2633bf804aa097426bbb3896c04b510a6db247e08929f7537f35d024",
+        "sha256_in_prefix": "fd58760b2633bf804aa097426bbb3896c04b510a6db247e08929f7537f35d024",
+        "size_in_bytes": 5068
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_dammit.py",
+        "path_type": "hardlink",
+        "sha256": "952dc4582602b71544e1f0bf276793717882861b9a2f855c6e8f7807981e20be",
+        "sha256_in_prefix": "952dc4582602b71544e1f0bf276793717882861b9a2f855c6e8f7807981e20be",
+        "size_in_bytes": 15680
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_docs.py",
+        "path_type": "hardlink",
+        "sha256": "c680319d47e843b691a86226c16ffd0490d4f1634c64722ebd6a957a9bd65edf",
+        "sha256_in_prefix": "c680319d47e843b691a86226c16ffd0490d4f1634c64722ebd6a957a9bd65edf",
+        "size_in_bytes": 1127
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_element.py",
+        "path_type": "hardlink",
+        "sha256": "f76a11491a0693c8085c06c018712b2b3a1cc7630adf64ea71075427e74640ca",
+        "sha256_in_prefix": "f76a11491a0693c8085c06c018712b2b3a1cc7630adf64ea71075427e74640ca",
+        "size_in_bytes": 2377
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_formatter.py",
+        "path_type": "hardlink",
+        "sha256": "d2a57d1fb98c0c17271451fe770342ad29b6ccd8bfe3458c07618c715df93e86",
+        "sha256_in_prefix": "d2a57d1fb98c0c17271451fe770342ad29b6ccd8bfe3458c07618c715df93e86",
+        "size_in_bytes": 4128
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_html5lib.py",
+        "path_type": "hardlink",
+        "sha256": "5faaf5de37c9f8e986e922ff8727c53575aceec104abfd53982cc225c971bdb0",
+        "sha256_in_prefix": "5faaf5de37c9f8e986e922ff8727c53575aceec104abfd53982cc225c971bdb0",
+        "size_in_bytes": 8246
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_htmlparser.py",
+        "path_type": "hardlink",
+        "sha256": "0450aca4876192bf01b2cfa41ee7de35cc1afe5bc9a5558a809b243e866067b1",
+        "sha256_in_prefix": "0450aca4876192bf01b2cfa41ee7de35cc1afe5bc9a5558a809b243e866067b1",
+        "size_in_bytes": 5532
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_lxml.py",
+        "path_type": "hardlink",
+        "sha256": "75e69fd583ab47c2344f9c99015e130f17005c7cd585d967b126a31a9068c6cd",
+        "sha256_in_prefix": "75e69fd583ab47c2344f9c99015e130f17005c7cd585d967b126a31a9068c6cd",
+        "size_in_bytes": 7376
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_navigablestring.py",
+        "path_type": "hardlink",
+        "sha256": "4464a0ce235fedc66761d10fb28a8bd41d88ebc4d4269d49984415c5b87faf20",
+        "sha256_in_prefix": "4464a0ce235fedc66761d10fb28a8bd41d88ebc4d4269d49984415c5b87faf20",
+        "size_in_bytes": 5081
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_pageelement.py",
+        "path_type": "hardlink",
+        "sha256": "7e9394dd6e48033f766f403657158a908e6902939b301d7b70dcd7345f3915f0",
+        "sha256_in_prefix": "7e9394dd6e48033f766f403657158a908e6902939b301d7b70dcd7345f3915f0",
+        "size_in_bytes": 27792
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_soup.py",
+        "path_type": "hardlink",
+        "sha256": "0949cafab0dc70894a30b04fe00c1e0aa4436cfb772eace59ff0699c180a9b83",
+        "sha256_in_prefix": "0949cafab0dc70894a30b04fe00c1e0aa4436cfb772eace59ff0699c180a9b83",
+        "size_in_bytes": 17810
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_tag.py",
+        "path_type": "hardlink",
+        "sha256": "7f5f6e89eed07a1be0be122a3567e30d14784ca6be7ed9bf451a28e8b5d9caa9",
+        "sha256_in_prefix": "7f5f6e89eed07a1be0be122a3567e30d14784ca6be7ed9bf451a28e8b5d9caa9",
+        "size_in_bytes": 9016
+      },
+      {
+        "_path": "lib/python3.9/site-packages/bs4/tests/test_tree.py",
+        "path_type": "hardlink",
+        "sha256": "cbd42fb3c9e7623e919c6452c6da18410c128daf8395bb6e90256cd27795c325",
+        "sha256_in_prefix": "cbd42fb3c9e7623e919c6452c6da18410c128daf8395bb6e90256cd27795c325",
+        "size_in_bytes": 47557
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "f00e05bcfb1c768748d5139019a9b496066b2472b4081c9102857ddbe3572898",
+  "size": 193088,
+  "subdir": "osx-64",
+  "timestamp": 1650462258993,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/beautifulsoup4-4.11.1-py39hecd8cb5_0.conda",
+  "version": "4.11.1"
+}

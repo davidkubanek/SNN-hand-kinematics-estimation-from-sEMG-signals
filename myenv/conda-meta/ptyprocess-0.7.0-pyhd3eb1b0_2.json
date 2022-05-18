@@ -9,21 +9,21 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/ptyprocess-0.7.0-pyhd3eb1b0_2",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/LICENSE",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/METADATA",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/RECORD",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/WHEEL",
-    "lib/python3.10/site-packages/ptyprocess-0.7.0.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/ptyprocess/__init__.py",
-    "lib/python3.10/site-packages/ptyprocess/_fork_pty.py",
-    "lib/python3.10/site-packages/ptyprocess/ptyprocess.py",
-    "lib/python3.10/site-packages/ptyprocess/util.py",
-    "lib/python3.10/site-packages/ptyprocess/__pycache__/__init__.cpython-310.pyc",
-    "lib/python3.10/site-packages/ptyprocess/__pycache__/_fork_pty.cpython-310.pyc",
-    "lib/python3.10/site-packages/ptyprocess/__pycache__/ptyprocess.cpython-310.pyc",
-    "lib/python3.10/site-packages/ptyprocess/__pycache__/util.cpython-310.pyc"
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/LICENSE",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/ptyprocess-0.7.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/ptyprocess/__init__.py",
+    "lib/python3.9/site-packages/ptyprocess/_fork_pty.py",
+    "lib/python3.9/site-packages/ptyprocess/ptyprocess.py",
+    "lib/python3.9/site-packages/ptyprocess/util.py",
+    "lib/python3.9/site-packages/ptyprocess/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/ptyprocess/__pycache__/_fork_pty.cpython-39.pyc",
+    "lib/python3.9/site-packages/ptyprocess/__pycache__/ptyprocess.cpython-39.pyc",
+    "lib/python3.9/site-packages/ptyprocess/__pycache__/util.cpython-39.pyc"
   ],
   "fn": "ptyprocess-0.7.0-pyhd3eb1b0_2.conda",
   "legacy_bz2_md5": "62f3bb16b31fa9498a41fc4ad2b4f43c",
@@ -117,19 +117,19 @@
         "size_in_bytes": 2785
       },
       {
-        "_path": "lib/python3.10/site-packages/ptyprocess/__pycache__/__init__.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/ptyprocess/__pycache__/__init__.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/ptyprocess/__pycache__/_fork_pty.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/ptyprocess/__pycache__/_fork_pty.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/ptyprocess/__pycache__/ptyprocess.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/ptyprocess/__pycache__/ptyprocess.cpython-39.pyc",
         "path_type": "pyc_file"
       },
       {
-        "_path": "lib/python3.10/site-packages/ptyprocess/__pycache__/util.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/ptyprocess/__pycache__/util.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

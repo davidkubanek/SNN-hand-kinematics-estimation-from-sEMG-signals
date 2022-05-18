@@ -9,17 +9,17 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/decorator-5.1.1-pyhd3eb1b0_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/INSTALLER",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/LICENSE.txt",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/METADATA",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/RECORD",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/REQUESTED",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/WHEEL",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/direct_url.json",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/pbr.json",
-    "lib/python3.10/site-packages/decorator-5.1.1.dist-info/top_level.txt",
-    "lib/python3.10/site-packages/decorator.py",
-    "lib/python3.10/site-packages/__pycache__/decorator.cpython-310.pyc"
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/LICENSE.txt",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/METADATA",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/RECORD",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/WHEEL",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/pbr.json",
+    "lib/python3.9/site-packages/decorator-5.1.1.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/decorator.py",
+    "lib/python3.9/site-packages/__pycache__/decorator.cpython-39.pyc"
   ],
   "fn": "decorator-5.1.1-pyhd3eb1b0_0.conda",
   "legacy_bz2_md5": "6072a09eeab81c07c98065234e46af1e",
@@ -107,7 +107,7 @@
         "size_in_bytes": 16752
       },
       {
-        "_path": "lib/python3.10/site-packages/__pycache__/decorator.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/__pycache__/decorator.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],

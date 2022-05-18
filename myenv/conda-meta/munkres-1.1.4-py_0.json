@@ -9,12 +9,12 @@
   "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/munkres-1.1.4-py_0",
   "features": "",
   "files": [
-    "lib/python3.10/site-packages/munkres-1.1.4-py3.6.egg-info/PKG-INFO",
-    "lib/python3.10/site-packages/munkres-1.1.4-py3.6.egg-info/SOURCES.txt",
-    "lib/python3.10/site-packages/munkres-1.1.4-py3.6.egg-info/dependency_links.txt",
-    "lib/python3.10/site-packages/munkres-1.1.4-py3.6.egg-info/top_level.txt",
-    "lib/python3.10/site-packages/munkres.py",
-    "lib/python3.10/site-packages/__pycache__/munkres.cpython-310.pyc"
+    "lib/python3.9/site-packages/munkres-1.1.4-py3.6.egg-info/PKG-INFO",
+    "lib/python3.9/site-packages/munkres-1.1.4-py3.6.egg-info/SOURCES.txt",
+    "lib/python3.9/site-packages/munkres-1.1.4-py3.6.egg-info/dependency_links.txt",
+    "lib/python3.9/site-packages/munkres-1.1.4-py3.6.egg-info/top_level.txt",
+    "lib/python3.9/site-packages/munkres.py",
+    "lib/python3.9/site-packages/__pycache__/munkres.cpython-39.pyc"
   ],
   "fn": "munkres-1.1.4-py_0.conda",
   "legacy_bz2_md5": "67857cc5e9044770d2b15f9d94a4521d",
@@ -68,7 +68,7 @@
         "size_in_bytes": 19406
       },
       {
-        "_path": "lib/python3.10/site-packages/__pycache__/munkres.cpython-310.pyc",
+        "_path": "lib/python3.9/site-packages/__pycache__/munkres.cpython-39.pyc",
         "path_type": "pyc_file"
       }
     ],
