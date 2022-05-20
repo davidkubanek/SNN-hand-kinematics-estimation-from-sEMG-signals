@@ -1,8 +1,17 @@
 #%%
-import SNN_front_end
+'''
+Represents the last layer of the front-ent.
+Encodes the processed time-series signal into a series of spike trains: LIF input neurons.
+'''
 import importlib
-importlib.reload(SNN_front_end)
-from SNN_front_end import *
+import Support_Functions
+importlib.reload(Support_Functions)
+from Support_Functions import *
+import SNN_front_end
+#importlib.reload(SNN_front_end)
+#from SNN_front_end import *
+
+
 # %%
 '''
 Custom LIF generator
@@ -69,7 +78,7 @@ def run_LIF(pars, Iinj, stop=False):
   # Set current time in pA (conversion from microA to pA)
   Iinj = Iinj * 1000000
   #zero pad the current injection
-  Iinj = np.append(Iinj, np.zeros(len(range_t)-len(Iinj)))
+  Iinj = np.append(Iinj, np.zeros(abs(len(range_t)-len(Iinj))))
 
   # If current pulse, set beginning and end to 0
   if stop:
@@ -159,8 +168,11 @@ def Input_Spikes(input_current, sim_run_time, sampling_rate, R=1, scale=1000000,
 
 # %%
 if __name__ == '__main__':
+  '''
+  Extracts sample spike trains from a given input current and instantiates with this info a brian2 SpikeGenerator
+  '''
   #Extracting input spike trains
-  sim_run_time = 200
+  sim_run_time = 200 #ms
   p = Plots()
   inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
 
@@ -209,7 +221,7 @@ if __name__ == '__main__':
   G = SpikeGeneratorGroup(no_inp_ch, inp_indeces, inp_spike_times*ms)
   spikemon = SpikeMonitor(G)
 
-  run(200*ms)
+  run(sim_run_time*ms)
 
   #raster plot
   fig = plt.figure(figsize=(10,7))

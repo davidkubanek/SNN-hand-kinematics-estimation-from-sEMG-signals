@@ -1,6 +1,11 @@
 #%%
-import SNN_front_end
+'''
+Random Liquid Network of excitatory and inhibitory LIF neurons. 
+We map the input channels from the SNN front-end into a higher dimensional space and monitor the activity of this higher dimensional network.
+'''
+
 import importlib
+import SNN_front_end
 importlib.reload(SNN_front_end)
 from SNN_front_end import *
 from brian2 import *
@@ -21,11 +26,27 @@ net_sparsity = 0.3
 inp_w_scale = 0.2 #input to ex.
 ee_w_scale = 1.5 #ex. to ex.
 ei_w_scale = 1 #ex. to in.
-ie_w_scale = 10 #in. to ex.
+ie_w_scale = 6 #in. to ex.
 #neuron model equations
 tau=10*ms
 El = -1 #mV #Leak reversal potential
 V_th = 1 #mV #Threshold for firing
+
+print('____________________PARAMETERS____________________')
+print('No. of neurons:', N)
+print('Fraction of excitatory neurons:', frac_ex)
+print('Input sparsity:', inp_sparsity)
+print('Network sparsity:', net_sparsity)
+print('Input (P) to Ex synapse weight scaling:', inp_w_scale)
+print('Ex to Ex synapse weight scaling:', ee_w_scale)
+print('Ex to In synapse weight scaling:', ei_w_scale)
+print('In to Ex synapse weight scaling:', ie_w_scale)
+print('tau [ms]:', tau)
+print('El [mV]:', El)
+print('V_th [mV]:', V_th)
+print('__________________________________________________')
+
+
 
 ex = int(N*frac_ex) #no. of excitatory neurons
 inh = N-ex #no. of inhibiroty neurons
@@ -116,15 +137,19 @@ pop_in = PopulationRateMonitor(In)
 
 run(run_length*ms)
 
+
 #plot Ex. neuronal excitation
 fig = plt.figure(figsize=(10,7))
-plot(M_ex.t/ms, M_ex.v[0], label='Neuron 0')
-plot(M_ex.t/ms, M_ex.v[1], label='Neuron 1')
-plot(M_ex.t/ms, M_ex.v[2], label='Neuron 2')
-plot(M_ex.t/ms, M_ex.v[3], label='Neuron 3')
-plt.title('Neuronal Excitation')
-xlabel('Time (ms)')
-ylabel('v')
+#generate random integers
+random_int = np.random.randint(0,ex-1,size=4)
+#plot random 4 neurons
+plot(M_ex.t/ms, M_ex.v[random_int[0]], label=f'Neuron {random_int[0]}')
+plot(M_ex.t/ms, M_ex.v[random_int[1]], label=f'Neuron {random_int[1]}')
+plot(M_ex.t/ms, M_ex.v[random_int[2]], label=f'Neuron {random_int[2]}')
+plot(M_ex.t/ms, M_ex.v[random_int[3]], label=f'Neuron {random_int[3]}')
+plt.title('Sample Neuronal Excitation (Ex)')
+xlabel('Time [ms]')
+ylabel('v [mV]')
 legend();
 plt.show()
 
@@ -176,13 +201,41 @@ for b in range(int(run_length/bin)):
     p_rate += [np.average(pop_P_r[b*idx:b*idx+idx])]
     f_rate += [np.average(pop_ex_r[b*idx:b*idx+idx])*frac_ex + np.average(pop_in_r[b*idx:b*idx+idx])*(1-frac_ex)]
 
-# %%
+
 '''
 Plotting binned firing rates of populations
+- subplots
 '''
 #two by two subplot
-plt.subplots(nrows=2, ncols=2, figsize=(10,7))
+fig, axs = plt.subplots(2, 2, figsize=(10,7))
+plt.tight_layout()
+fig.subplots_adjust(hspace=0.4, wspace=0.2)
+axs[0,0].plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04ccc4', label=tag)
+axs[0,0].set_title('Input Population', fontname="Cambria", fontsize=12)
+axs[0,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+axs[0,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), f_rate, color='#04ccc4', label=tag) #04c8e0
+axs[0,1].set_title('Global Population', fontname="Cambria", fontsize=12)
+axs[0,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+axs[0,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+axs[1,0].plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04ccc4', label=tag)
+axs[1,0].set_title('Excitatory Population', fontname="Cambria", fontsize=12)
+axs[1,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+axs[1,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+axs[1,1].plot(np.linspace(bin, run_length, int(run_length/bin)), in_rate, color='#04ccc4', label=tag)
+axs[1,1].set_title('Inhibitory Population', fontname="Cambria", fontsize=12)
+axs[1,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+axs[1,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+plt.legend();
+plt.show()
 
+
+
+#%%
+'''
+Plotting binned firing rates of populations
+- Individual plots
+'''
 
 t = np.linspace(bin, run_length, int(run_length/bin))
 fig = plt.figure()figsize=(10,7)
