@@ -2,6 +2,7 @@
 
 #%%
 import numpy as np
+from pyrsistent import b
 from scipy.signal import butter, lfilter, resample
 import matplotlib.pyplot as plt
 import importlib
@@ -128,11 +129,11 @@ if __name__ == '__main__':
     print(np.shape(data_filtered))
     
     #original unfiltered power spectrum (note input axis conversion to make compatible with function)
-    xf, yf = time_to_freq_domain(np.swapaxes(emg_data, 0, 1), time_pose[0], sampling_rate, classes, no_electrodes, sample=True)
-    p.plot_power_spectrum(xf, yf, 'Single motion, Single electrode Unfiltered Power Spectrum')
+    xf, yf = time_to_freq_domain(np.swapaxes(emg_data, 0, 1), time_pose[index], sampling_rate, classes, no_electrodes, sample=True)
+    p.plot_power_spectrum(xf, yf, 'Single motion, Single electrode Unfiltered Power Spectrum', electrode=1)
     #filtered power spectrum
-    xf, yf = time_to_freq_domain(np.swapaxes(data_filtered, 0, 1), time_pose[0], sampling_rate, classes, no_electrodes, sample=True)
-    p.plot_power_spectrum(xf, yf, 'Single motion, Single electrode Filtered Power Spectrum (BP: {lowcut}-{highcut}Hz)'.format(lowcut=lowcut,highcut=highcut))
+    xf, yf = time_to_freq_domain(np.swapaxes(data_filtered, 0, 1), time_pose[index], sampling_rate, classes, no_electrodes, sample=True)
+    p.plot_power_spectrum(xf, yf, 'Single motion, Single electrode Filtered Power Spectrum (BP: {lowcut}-{highcut}Hz)'.format(lowcut=lowcut,highcut=highcut), electrode=1)
 
     Filter_spectogram(emg_data, np.array(data_filtered), sampling_rate, electrode = 0)
 
@@ -182,4 +183,44 @@ if __name__=='__main__':
     if m == 0:
         print('No clashes, methods are identical')
 
+# %%
+'''
+Adaptive frequency split based on partition of the power spectrum into bins of equal power
+- computes total power in all electrodes, then splits the power spectrum into bins of equal power cumulative across all electrodes
+'''
+def Adaptive_Freq_Split(emg_data, index, time_pose, sampling_rate, classes, no_electrodes):
+    #original unfiltered power spectrum (note input axis conversion to make compatible with function)
+    xf, yf = time_to_freq_domain(np.swapaxes(emg_data, 0, 1), time_pose[index], sampling_rate, classes, no_electrodes, sample=True)
+
+    bins = 4
+    power_per_bin = np.sum(np.abs(yf))/bins #total power / no. bins
+    cut_f = [1] #stores cut-off frequencies
+    cut_idx = [] #stores cut-off indices
+    b=1
+    for i in range(np.shape(np.abs(yf))[1]):
+        cum_sum = np.sum(np.abs(yf)[:,:i])
+        if cum_sum >= power_per_bin*b:
+            cut_f.append(int(xf[i]))
+            cut_idx.append(i)
+            b += 1
+            # print(cum_sum)
+
+    if len(cut_f)<bins+1:
+        cut_f.append(int(xf[-1]))
+
+    # print('Freq. bands:\n', cut_f)
+    # print('Cut-off indeces:\n', cut_idx)
+    return cut_f
+
+
+#filtering using adaptive frequency split
+data_filtered = cochlear_freq_split(emg_data, Adaptive_Freq_Split(emg_data, index, time_pose, sampling_rate, classes, no_electrodes), fs=2000, order=4, no_electrodes=no_electrodes)
+
+#sample unfiltered power spectrum
+xf, yf = time_to_freq_domain(np.swapaxes(emg_data, 0, 1), time_pose[index], sampling_rate, classes, no_electrodes, sample=True)
+p.plot_power_spectrum(xf, yf, 'Single motion, Single electrode Unfiltered Power Spectrum', electrode=1)
+#filtered power spectrum
+xf, yf = time_to_freq_domain(np.swapaxes(data_filtered, 0, 1), time_pose[index], sampling_rate, classes, data_filtered.shape[0], sample=True)
+for ch in range(data_filtered.shape[0]):
+    p.plot_power_spectrum(xf, yf, 'Single Motion Filtered Power Spectrum', electrode=ch, power=int(np.sum(np.abs(yf)[ch])))
 # %%

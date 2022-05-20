@@ -242,17 +242,24 @@ class Plots:
         plt.legend(loc='upper left')
         plt.show()
 
-    def plot_power_spectrum(self, xf, yf, plt_title, electrode=0):
+    def plot_power_spectrum(self, xf, yf, plt_title, electrode=0, **kwargs):
         '''
         Displays power spectrum of corresponding electrode
         Input:
             - xf, yf for 12 electrodes, shape (12,samples)
+            - can feed in kwargs to customize visualization
         '''
+        power = ''
+        for arg in kwargs:
+            if arg == 'power':
+                power = f'\nPower: {kwargs[arg]}'
+
         fig = plt.figure(figsize=(10,7))
-        plt.plot(xf, np.abs(yf[electrode]), color='black') #absolute since yf outputs as complex numbers
-        plt.title(plt_title)
+        plt.plot(xf, np.abs(yf[electrode]), color='black', label=f'Channel: {electrode}') #absolute since yf outputs as complex numbers
+        plt.title(plt_title + power)
         plt.xlabel('Frequency (Hz)')
         plt.ylabel('Power')
+        plt.legend()
         plt.show()
 
 
