@@ -180,6 +180,43 @@ def Filter_spectogram(original_data, filtered_data, sampling_rate, electrode = 0
     plt.xlabel('Time [sec]')
     plt.show()
 
+def Adaptive_Freq_Split(emg_data, index, time_pose, sampling_rate, classes, no_electrodes, bins=4):
+    '''
+    Adaptive frequency split based on partition of the power spectrum into bins of equal power
+        - computes total power in all electrodes, then splits the power spectrum into bins of equal power cumulative across all electrodes
+    Input:
+        - emg_data: sample of shape (12,samples)
+        - 'index' of sample (movement), use Index_To_Tag(index) to get semantic label
+        - time_pose: array of pose times
+        - 'sampling_rate' of emg_data
+        - classes: list of classes
+        - no_electrodes: no. of channels matching shape of emg_data
+        - bins: how many frequnecy bands to split the data into
+    Output:
+        - cut_f: the boundaries of the computed frequency bins
+    '''
+    #original unfiltered power spectrum (note input axis conversion to make compatible with function)
+    xf, yf = time_to_freq_domain(np.swapaxes(emg_data, 0, 1), time_pose[index], sampling_rate, classes, no_electrodes, sample=True)
+    #finding the global frequency bins of equal cumulative power
+    power_per_bin = np.sum(np.abs(yf))/bins #total power / no. bins
+    cut_f = [1] #stores cut-off frequencies
+    cut_idx = [] #stores cut-off indices
+    b=1
+    for i in range(np.shape(np.abs(yf))[1]):
+        cum_sum = np.sum(np.abs(yf)[:,:i])
+        if cum_sum >= power_per_bin*b:
+            cut_f.append(int(xf[i]))
+            cut_idx.append(i)
+            b += 1
+            # print(cum_sum)
+
+    if len(cut_f)<bins+1:
+        cut_f.append(int(xf[-1]))
+
+    # print('Freq. bands:\n', cut_f)
+    # print('Cut-off indeces:\n', cut_idx)
+    return cut_f
+    
 '''
 Plotting functions
 '''

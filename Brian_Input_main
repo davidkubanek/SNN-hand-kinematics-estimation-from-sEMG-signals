@@ -1,0 +1,81 @@
+'''
+Testing hub for Brian_Input.py
+'''
+#%%
+import numpy as np
+import importlib
+
+import Brian_Input
+importlib.reload(Brian_Input)
+from Brian_Input import *
+
+import SNN_front_end
+importlib.reload(SNN_front_end)
+from SNN_front_end import *
+
+#%%
+
+if __name__ == '__main__':
+  '''
+  Extracts sample spike trains from a given input current and instantiates with this info a brian2 SpikeGenerator
+  '''
+  #Extracting input spike trains
+  sim_run_time = 200 #ms
+  p = Plots()
+  inp_spike_times, inp_indeces = Input_Spikes(front_end_data, sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
+
+
+  #raster plot
+  fig = plt.figure(figsize=(10,7))
+  plt.plot(inp_spike_times, inp_indeces, '.k')
+  plt.title('Input Spikes', fontname="Cambria", fontsize=12)
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+  plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+
+
+
+# %%
+  '''
+  Plotting original EMG signal and the final spike encoding
+  '''
+  data_sample = emg_data[0]
+  fig, (ax1, ax2) = plt.subplots(2,1,figsize=(10,7), sharex=True)
+  # fig.tight_layout()
+  #raw EMG data
+  ax1.plot(np.linspace(0, sim_run_time, int(sim_run_time/dt)), data_sample[:int(sim_run_time/dt)], color='black') #in microVolts
+  ax1.set_title('Raw EMG Data', fontname="Cambria", fontsize=12)
+  ax1.set_ylabel('Voltage [\u03BCV]', fontname="Cambria", fontsize=12)
+  #spike raster plot
+  ax2.eventplot([rec_spike_times], color= 'black', linelengths = 0.5)
+  ax2.set_title('Spike Encoding Raster Plot', fontname="Cambria", fontsize=12)
+  ax2.set_yticks([])
+  ax2.set_yticklabels([])
+  ax2.set_ylabel('Neuron Activation', fontname="Cambria", fontsize=12)
+  # ax2.set_xlabel('Spike time (s)')
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  # fig.savefig('EMG_spike_encoding_example2.svg', format='svg', dpi=1200)
+  plt.show()
+# %%
+  '''
+  Brian2 Input Layer
+  '''
+  from brian2 import *
+
+  start_scope()
+  #no. of input channels
+  no_inp_ch = int(max(inp_indeces))+1
+  #defining the input spikes explicitly
+  G = SpikeGeneratorGroup(no_inp_ch, inp_indeces, inp_spike_times*ms)
+  spikemon = SpikeMonitor(G)
+
+  run(sim_run_time*ms)
+
+  #raster plot
+  fig = plt.figure(figsize=(10,7))
+  plot(spikemon.t/ms, spikemon.i, '.k')
+  plt.title('Brian Input Spikes', fontname="Cambria", fontsize=12)
+  plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+  plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+  plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+# %%
