@@ -1,0 +1,117 @@
+{
+  "build": "py39hecd8cb5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.9,<3.10.0a0"
+  ],
+  "extracted_package_dir": "/Users/david/opt/anaconda3/pkgs/zipp-3.8.0-py39hecd8cb5_0",
+  "features": "",
+  "files": [
+    "lib/python3.9/site-packages/__pycache__/zipp.cpython-39.pyc",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/LICENSE",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/METADATA",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/RECORD",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/WHEEL",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/zipp-3.8.0.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/zipp.py"
+  ],
+  "fn": "zipp-3.8.0-py39hecd8cb5_0.conda",
+  "legacy_bz2_md5": "b582c0d2087797ff5e9f9165ff33861d",
+  "license": "MIT",
+  "license_family": "MIT",
+  "link": {
+    "source": "/Users/david/opt/anaconda3/pkgs/zipp-3.8.0-py39hecd8cb5_0",
+    "type": 1
+  },
+  "md5": "00641f0cb31501e984eab3b486ceb0ef",
+  "name": "zipp",
+  "package_tarball_full_path": "/Users/david/opt/anaconda3/pkgs/zipp-3.8.0-py39hecd8cb5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.9/site-packages/__pycache__/zipp.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "b1e3a22c59ff61350cf399a70fca86e15c58fdcf7a6e9afe9f5ed22f7c3b1290",
+        "sha256_in_prefix": "b1e3a22c59ff61350cf399a70fca86e15c58fdcf7a6e9afe9f5ed22f7c3b1290",
+        "size_in_bytes": 9867
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "db3f0246b1f9278f15845b99fec478b8b506eb76487993722f8c6e254285faf8",
+        "sha256_in_prefix": "db3f0246b1f9278f15845b99fec478b8b506eb76487993722f8c6e254285faf8",
+        "size_in_bytes": 1050
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "e8a268dbf80a30d60dcf9d8535b213969c1b1f06bfb2dd0a5a934c141f4e41f1",
+        "sha256_in_prefix": "e8a268dbf80a30d60dcf9d8535b213969c1b1f06bfb2dd0a5a934c141f4e41f1",
+        "size_in_bytes": 2719
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "24c3dfe6db105219d00816d79486a7811e6c10cb37d121a4d56e34851bdc53dc",
+        "sha256_in_prefix": "24c3dfe6db105219d00816d79486a7811e6c10cb37d121a4d56e34851bdc53dc",
+        "size_in_bytes": 738
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "1b5e87e00dc87a84269cead8578b9e6462928e18a95f1f3373c9eef451a5bcc0",
+        "sha256_in_prefix": "1b5e87e00dc87a84269cead8578b9e6462928e18a95f1f3373c9eef451a5bcc0",
+        "size_in_bytes": 92
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "6f57ffabaa752e0598c4f5d313d76e78391cb54070b9e40eaf17d32e819418a7",
+        "sha256_in_prefix": "6f57ffabaa752e0598c4f5d313d76e78391cb54070b9e40eaf17d32e819418a7",
+        "size_in_bytes": 177
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp-3.8.0.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "8806dda121df686a817d56f65ee47d26a4901c2a0eb0eb46eb2f42fcb4a9a85c",
+        "sha256_in_prefix": "8806dda121df686a817d56f65ee47d26a4901c2a0eb0eb46eb2f42fcb4a9a85c",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.9/site-packages/zipp.py",
+        "path_type": "hardlink",
+        "sha256": "e61af1dfcffe917d160a97c19392d2c0220c62b69386368d8f91ecae251207ef",
+        "sha256_in_prefix": "e61af1dfcffe917d160a97c19392d2c0220c62b69386368d8f91ecae251207ef",
+        "size_in_bytes": 8029
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "ebaa97e16798c0ce2fe6e9f0515aa2510d4d31b4f395da4c725ba6e16d5404d6",
+  "size": 16212,
+  "subdir": "osx-64",
+  "timestamp": 1652341838235,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/zipp-3.8.0-py39hecd8cb5_0.conda",
+  "version": "3.8.0"
+}

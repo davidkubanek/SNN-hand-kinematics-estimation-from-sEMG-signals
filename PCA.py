@@ -1,3 +1,6 @@
+'''
+Functions needed for the PCA analysis
+'''
 #%%
 from urllib import response
 from sklearn.decomposition import PCA
@@ -11,7 +14,7 @@ import numpy as np
 def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0):
     '''
     Input:
-        - data sample
+        - sample: array of time-series data of shape (no_electrodes, no_time_samples)
         - no_electrodes: no. of data channels (i.e., dimensions/axes)
         - sampling rate of data sample
         - ex_var: desired variance to be explained by the output principal components
@@ -109,6 +112,7 @@ def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0)
     #Data in the in the principal coordinate frame
     X_new = pca.transform(X)
     pc = [[X_new[t][p] for t in range(len(X_new))] for p in range(no_electrodes)]
+
     if visual==1 or visual==2:
         #ORIGINAL CHANNELS AND 3 PRINCIPAL COMPONENTS
         fig = plt.figure(figsize=(10,7))
