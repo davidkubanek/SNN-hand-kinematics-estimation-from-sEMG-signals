@@ -34,6 +34,7 @@ def default_params(**kwargs):
     pars['ee_w_scale'] = 0.5 #ex. to ex.
     pars['ei_w_scale'] = 1 #ex. to in.
     pars['ie_w_scale'] = 0.2 #in. to ex.
+    pars['ro_w_scale'] = 100 #Ex. to Read Out
     #neuron model equations
     pars['tau_ex'] = 1*ms
     pars['tau_in'] = 10*ms
@@ -54,11 +55,11 @@ Define Network Architecture
 '''
 start_scope()
 #no. of input channels/neurons
-inp_N = int(max(inp_indeces))+1
+# inp_N = int(max(inp_indeces))+1
 #if small sample network
 # inp_N = 5
 
-pars = default_params(inp_N=inp_N, index=index, tag=tag)
+# pars = default_params(inp_N=inp_N, index=index, tag=tag)
 
 def Random_Connect(pars, seed=1):
         '''
@@ -156,6 +157,12 @@ def Net_Architecture(pars, inp_indeces, inp_spike_times):
     S_ie = Synapses(In, Ex, 'w : 1', on_pre='v_post -= w', name='In_to_Ex')
     S_ie.connect(i=ie_pre_idx, j=ie_post_idx)
 
+    #Readout neuron
+    Read_Out = NeuronGroup(1, eqs, threshold=f'v>{V_th}', reset='v = 0', refractory=refractory, method='euler', name='Read_Out')
+    #Connecting with Excitatory neurons
+    S_ro = Synapses(Ex, Read_Out, 'w : 1', on_pre='v_post += w', name='Ex_to_Read_Out')
+    S_ro.connect(i=[i for i in range(ex)], j=[0 for j in range(ex)])
+
     def visualise_connectivity(S):
         Ns = len(S.source)
         Nt = len(S.target)
@@ -196,16 +203,22 @@ def Net_Architecture(pars, inp_indeces, inp_spike_times):
     spike_in = SpikeMonitor(In, name='spike_in')
     pop_in = PopulationRateMonitor(In, name='pop_in')
 
+    #readout neuron
+    M_ro = StateMonitor(Read_Out, 'v', record=True, name='M_ro')
+    spike_ro = SpikeMonitor(Read_Out, name='spike_ro')
+    pop_ro = PopulationRateMonitor(Read_Out, name='pop_ro')
+
+
     #store network with connections as defined above
-    net = Network(P, Ex, In, S, S_ee, S_ei, S_ie)
-    net.add(M_ex, spike_P, spike_ex, spike_in, pop_P, pop_ex, pop_in)
+    net = Network(P, Ex, In, Read_Out, S, S_ee, S_ei, S_ie, S_ro)
+    net.add(M_ex, spike_P, spike_ex, spike_in, pop_P, pop_ex, pop_in, M_ro, spike_ro, pop_ro)
     net.store(name='net', filename='network_1')
 
     print('-----NETWORK ARCHITECTURE DEFINED-----')
 
     return net
 
-net = Net_Architecture(pars, inp_indeces, inp_spike_times)
+# net = Net_Architecture(pars, inp_indeces, inp_spike_times)
 #%%
 '''
 Define Flexible Network Parameters
@@ -215,6 +228,7 @@ pars['inp_w_scale'] = 1 #input to ex.
 pars['ee_w_scale'] = 0.5 #ex. to ex.
 pars['ei_w_scale'] = 1 #ex. to in.
 pars['ie_w_scale'] = 0.2 #in. to ex.
+pars['ro_w_scale'] = 100 #Ex. to Read Out
 #neuron model equations
 pars['tau_ex'] = 1*ms
 pars['tau_in'] = 10*ms
@@ -229,25 +243,29 @@ def Run_Net(pars, net=net, time_pose=time_pose):
         - reservoir/net activity plots
     '''
     #extract parameters
-    inp_w_scale, ee_w_scale, ei_w_scale, ie_w_scale, tau_ex, tau_in, El, N, frac_ex = pars['inp_w_scale'], pars['ee_w_scale'], pars['ei_w_scale'], pars['ie_w_scale'], pars['tau_ex'], pars['tau_in'], pars['El'], pars['N'], pars['frac_ex']
+    inp_w_scale, ee_w_scale, ei_w_scale, ie_w_scale, ro_w_scale, tau_ex, tau_in, El, N, frac_ex = pars['inp_w_scale'], pars['ee_w_scale'], pars['ei_w_scale'], pars['ie_w_scale'], pars['ro_w_scale'], pars['tau_ex'], pars['tau_in'], pars['El'], pars['N'], pars['frac_ex']
     index, tag = pars['index'], pars['tag']
 
     net.restore(name='net', filename='network_1')
     Ex = net['Ex']
     In = net['In']
     P = net['P']
+    Read_Out = net['Read_Out']
     S = net['Inp_to_Ex']
     S_ee = net['Ex_to_Ex']
     S_ei = net['Ex_to_In']
     S_ie = net['In_to_Ex']
+    S_ro = net['Ex_to_Read_Out']
     spike_P = net['spike_P']
     pop_P = net['pop_P']
     M_ex = net['M_ex']
+    M_ro = net['M_ro']
     pop_ex = net['pop_ex']
     pop_in = net['pop_in']
+    pop_ro = net['pop_ro']
     spike_ex = net['spike_ex']
     spike_in = net['spike_in']
-    
+    spike_ro = net['spike_ro']
 
     ex = int(N*frac_ex) #no. of excitatory neurons
     inh = N-ex #no. of inhibiroty neurons
@@ -261,6 +279,7 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     print('Ex to Ex synapse weight scaling:', ee_w_scale)
     print('Ex to In synapse weight scaling:', ei_w_scale)
     print('In to Ex synapse weight scaling:', ie_w_scale)
+    print('Ex to Read Out synapse weight scaling:', ro_w_scale)
     print('tau Ex [ms]:', tau_ex)
     print('tau In [ms]:', tau_in)
     print('El [mV]:', pars['El'])
@@ -268,13 +287,14 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     print('Refractory [ms]:', Ex._refractory, ', saturation:', np.round(1/Ex._refractory))
     print('__________________________________________________')
 
-
     #time constants of NeuronGroups
     Ex.tau = tau_ex
     In.tau = tau_in
+    Read_Out.tau = tau_ex
     #reverse potentials of NeuronGroups
     Ex.El = El
     In.El = El
+    Read_Out.El = El
 
     #setting random weights
     np.random.seed(0)
@@ -286,7 +306,8 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     np.random.seed(3)
     S_ie.w = np.random.rand(1,np.sum(S_ie.N_outgoing_pre))*ie_w_scale
 
-
+    #readout weights
+    S_ro.w = np.ones((1,ex))/N*ro_w_scale
     #plot connectivity with scalled points by weight
     # scatter(S.i, S.j, S.w*20)
     # xlabel('Source neuron ID')
@@ -339,6 +360,15 @@ def Run_Net(pars, net=net, time_pose=time_pose):
         fig = plt.figure(figsize=(10,7))
         plot(spike_in.t/ms, spike_in.i, '.k')
         plt.title('Inhibitory Population', fontname="Cambria", fontsize=12)
+        plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+        plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+        #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+        plt.show()
+
+        #raster plot
+        fig = plt.figure(figsize=(10,7))
+        plot(spike_ro.t/ms, spike_ro.i, '.k')
+        plt.title('Readout Neuron', fontname="Cambria", fontsize=12)
         plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
         plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
         #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
@@ -472,6 +502,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
     pars['ee_w_scale'] = 0.5 #ex. to ex.
     pars['ei_w_scale'] = 1 #ex. to in.
     pars['ie_w_scale'] = 0.2 #in. to ex.
+    pars['ro_w_scale'] = 100 #Ex. to Read Out
     #neuron model equations
     pars['tau_ex'] = 1*ms
     pars['tau_in'] = 10*ms
@@ -491,25 +522,30 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
             - reservoir/net activity plots
         '''
         #extract parameters
-        inp_w_scale, ee_w_scale, ei_w_scale, ie_w_scale, tau_ex, tau_in, El, N, frac_ex = pars['inp_w_scale'], pars['ee_w_scale'], pars['ei_w_scale'], pars['ie_w_scale'], pars['tau_ex'], pars['tau_in'], pars['El'], pars['N'], pars['frac_ex']
+        inp_w_scale, ee_w_scale, ei_w_scale, ie_w_scale, ro_w_scale, tau_ex, tau_in, El, N, frac_ex = pars['inp_w_scale'], pars['ee_w_scale'], pars['ei_w_scale'], pars['ie_w_scale'], pars['ro_w_scale'], pars['tau_ex'], pars['tau_in'], pars['El'], pars['N'], pars['frac_ex']
         index, tag = pars['index'], pars['tag']
 
         net.restore(name='net', filename='network_1')
         Ex = net['Ex']
         In = net['In']
         P = net['P']
+        Read_Out = net['Read_Out']
         S = net['Inp_to_Ex']
         S_ee = net['Ex_to_Ex']
         S_ei = net['Ex_to_In']
         S_ie = net['In_to_Ex']
+        S_ro = net['Ex_to_Read_Out']
         spike_P = net['spike_P']
         pop_P = net['pop_P']
         M_ex = net['M_ex']
+        M_ro = net['M_ro']
         pop_ex = net['pop_ex']
         pop_in = net['pop_in']
+        pop_ro = net['pop_ro']
         spike_ex = net['spike_ex']
         spike_in = net['spike_in']
-        
+        spike_ro = net['spike_ro']
+
         ex = int(N*frac_ex) #no. of excitatory neurons
         inh = N-ex #no. of inhibiroty neurons
 
@@ -522,6 +558,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         print('Ex to Ex synapse weight scaling:', ee_w_scale)
         print('Ex to In synapse weight scaling:', ei_w_scale)
         print('In to Ex synapse weight scaling:', ie_w_scale)
+        print('Ex to Read Out synapse weight scaling:', ro_w_scale)
         print('tau Ex [ms]:', tau_ex)
         print('tau In [ms]:', tau_in)
         print('El [mV]:', pars['El'])
@@ -532,9 +569,11 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         #time constants of NeuronGroups
         Ex.tau = tau_ex
         In.tau = tau_in
+        Read_Out.tau = tau_ex
         #reverse potentials of NeuronGroups
         Ex.El = El
         In.El = El
+        Read_Out.El = El
 
         #setting random weights
         np.random.seed(0)
@@ -546,6 +585,8 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         np.random.seed(3)
         S_ie.w = np.random.rand(1,np.sum(S_ie.N_outgoing_pre))*ie_w_scale
 
+        #readout weights
+        S_ro.w = np.ones((1,ex))/N*ro_w_scale
 
         #plot connectivity with scalled points by weight
         # scatter(S.i, S.j, S.w*20)
@@ -578,7 +619,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
             legend();
             plt.show()
 
-        if False:
+        if True:
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_P.t/ms, spike_P.i, '.k')
@@ -607,6 +648,15 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
             #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
             plt.show()
 
+            #raster plot
+            fig = plt.figure(figsize=(10,7))
+            plot(spike_ro.t/ms, spike_ro.i, '.k')
+            plt.title('Readout Neuron', fontname="Cambria", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+            plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+            #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+            plt.show()
+
         '''
         Calc. binned avg. firing rate (sliding window)
         '''
@@ -618,21 +668,24 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         pop_ex_r = np.asarray(pop_ex.rate)
         pop_in_r= np.asarray(pop_in.rate)
         pop_P_r = np.asarray(pop_P.rate)
+        pop_ro_r = np.asarray(pop_ro.rate)
         p_rate = []
         ex_rate = []
         in_rate = []
         f_rate = []
+        ro_rate = []
         for b in range(int(run_length/bin)):
             ex_rate += [np.average(pop_ex_r[b*idx:b*idx+idx])]
             in_rate += [np.average(pop_in_r[b*idx:b*idx+idx])]
             p_rate += [np.average(pop_P_r[b*idx:b*idx+idx])]
             f_rate += [np.average(pop_ex_r[b*idx:b*idx+idx])*frac_ex + np.average(pop_in_r[b*idx:b*idx+idx])*(1-frac_ex)]
-
+            ro_rate += [np.average(pop_ro_r[b*idx:b*idx+idx])]
         #Gaussian smoothing
         p_rate = ndimage.gaussian_filter1d(p_rate, sigma=2)
         ex_rate = ndimage.gaussian_filter1d(ex_rate, sigma=2)
         in_rate = ndimage.gaussian_filter1d(in_rate, sigma=2)
         f_rate = ndimage.gaussian_filter1d(f_rate, sigma=2)
+        ro_rate = ndimage.gaussian_filter1d(ro_rate, sigma=2)
         '''
         Plotting binned firing rates of populations
         - subplots
@@ -645,8 +698,8 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         axs[0,0].set_title('Input Population', fontname="Cambria", fontsize=12)
         axs[0,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
         axs[0,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), f_rate, color='#04ccc4', label=tag) #04c8e0
-        axs[0,1].set_title('Global Population', fontname="Cambria", fontsize=12)
+        axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04ccc4', label=tag) #04c8e0
+        axs[0,1].set_title('Readout Neuron', fontname="Cambria", fontsize=12)
         axs[0,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
         axs[0,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
         axs[1,0].plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04ccc4', label=tag)
@@ -671,3 +724,7 @@ for c in classes:
         Net_Class_Sweep(emg_labelled, time_pose, c=c, rep=rep)
 
 # %%
+
+'''
+What tau of reaodout neuron? What weight scaling?
+'''
