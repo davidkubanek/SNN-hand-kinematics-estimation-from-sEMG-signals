@@ -3,7 +3,9 @@ Created on April 03 14:54:55 2022
 
 @author: David
 
-Can load data for all subjects for all classes.
+Can load data collected using the custom BioWolf EMG device (our data).
+
+all subjects for all classes.
 Can also load data for a single subject in a single class.
 Can do data extraction straight on after data load.
 """
@@ -56,7 +58,7 @@ def time_to_freq_domain(data, time_pose, sampling_rate, classes, no_electrodes, 
 '''
 Large scale data
 '''
-def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=False):
+def load_data(subjects, classes, sampling_rate, no_electrodes=16, extract_features=False):
     '''
     Input:
         - list of subject IDs and classes (hand poses)
@@ -79,73 +81,48 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     #  windows
     # data_path = 'C:\\Users\\David\\Projects\\Data'
     #  mac
-    data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
+    data_path = '/Users/david/Documents/Code/Data/EMG_data_BioWolf'
 
     subjects_labels = [str(s) for s in subjects]
     #target variable stores class ID for each EMG data stream
     y = []
     #initialize empty lists for storing electrode data across samples and subjects
-    global_el = [[] for i in range(12)]
+    global_el = [[] for i in range(no_electrodes)]
     for idx, subject in enumerate(subjects):
         #extract data for each subject
         #  windows
         # file_name = '\\S'+str(subject)+'_E1_A1.mat' #relative path from current script directory to data file
         #  mac
-        file_name = '/S'+str(subject)+'_E1_A1.mat' #relative path from current script directory to data file
+        file_name = '/BioWolf_S'+str(subject)+'_E1.mat' #relative path from current script directory to data file
         abs_file_path = data_path + file_name #absolute path to data file
         #load data from MATLAB file
-        mat = (spio.loadmat(abs_file_path, squeeze_me=True))
+        mat = (spio.loadmat(abs_file_path, squeeze_me=False))
+        #extract values from matlab dictionary
         #extracts raw emg data
-        emg = np.array(mat['emg'])
-        # print(np.shape(emg))
-        #each time point labelled with corresponding pose
-        #'the movement repeated by the subject'
-        stimulus = np.array(mat['stimulus'])
-        #'gain the movement repeated by the subject. In this case the duration of the movement label is 
-        # refined a-posteriori in order to correspond to the real movement'
-        restimulus  = np.array(mat['restimulus'])
-        #'repetition of the stimulus'
-        repetition  = np.array(mat['repetition'])
+        emg = mat['Data']
+        Test_Name = mat['Test_Name']
+        # Subject_Name = mat['Subject_Name']
+        # Subject_Age = mat['Subject_Age']
+        # Remarks = mat['Remarks']
+        sampling_rate = mat['Sample_Rate']
+        # Signal_Gain = mat['Signal_Gain']
+        Trigger = mat['Trigger']
+        timestamp = mat['timestamp']
+        # Imu_Data = mat['Imu_Data']
 
-        emg_labelled = []
-        #number of repetitions of class
-        reps = 6
-        g = np.gradient(restimulus)
-        g = np.where(g!=0)[0]
-        for c in classes:
-            for r in range(reps):
-                #append single repetition of movement
-                rep_emg = emg[g[4*reps*(c-1)+4*r+1]:g[4*reps*(c-1)+4*r+2]+1]
-                emg_labelled.append(rep_emg)
-                #target variables (class ID)
-                y += [c]
-        
-        time_pose = [len(emg_labelled[i])/sampling_rate for i in range(np.shape(emg_labelled)[0])] 
-       
+        #converting to shape (reps, samples, 12) compatible with rest of code (mirroring structure of NinaPro VII dataset used in Load_Data)
+        emg_labelled = np.array([emg])
         '''
-        Feature Extraction
+        - add extractions of repetitions
+        - what does trigger meean?
+        - is timestamp in seconds?
         '''
-        if extract_features is True: #reduces raw EMG into features stored in global_el
-            #convert data to freq. domain
-            xf, yf = time_to_freq_domain(emg_labelled, time_pose, sampling_rate, classes, no_electrodes)
-            # print('L:',np.shape(xf[0]),np.shape(xf[1]),np.shape(xf[2]))
-            # print('L:',np.shape(yf[0]),np.shape(yf[1]),np.shape(yf[2]))
-            # print(type(xf))
-        
-
-            #Mean Power (MP)
-            MP = [np.sum(np.abs(yf[c]),axis=1)/len(xf[c]) for c in range(len(classes))]
-            # #saves data for each electrode over samples
-            el = [[MP[c][e] for c in range(len(classes))] for e in range(no_electrodes)]
-            #appends data of current sample to electrode data of all samples
-            global_el = [global_el[e] + el[e] for e in range(no_electrodes)]
-        
-
-        
     
 
-    return emg_labelled, y, time_pose, global_el, stimulus, restimulus, repetition
+    return emg_labelled
 
+#m = mat['ExGData']
+#data = np.array([m['Data']])
 # %%     
 if __name__ == "__main__":
 
