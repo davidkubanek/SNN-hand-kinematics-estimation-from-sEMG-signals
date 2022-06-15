@@ -38,7 +38,7 @@ subjects = [1] #subjects to extract
 reps = 6
 
 #extract data
-emg_labelled, y, time_pose, _, _, restimulus, _ = load_data(subjects, classes, sampling_rate, no_electrodes)
+emg_labelled, y, time_pose, _, _, restimulus, _, hand_kin_labelled = load_data(subjects, classes, sampling_rate, no_electrodes)
 
 
 #functions to extract data from emg_labelled
@@ -75,6 +75,15 @@ def SNN_Full_Input(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, class
     tag = Index_To_Tag(index)
     emg_data = emg_labelled[index]*1000000
     emg_data = np.swapaxes(emg_data, 0, 1)
+    #convert hand kinematics data to the same format
+    hand_kin_data = hand_kin_labelled[index]
+    hand_kin_data = np.swapaxes(hand_kin_data, 0, 1)
+    #get indices of 5 dominant (i.e., most varying) nodes
+    hk_std = np.std(hand_kin_data, axis=1)
+    dom_nodes = np.where(hk_std>=np.average(hk_std)+np.std(hk_std))[0] #higher than (average + std) variability
+    # dom_nodes = (-hk_std).argsort()[:5]
+    hand_kin_data = NormalizeData(hand_kin_data)
+
     '''
     PCA
     '''
@@ -100,6 +109,6 @@ def SNN_Full_Input(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, class
     #sim_run_time = np.max(time_pose[:channels])*1000 #ms #defined such that simulation time is always longer or equal to the gesture time
     inp_spike_times, inp_indeces = Input_Spikes(front_end_data[:channels], sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
 
-    return inp_spike_times, inp_indeces, index, tag
+    return inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes
 
 # %%

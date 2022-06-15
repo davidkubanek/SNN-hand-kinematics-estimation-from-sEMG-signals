@@ -216,7 +216,15 @@ def Adaptive_Freq_Split(emg_data, index, time_pose, sampling_rate, classes, no_e
     # print('Freq. bands:\n', cut_f)
     # print('Cut-off indeces:\n', cut_idx)
     return cut_f
-    
+
+def NormalizeData(data):
+    '''
+    Normalizes each data column individually to range 0-1
+    '''
+    normed_data = np.zeros(data.shape)
+    for s in range(data.shape[0]): #for all nodes/sensors
+        normed_data[s,:] = (data[s,:] - np.min(data[s,:])) / (np.max(data[s,:]) - np.min(data[s,:]))
+    return normed_data
 '''
 Plotting functions
 '''

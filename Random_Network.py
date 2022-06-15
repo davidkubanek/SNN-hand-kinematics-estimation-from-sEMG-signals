@@ -47,7 +47,7 @@ def default_params(**kwargs):
     return pars
 
 #%%
-inp_spike_times, inp_indeces, index, tag = SNN_Full_Input(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
 
 # %%
 '''
@@ -475,7 +475,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         - reservoir/net activity plots
     '''
     #extracting input channels spike trains and the index & tag of the sample
-    inp_spike_times, inp_indeces, index, tag = SNN_Full_Input(emg_labelled, time_pose, c=c, rep=rep, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+    inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, time_pose, c=c, rep=rep, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
 
     start_scope()
     #no. of input channels/neurons
@@ -714,9 +714,28 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         # fig.savefig('Figures/Run_Sweep/'+f'run_{index}.png')
         plt.show()
 
+        '''overlay activity and norm. kinematics data'''
+        fig, ax = plt.subplots(figsize=(10,7))
+        ax.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04ccc4', label='Input Population')
+        ax.plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0', label='Readout Neuron')
+        ax2=ax.twinx()
+        for s in dom_nodes:
+            ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[0,:]))*1000, ndimage.gaussian_filter1d(hand_kin_data[s,:], sigma=75), label='Node: '+str(s), color='red')
+        
+        plt.title('Network Activity and Hand Kinematics '+'('+tag+')', fontname="Cambria", fontsize=12)
+        plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+        ax.set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+        ax2.set_ylabel('Node Angle [degrees]', fontname="Cambria", fontsize=12)
+        plt.grid(True)
+        plt.axis('tight')
+        ax.legend(loc='upper left')
+        ax2.legend(loc='upper right')
+        # fig.savefig('Figures/'+f'run_{index}.png')
+        plt.show()
+
     Run_Net(pars, net=net, time_pose=time_pose)
 
-
+Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2)
 # %%
 '''Sweep through all samples'''
 for c in classes:
@@ -724,7 +743,3 @@ for c in classes:
         Net_Class_Sweep(emg_labelled, time_pose, c=c, rep=rep)
 
 # %%
-
-'''
-What tau of reaodout neuron? What weight scaling?
-'''

@@ -106,8 +106,11 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
         restimulus  = np.array(mat['restimulus'])
         #'repetition of the stimulus'
         repetition  = np.array(mat['repetition'])
+        #glove kinematics data
+        glove = np.array(mat['glove'])
 
         emg_labelled = []
+        hand_kin_labelled = []
         #number of repetitions of class
         reps = 6
         g = np.gradient(restimulus)
@@ -117,6 +120,9 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
                 #append single repetition of movement
                 rep_emg = emg[g[4*reps*(c-1)+4*r+1]:g[4*reps*(c-1)+4*r+2]+1]
                 emg_labelled.append(rep_emg)
+                #append single repetition of movement hand kinematics data
+                rep_hk = glove[g[4*reps*(c-1)+4*r+1]:g[4*reps*(c-1)+4*r+2]+1]
+                hand_kin_labelled.append(rep_hk)
                 #target variables (class ID)
                 y += [c]
         
@@ -144,7 +150,7 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
         
     
 
-    return emg_labelled, y, time_pose, global_el, stimulus, restimulus, repetition
+    return emg_labelled, y, time_pose, global_el, stimulus, restimulus, repetition, hand_kin_labelled
 
 # %%     
 if __name__ == "__main__":

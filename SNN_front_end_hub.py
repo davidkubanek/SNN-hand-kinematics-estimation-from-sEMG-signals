@@ -66,8 +66,43 @@ if __name__ == '__main__':
 
 
 # %%
+'''
+Overlay emg and kinematics data
+'''
 if __name__=='__main__':
-    p.plot_EMG(emg_data[0,:], time_pose[0], 'emg')
+    #single subject, single class repetition: data structure with 12 channels (electrodes)
+    #shape (12, samples)
+    #convert to microVolts
+    index = Tag_To_Index(c=5, rep=2)
+    tag = Index_To_Tag(index)
+    emg_data = emg_labelled[index]*1000000
+    emg_data = np.swapaxes(emg_data, 0, 1)
+    hand_kin_data = hand_kin_labelled[index]
+    hand_kin_data = np.swapaxes(hand_kin_data, 0, 1)
+
+    #get indices of 5 dominant (i.e., most varying) nodes
+    hk_std = np.std(hand_kin_data, axis=1)
+    dom_nodes = np.where(hk_std>=np.average(hk_std)+np.std(hk_std))[0] #higher than (average + std) variability
+    # dom_nodes = (-hk_std).argsort()[:5]
+
+    #p.plot_EMG(emg_data[0,:], time_pose[0], 'emg')
+
+    '''overlay emg and kinematics data'''
+    fig, ax = plt.subplots(figsize=(10,7))
+    ax.plot(np.linspace(0,time_pose[index] ,len(emg_data[0,:])), emg_data[0,:], color='#52AD89', label='EMG')
+    ax2=ax.twinx()
+    for s in dom_nodes:
+        ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[0,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
+    
+    plt.title('EMG and Hand Kinematics')
+    plt.xlabel('Time [seconds]')
+    ax.set_ylabel('Voltage (\u03BCV)')
+    ax2.set_ylabel('Node Angle (degrees)')
+    plt.xlabel('Time [seconds]')
+    plt.grid(True)
+    plt.axis('tight')
+    plt.legend(loc='upper left')
+    plt.show()
 
     # p.plot_EMG(stimulus[6000:25000], len(stimulus[6000:25000])/sampling_rate, 'stimulus')
     # p.plot_EMG(restimulus[6000:110000], len(restimulus[6000:110000])/sampling_rate, 'restimulus')

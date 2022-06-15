@@ -48,7 +48,7 @@ y = []
 no_pce_raw = []
 
 for s in subjects:
-    emg_labelled, y_temp, time_pose, _, _, _, _ = load_data([s], classes, sampling_rate, no_electrodes)
+    emg_labelled, y_temp, time_pose, _, _, _, _,_ = load_data([s], classes, sampling_rate, no_electrodes)
     y += y_temp
     for c in classes:
         pc_electrodes = []
