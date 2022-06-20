@@ -11,7 +11,6 @@ importlib.reload(SNN_front_end)
 from SNN_front_end import *
 from brian2 import *
 
-#%%
 def default_params(**kwargs):
     '''
     Setting up a dictionary with model parameters
@@ -46,10 +45,8 @@ def default_params(**kwargs):
 
     return pars
 
-#%%
-inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+# inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=1, c=5, rep=2, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
 
-# %%
 '''
 Define Network Architecture
 '''
@@ -463,7 +460,7 @@ plt.legend()
 
 
 # %%
-def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate):
+def Net_Class_Sweep(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate, hand_kin_labelled=hand_kin_labelled):
     '''
     Runs simulation for any sample to extract the firing rates of the network
     Input:
@@ -475,7 +472,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         - reservoir/net activity plots
     '''
     #extracting input channels spike trains and the index & tag of the sample
-    inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, time_pose, c=c, rep=rep, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+    inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=s, c=c, rep=rep, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
 
     start_scope()
     #no. of input channels/neurons
@@ -619,7 +616,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
             legend();
             plt.show()
 
-        if True:
+        if False:
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_P.t/ms, spike_P.i, '.k')
@@ -720,12 +717,12 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
         ax.plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0', label='Readout Neuron')
         ax2=ax.twinx()
         for s in dom_nodes:
-            ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[0,:]))*1000, ndimage.gaussian_filter1d(hand_kin_data[s,:], sigma=75), label='Node: '+str(s), color='red')
+            ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[0,:]))*1000, np.ones(np.shape(hand_kin_data[s,:]))-ndimage.gaussian_filter1d(hand_kin_data[s,:], sigma=75), label='Node: '+str(s), color='red', alpha=0.3)
         
-        plt.title('Network Activity and Hand Kinematics '+'('+tag+')', fontname="Cambria", fontsize=12)
+        plt.title('Network Activity and Smoothed-Normed Hand Kinematics '+'('+tag+')', fontname="Cambria", fontsize=12)
         plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
         ax.set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        ax2.set_ylabel('Node Angle [degrees]', fontname="Cambria", fontsize=12)
+        ax2.set_ylabel('Fraction of Gesture [dimensionless]', fontname="Cambria", fontsize=12)
         plt.grid(True)
         plt.axis('tight')
         ax.legend(loc='upper left')
@@ -735,7 +732,7 @@ def Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2, subjects=subjects, clas
 
     Run_Net(pars, net=net, time_pose=time_pose)
 
-Net_Class_Sweep(emg_labelled, time_pose, c=5, rep=2)
+Net_Class_Sweep(emg_labelled, time_pose, s=3, c=6, rep=0)
 # %%
 '''Sweep through all samples'''
 for c in classes:

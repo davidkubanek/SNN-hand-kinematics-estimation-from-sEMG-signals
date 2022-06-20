@@ -6,6 +6,8 @@ import importlib
 import SNN_front_end
 importlib.reload(SNN_front_end)
 from SNN_front_end import *
+
+#%%
 if __name__ == '__main__':
     #raster plot
     fig = plt.figure(figsize=(10,7))
@@ -73,7 +75,7 @@ if __name__=='__main__':
     #single subject, single class repetition: data structure with 12 channels (electrodes)
     #shape (12, samples)
     #convert to microVolts
-    index = Tag_To_Index(c=5, rep=2)
+    index = Tag_To_Index(s=1, rep=2)
     tag = Index_To_Tag(index)
     emg_data = emg_labelled[index]*1000000
     emg_data = np.swapaxes(emg_data, 0, 1)
@@ -87,13 +89,27 @@ if __name__=='__main__':
 
     #p.plot_EMG(emg_data[0,:], time_pose[0], 'emg')
 
+    '''Kinematics data'''
+    fig = plt.figure(figsize=(10,7))
+    for s in range(no_electrodes):
+        plt.plot(np.linspace(0,time_pose[index],len(hand_kin_data[s,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
+    plt.title('Hand Kinematics')
+    plt.xlabel('Time [seconds]')
+    plt.ylabel('Node Angle (degrees)')
+    plt.legend(loc='upper left')
+    plt.grid(True)
+    plt.show()
+
     '''overlay emg and kinematics data'''
     fig, ax = plt.subplots(figsize=(10,7))
     ax.plot(np.linspace(0,time_pose[index] ,len(emg_data[0,:])), emg_data[0,:], color='#52AD89', label='EMG')
     ax2=ax.twinx()
-    for s in dom_nodes:
-        ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[0,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
-    
+    for s in range(no_electrodes): #dom_nodes:
+        if s in dom_nodes:
+            ax2.plot(np.linspace(0,time_pose[index] ,len(hand_kin_data[s,:])), hand_kin_data[s,:], color='#F5A442', label='DomNode'+str(s))
+            continue
+        #ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[s,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
+
     plt.title('EMG and Hand Kinematics')
     plt.xlabel('Time [seconds]')
     ax.set_ylabel('Voltage (\u03BCV)')
@@ -149,4 +165,4 @@ if __name__=='__main__':
     xf, yf = time_to_freq_domain(np.swapaxes(data_filtered, 0, 1), time_pose[index], sampling_rate, classes, data_filtered.shape[0], sample=True)
     for ch in range(data_filtered.shape[0]):
         p.plot_power_spectrum(xf, yf, 'Single Motion Filtered Power Spectrum', electrode=ch, power=int(np.sum(np.abs(yf)[ch])))
-# %%
+    

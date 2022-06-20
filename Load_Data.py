@@ -78,8 +78,10 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     #explicit path to data folder
     #  windows
     # data_path = 'C:\\Users\\David\\Projects\\Data'
-    #  mac
-    data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
+    #  mac (internal storage)
+    # data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
+    # mac (external hard drive storage)
+    data_path = '/Volumes/Kubánek UCL/Data/thesis_emg'
 
     subjects_labels = [str(s) for s in subjects]
     #target variable stores class ID for each EMG data stream
