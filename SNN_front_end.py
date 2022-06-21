@@ -130,56 +130,6 @@ def Tag_To_Index(s=-1, c=0, rep=0, type=type, classes=classes, subjects=subjects
         index = (classes.index(c)*reps)+rep
     return int(index)
 
-def SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, c=5, rep=2, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate):
-    '''
-    Returns the input channels spike trains for a given class and repetition id
-    Input:
-        - c and rep: class and repetition id of movement for which to get input channels spike trains
-    '''
-    #single subject, single class repetition: data structure with 12 channels (electrodes)
-    #shape (12, samples)
-    #convert to microVolts
-    index = Tag_To_Index(c=c, rep=rep)
-    tag = Index_To_Tag(index)
-    emg_data = emg_labelled[index]*1000000
-    emg_data = np.swapaxes(emg_data, 0, 1)
-    #convert hand kinematics data to the same format
-    hand_kin_data = hand_kin_labelled[index]
-    hand_kin_data = np.swapaxes(hand_kin_data, 0, 1)
-    #get indices of 5 dominant (i.e., most varying) nodes
-    hk_std = np.std(hand_kin_data, axis=1)
-    dom_nodes = np.where(hk_std>=np.average(hk_std)+np.std(hk_std))[0] #higher than (average + std) variability
-    # dom_nodes = (-hk_std).argsort()[:5]
-    hand_kin_data = NormalizeData(hand_kin_data)
-
-    '''
-    PCA
-    '''
-    #sample = emg_data[:no_electrodes+1,:200]
-    #pc_electrodes = PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9, visual=0)
-    #emg_data = emg_data[pc_electrodes,:]
-
-    #most influential electrodas from global offline PCA analysis
-    pc_electrodes = np.array([0, 1, 6, 7, 8, 9])
-    '''
-    Front-end data pre-processing
-    '''
-    front_end_data = Front_End(emg_data[pc_electrodes], time_pose, no_electrodes=len(pc_electrodes))
-    print('No. of front-end channels:', front_end_data.shape[0])
-
-    '''
-    LIF Input Layer Spike Encoding
-    '''
-    #Extracting input spike trains
-    channels = front_end_data.shape[0]
-    sim_run_time = time_pose[index]*1000 #sim time directly related to length of injected current
-    #alternatively, but slower
-    #sim_run_time = np.max(time_pose[:channels])*1000 #ms #defined such that simulation time is always longer or equal to the gesture time
-    inp_spike_times, inp_indeces = Input_Spikes(front_end_data[:channels], sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
-
-    return inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes
-
-
 
 #%%
 
@@ -234,12 +184,4 @@ def SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=-1, c=0, rep=2,
     inp_spike_times, inp_indeces = Input_Spikes(front_end_data[:channels], sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
 
     return inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes
-# %%
-'''
-- comment functions
-- test random_net with new functions
-- test implementation type='subject': remove old SNN function
-'''
 
-#%%
-SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=2, c=0, rep=2)

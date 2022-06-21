@@ -61,12 +61,14 @@ if False:#test
     x_com, y_com = standardize_data(x, y, avg=8, sampling_rate=1, visual=True)
 
 '''Sweep through all samples of a gesture from one subject'''
-#=======
-#subject ID
-s = 3
-#=======
-def Average_Over_Samples():
-    ## Preparing data structures to store standardized data 
+def Average_Over_Samples(s, emg_labelled, time_pose, sampling_rate, visual=True):
+    '''
+    
+    '''
+    ## Preparing data structures to store standardized data
+    #sim net once to get values for defining the following data structures
+    pars, ro_rate, ro_t, hand_kin_data = Net_Simulation(emg_labelled, time_pose, s=s, c=6, rep=0)
+
     avg_time = np.average(time_pose)*1000 #average time of pose in ms
 
     #sampling rate of activity readout neuron
@@ -90,30 +92,32 @@ def Average_Over_Samples():
     avg_ro_activity = np.average(ro_rate_global,axis=0)
     avg_kinematics = np.average(hand_kin_data_global,axis=0)
 
-    '''overlay AVERAGE activity and AVERAGE norm. kinematics data'''
-    fig, ax = plt.subplots(figsize=(10,7))
-    ax.plot(ro_t_standard, avg_ro_activity, color='#04c8e0', label='Average Readout Activity')
-    ax2=ax.twinx()
+    if visual is True:
+        '''overlay AVERAGE activity and AVERAGE norm. kinematics data'''
+        fig, ax = plt.subplots(figsize=(10,7))
+        ax.plot(ro_t_standard, avg_ro_activity, color='#04c8e0', label='Average Readout Activity')
+        ax2=ax.twinx()
 
-    ax2.plot(t_data_standard, ndimage.gaussian_filter1d(avg_kinematics, sigma=75), label='Average Hand Kinematics (smooth)', color='red', alpha=0.8)
-    ax2.plot(t_data_standard, avg_kinematics, label='Average Hand Kinematics', color='red', alpha=0.3)
+        ax2.plot(t_data_standard, ndimage.gaussian_filter1d(avg_kinematics, sigma=75), label='Average Hand Kinematics (smooth)', color='red', alpha=0.8)
+        ax2.plot(t_data_standard, avg_kinematics, label='Average Hand Kinematics', color='red', alpha=0.3)
 
-    plt.title('AVERAGE Network Activity and Smoothed-Normed Hand Kinematics '+'('+pars['tag']+')', fontname="Cambria", fontsize=12)
-    plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-    ax.set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-    ax2.set_ylabel('Fraction of Gesture [dimensionless]', fontname="Cambria", fontsize=12)
-    plt.grid(True)
-    plt.axis('tight')
-    ax.legend(loc='upper left')
-    ax2.legend(loc='upper right')
-    # fig.savefig('Figures/'+f'run_{index}.png')
-    plt.show()
+        plt.title('AVERAGE Network Activity and Smoothed-Normed Hand Kinematics '+f'Subject {s}', fontname="Cambria", fontsize=12)
+        plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
+        ax.set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
+        ax2.set_ylabel('Fraction of Gesture [dimensionless]', fontname="Cambria", fontsize=12)
+        plt.grid(True)
+        plt.axis('tight')
+        ax.legend(loc='upper left')
+        ax2.legend(loc='upper right')
+        fig.savefig('Figures/Subject_Sweep/'+f'subject_{s}.png')
+        plt.show()
 
 # %%
 '''
-sweep through subjects to see whose kinematics has the best envelope
+sweep through subjects to see whose activation and kinematics has the best envelope
 '''
 for s in subjects:
+    Average_Over_Samples(s, emg_labelled, time_pose, sampling_rate, visual=True)
 
 
 # %%
