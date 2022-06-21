@@ -56,7 +56,7 @@ elif type=='subject':
     no_electrodes = 12
     sampling_rate = 2000 #Hz
     classes = [6] #which movement to classify based on ID
-    subjects = [s+1 for s in range(4)] #subjects to extract
+    subjects = [s+1 for s in range(3)] #subjects to extract
     reps = 6
 
     #extract data

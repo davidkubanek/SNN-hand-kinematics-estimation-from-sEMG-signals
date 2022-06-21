@@ -75,7 +75,7 @@ if __name__=='__main__':
     #single subject, single class repetition: data structure with 12 channels (electrodes)
     #shape (12, samples)
     #convert to microVolts
-    index = Tag_To_Index(s=1, rep=2)
+    index = Tag_To_Index(s=2, rep=0)
     tag = Index_To_Tag(index)
     emg_data = emg_labelled[index]*1000000
     emg_data = np.swapaxes(emg_data, 0, 1)
