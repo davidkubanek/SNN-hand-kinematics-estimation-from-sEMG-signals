@@ -4,6 +4,7 @@
 import numpy as np
 from scipy.signal import butter, lfilter, resample
 import matplotlib.pyplot as plt
+plt.rc('font',family='Palatino')
 import math
 
 '''
@@ -245,13 +246,14 @@ class Plots:
         plt.clf()
         b, a = butter_bandpass(lowcut, highcut, fs, order=order)
         w, h = freqz(b, a, worN=2000)
-        plt.plot((fs * 0.5 / np.pi) * w, abs(h), label="order = %d" % order)
-        plt.plot([0, 0.5 * fs], [np.sqrt(0.5), np.sqrt(0.5)],
-                '--', label='sqrt(0.5)') #plot sqrt() threshold
+        plt.plot((fs * 0.5 / np.pi) * w, abs(h), label="order = %d" % order, color='black')
+        #plt.plot([0, 0.5 * fs], [np.sqrt(0.5), np.sqrt(0.5)],
+        #       '--', label='sqrt(0.5)') #plot sqrt() threshold
         plt.xlabel('Frequency (Hz)')
         plt.ylabel('Gain')
         plt.grid(True)
         plt.legend(loc='best')
+        #fig.savefig('Figures/band_pass.png', format='png', dpi=800)
 
         # Filter a noisy signal.
         plt.figure(2, figsize=(10,7))
@@ -276,7 +278,7 @@ class Plots:
             - time_pose: scalar value for time of corresponding class 
         '''
         fig = plt.figure(figsize=(10,7))
-        plt.plot(np.linspace(0,time_pose,len(data)), data, color='#52AD89')
+        plt.plot(np.linspace(0,time_pose,len(data)), data, color='#04c8e0')
         plt.title(plt_title)
         plt.xlabel('Time [seconds]')
         plt.ylabel('Voltage (\u03BCV)')
@@ -285,6 +287,7 @@ class Plots:
         plt.grid(True)
         plt.axis('tight')
         plt.legend(loc='upper left')
+        #fig.savefig('Figures/ff.png', format='png', dpi=800)
         plt.show()
 
     def plot_power_spectrum(self, xf, yf, plt_title, electrode=0, **kwargs):

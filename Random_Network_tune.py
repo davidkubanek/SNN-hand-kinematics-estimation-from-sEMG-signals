@@ -23,7 +23,7 @@ def default_params(**kwargs):
     pars = {}
 
     '''Hard Params'''
-    pars['N'] = 256 #no. of neurons in network
+    pars['N'] = 100 #no. of neurons in network
     pars['frac_ex'] = 0.8 #fraction of excitatory in the population 
     #sparsities of the input connections and of the net
     pars['inp_sparsity'] = 0.2
@@ -50,7 +50,7 @@ def default_params(**kwargs):
 
     return pars
 
-inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=2, c=6, rep=0, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=3, c=6, rep=5, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
 
 '''
 Define Network Architecture
@@ -227,14 +227,14 @@ net = Net_Architecture(pars, inp_indeces, inp_spike_times)
 Define Flexible Network Parameters
 '''
 #synapse weights scaling
-pars['inp_w_scale'] = 1 #input to ex.
-pars['ee_w_scale'] = 0.5 #ex. to ex.
+pars['inp_w_scale'] = 0.9 #input to ex.
+pars['ee_w_scale'] = 2 #ex. to ex.
 pars['ei_w_scale'] = 1 #ex. to in.
-pars['ie_w_scale'] = 0.2 #in. to ex.
+pars['ie_w_scale'] = 0.5 #in. to ex.
 pars['ro_w_scale'] = 100 #Ex. to Read Out
 #neuron model equations
 pars['tau_ex'] = 1*ms
-pars['tau_in'] = 5*ms
+pars['tau_in'] = 10*ms
 pars['El'] = -1 #mV #Leak reversal potential
 
 def Run_Net(pars, net=net, time_pose=time_pose):
@@ -381,27 +381,31 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     Calc. binned avg. firing rate (sliding window)
     '''
     dt = 0.1 #ms #the sampling time of PopulationRateMonitor
-    bin = 50 #ms #the desired sliding window size
+    bin = 200 #ms #the desired sliding window size
     idx = int(bin/dt) #length of window in array indeces
     #removing Hz units and cutting padding at end of pose
     pop_ex_r = np.asarray(pop_ex.rate)
     pop_in_r= np.asarray(pop_in.rate)
     pop_P_r = np.asarray(pop_P.rate)
+    pop_ro_r = np.asarray(pop_ro.rate)
     p_rate = []
     ex_rate = []
     in_rate = []
     f_rate = []
+    ro_rate = []
     for b in range(int(run_length/bin)):
         ex_rate += [np.average(pop_ex_r[b*idx:b*idx+idx])]
         in_rate += [np.average(pop_in_r[b*idx:b*idx+idx])]
         p_rate += [np.average(pop_P_r[b*idx:b*idx+idx])]
         f_rate += [np.average(pop_ex_r[b*idx:b*idx+idx])*frac_ex + np.average(pop_in_r[b*idx:b*idx+idx])*(1-frac_ex)]
-
+        ro_rate += [np.average(pop_ro_r[b*idx:b*idx+idx])]
     #Gaussian smoothing
     p_rate = ndimage.gaussian_filter1d(p_rate, sigma=2)
     ex_rate = ndimage.gaussian_filter1d(ex_rate, sigma=2)
     in_rate = ndimage.gaussian_filter1d(in_rate, sigma=2)
     f_rate = ndimage.gaussian_filter1d(f_rate, sigma=2)
+    ro_rate = ndimage.gaussian_filter1d(ro_rate, sigma=2)
+    
     '''
     Plotting binned firing rates of populations
     - subplots
@@ -414,8 +418,8 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     axs[0,0].set_title('Input Population', fontname="Cambria", fontsize=12)
     axs[0,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
     axs[0,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-    axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), f_rate, color='#04ccc4', label=tag) #04c8e0
-    axs[0,1].set_title('Global Population', fontname="Cambria", fontsize=12)
+    axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04ccc4', label=tag) #04c8e0
+    axs[0,1].set_title('Readout Neuron', fontname="Cambria", fontsize=12)
     axs[0,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
     axs[0,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
     axs[1,0].plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04ccc4', label=tag)
@@ -430,3 +434,4 @@ def Run_Net(pars, net=net, time_pose=time_pose):
     plt.show()
 
 Run_Net(pars, net=net, time_pose=time_pose)
+# %%

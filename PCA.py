@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 #%matplotlib qt 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+plt.rc('font',family='Palatino')
 import numpy as np
 
 #%%
@@ -64,7 +65,7 @@ def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0)
         PA_d = pca_d.components_.T*100
 
         fig = plt.figure(figsize=(10,7))
-        plt.plot(time, np.swapaxes(sample,1,0), color='#52AD89')
+        plt.plot(time, np.swapaxes(sample,1,0), color='#04c8e0')
         #color='#75BDA1'
         #color='#7CCEAE'
         plt.title('EMG Channels')
@@ -76,15 +77,34 @@ def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0)
         elev = 30
         azim = 60
         ax = Axes3D(fig, rect=[0, 0, 0.95, 1], elev=elev, azim=azim)
-        ax.scatter(sample[0,:],sample[1,:],sample[2,:], marker="+", color='#52AD89', alpha=0.8)
-        ax.set_xlabel('Electrode 0 (\u03BCV)')
-        ax.set_ylabel('Electrode 1 (\u03BCV)')
-        ax.set_zlabel('Electrode 2 (\u03BCV)')
-        ax.set_title('EMG Channels Feature Space')
+        ax.scatter(sample[0,:500],sample[1,:500],sample[2,:500], marker="+", color='#04c8e0', alpha=0.8)
+        ax.set_xlabel('Electrode 0 [\u03BCV]')
+        ax.set_ylabel('Electrode 1 [\u03BCV]')
+        ax.set_zlabel('Electrode 2 [\u03BCV]')
+        ax.set_title('EMG Channels Feature Space', fontsize=14)
         soa = np.array([[0,0,0,PA_d[0][0],PA_d[0][1],PA_d[0][2]],[0,0,0,PA_d[1][0],PA_d[1][1],PA_d[1][2]],[0,0,0,PA_d[2][0],PA_d[2][1],PA_d[2][2]]])
         Xs, Y, Z, U, V, W = zip(*soa)
-        ax.quiver(Xs, Y, Z, U, V, W, color='#AD5276', label='Principal Directions')
+        ax.quiver(Xs, Y, Z, U, V, W, color='#eb0962', label='Principal Directions')
         ax.legend()
+
+        #Only conducting PCA on 2 displayable dimensions for visualisation purposes
+        X_d = np.stack(sample[:2], axis=-1)
+        pca_d = PCA()
+        pca_d.fit(X_d)
+        #principal axes
+        PA_d = pca_d.components_.T*100
+        fig, ax = plt.subplots(figsize=(10, 7))
+        #perspective angles of plot
+        ax.scatter(sample[0,:500],sample[1,:500], marker="+", color='#04c8e0', alpha=0.5, label='samples')
+        ax.set_xlabel('Electrode 0 [\u03BCV]')
+        ax.set_ylabel('Electrode 1 [\u03BCV]')
+        ax.set_title('EMG Channels Feature Space', fontsize=14)
+        soa = np.array([[0,0,PA_d[0][0],PA_d[0][1]],[0,0,PA_d[1][0],PA_d[1][1]]])
+        Xs, Y, U, V = zip(*soa)
+        ax.quiver(Xs, Y, U, V, color='#eb0962', scale=700, width=0.004)
+        ax.plot([],[], color='#eb0962', label='principal directions')
+        ax.legend()
+        #fig.savefig('Figures/pc_space.png', format='png', dpi=800)
 
 
         if False:
@@ -116,15 +136,15 @@ def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0)
     if visual==1 or visual==2:
         #ORIGINAL CHANNELS AND 3 PRINCIPAL COMPONENTS
         fig = plt.figure(figsize=(10,7))
-        plt.plot(time, np.swapaxes(sample[1:],1,0), color='#52AD89')
-        plt.plot(time, sample[0], color='#52AD89', label='channels')
-        plt.plot(time, pc[0], color='#AD5276', label='first 3 principal components')
-        plt.plot(time, pc[1], color='#AD5276')
-        plt.plot(time, pc[2], color='#AD5276')
+        plt.plot(time, np.swapaxes(sample[1:],1,0), color='#04c8e0')
+        plt.plot(time, sample[0], color='#04c8e0', label='channels')
+        plt.plot(time, pc[0], color='#eb0962', label='first 3 principal components')
+        plt.plot(time, pc[1], color='#eb0962')
+        plt.plot(time, pc[2], color='#eb0962')
         plt.legend()
-        plt.xlabel('Time (s)')
-        plt.ylabel('Voltage (\u03BCV)')
-        plt.title('PCA decomposition')
+        plt.xlabel('Time [s]', fontsize=12)
+        plt.ylabel('Voltage [\u03BCV]', fontsize=12)
+        plt.title('PCA decomposition', fontsize=14)
         plt.show()
 
     '''
@@ -141,33 +161,35 @@ def PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9975, visual=0)
         #CORRELATION MATRIX
         fig, ax = plt.subplots(figsize=(7,5))
         im = ax.imshow(correlations, cmap='gray')
-        ax.set_xlabel('Principal Components')
+        ax.set_xlabel('Principal Components', fontsize=12)
         ax.xaxis.set_label_position('top')
-        ax.set_ylabel('Channels')
+        ax.set_ylabel('Channels', fontsize=12)
         ax.set_xticks([t for t in range(no_electrodes)])
         ax.xaxis.tick_top()
         ax.set_yticks([t for t in range(no_electrodes)])
         fig.colorbar(im, label='Pearson coeff.')
         im.set_clim(-1, 1)
-        ax.set_title('Correlation Matrix')
+        ax.set_title('Correlation Matrix', fontsize=14)
         fig.tight_layout()
+        #fig.savefig('Figures/corr_matrix.png', format='png', dpi=800)
         plt.show()
 
         #SORTED CORRELATION MATRIX
         sorted = np.sort(correlations, axis=0)[::-1]
         fig, ax = plt.subplots(figsize=(7,5))
         im = ax.imshow(sorted, cmap='gray')
-        ax.set_xlabel('Principal Components')
+        ax.set_xlabel('Principal Components', fontsize=12)
         ax.xaxis.set_label_position('top')
-        ax.set_ylabel('Correlation Rank (Channels)')
+        ax.set_ylabel('Correlation Rank (Channels)', fontsize=12)
         ax.set_xticks([t for t in range(no_electrodes)])
         ax.xaxis.tick_top()
         ax.set_yticks([t for t in range(no_electrodes)])
         ax.set_yticklabels([t+1 for t in range(no_electrodes)])
         fig.colorbar(im, label='Pearson coeff.')
         im.set_clim(-1, 1)
-        ax.set_title('Sorted Correlation Matrix')
+        ax.set_title('Sorted Correlation Matrix', fontsize=14)
         fig.tight_layout()
+        #fig.savefig('Figures/sorted_corr_matrix.png', format='png', dpi=800)
         plt.show()
 
     '''
@@ -191,21 +213,21 @@ def pc_histogram(data, no_electrodes, title):
     bins_custom = [b for b in range(no_electrodes+1)]
     fig = plt.figure(figsize=(10,7))
     plt.subplot()
-    n, bins, patches = plt.hist(x=data, bins=bins_custom,   color='#52AD89',
+    n, bins, patches = plt.hist(x=data, bins=bins_custom,   color='#04c8e0',
                                 alpha=0.7, rwidth=0.85)
 
     plt.grid(axis='y', alpha=0.75)
-    plt.xlabel('Electrode ID [dimensionless]', fontname="Cambria", fontsize=12)
-    plt.ylabel('Count [dimensionless]',fontname="Cambria", fontsize=12)
-    plt.title(title,fontname="Cambria", fontsize=12)
+    plt.xlabel('Electrode ID [dimensionless]', fontname="Palatino", fontsize=12)
+    plt.ylabel('Count [dimensionless]',fontname="Palatino", fontsize=12)
+    plt.title(title,fontname="Palatino", fontsize=14)
     plt.xticks([t+0.5 for t in range(no_electrodes)],[t for t in range(no_electrodes)])
     #plt.text(23, 45, r'$\mu=15, b=3$')
     maxfreq = n.max()
     # Set a clean upper y-axis limit.
     plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
 
-    #save
-    # fig.savefig('pc_electrodes_hist_global.svg', format='svg', dpi=1200)
+    if 'Class 6' in title:
+        fig.savefig('Figures/pc_electrodes_class_hist_2.png', format='png', dpi=800)
 
     plt.show()
 # %%

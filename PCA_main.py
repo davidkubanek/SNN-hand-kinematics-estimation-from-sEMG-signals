@@ -24,9 +24,9 @@ Parameters
 no_electrodes = 12
 sampling_rate = 2000 #Hz
 classes = [c+1 for c in range(17)] #which movements to classify based on ID in dataset
-subjects = [1,2] #subjects to extract
+subjects = [1] #subjects to extract
 #explained variance
-ex_var = 0.9
+ex_var = 0.95
 #no. of repetitions per class (movement)
 no_reps = 6
 
@@ -64,7 +64,7 @@ for s in subjects:
             pc_electrodes += np.ndarray.tolist(pce)
 
         #histogram of pc electrodes for current class
-        #pc_histogram(pc_electrodes, no_electrodes, 'Principal Electrodes Histogram: Class {}'.format(c))
+        pc_histogram(pc_electrodes, no_electrodes, 'Principal Electrodes Histogram: Class {}'.format(c))
         histograms[len(classes)*(s-1)+c-1] = np.histogram(pc_electrodes, bins=[b for b in range(no_electrodes+1)])[0]
         global_pc_electrodes += pc_electrodes
 #histogram of all samples
@@ -82,9 +82,9 @@ plt.scatter(y, no_pce_raw, color='#52AD89', marker='+')
 plt.plot(classes, no_pc_avg,color='#AD5276', label='mean')
 plt.plot(classes, np.array(no_pc_avg)+np.array(no_pc_std), color='#AD5276',linestyle='dashed', label='std')
 plt.plot(classes, np.array(no_pc_avg)-np.array(no_pc_std), color='#AD5276', linestyle='dashed')
-plt.xlabel('Class ID [dimensionless]', fontname="Cambria", fontsize=12)
-plt.ylabel('Principal Electrodes Count [dimensionless]',fontname="Cambria", fontsize=12)
-plt.title('No. of Principal Electrodes',fontname="Cambria", fontsize=12)
+plt.xlabel('Class ID [dimensionless]', fontname="Palatino", fontsize=12)
+plt.ylabel('Principal Electrodes Count [dimensionless]',fontname="Palatino", fontsize=12)
+plt.title('No. of Principal Electrodes',fontname="Palatino", fontsize=12)
 plt.xlim(0,len(classes)+1)
 
 #print the indeces of the globally most influential electrodes
@@ -106,13 +106,22 @@ markers = ['D','s','D','s','D','s','D','s','D','s','D','s','D','s','D','s','D']
 range_c = [p+1 for p in range(len(classes))]
 for bin, range_c, m in zip(data, range_c, markers):
     points = range_c*np.ones(len(bin))+np.random.normal(loc=0.0, scale=0.1, size=len(bin))
-    plt.scatter(points, bin, alpha=0.4, marker=m, color='#52AD89')
+    plt.scatter(points, bin, alpha=0.4, marker=m, color='#04c8e0')
 
-plt.scatter([], [], alpha=0.4, marker=m, color='#52AD89', label='samples')
-plt.xlabel('Class ID [dimensionless]',fontname="Cambria", fontsize=12)
-plt.ylabel('No. of Principal Electrodes [dimensionless]',fontname="Cambria", fontsize=12)
-plt.hlines(np.average(no_pce_raw),0.75, max(y)+0.25,color='#AD5276', label='mean', linestyles='dashed')
+plt.scatter([], [], alpha=0.4, marker=m, color='#04c8e0', label='samples')
+plt.xlabel('Class ID [dimensionless]',fontname="Palatino", fontsize=12)
+plt.ylabel('No. of Principal Electrodes [dimensionless]',fontname="Palatino", fontsize=12)
+plt.title('No. of Principal Electrodes',fontname="Palatino", fontsize=14)
+plt.hlines(np.average(no_pce_raw),0.75, max(y)+0.25,color='#eb0962', label='mean', linestyles='dashed')
 plt.legend()
-# fig.savefig('global_pce_box_plots.svg', format='svg', dpi=1200)
+#fig.savefig('Figures/global_pce_box_plots_S3_95.png', format='png', dpi=800)
 plt.show()
+# %%
+emg_labelled, y_temp, time_pose, _, _, _, _,_ = load_data([13], [6], sampling_rate, no_electrodes)
+
+#shape (12, samples)
+#convert to microVolts
+emg_data = emg_labelled[(c-1)*no_reps+rep]*1000000
+emg_data = np.swapaxes(emg_data, 0, 1)
+pce = PCA_reduction(emg_data, no_electrodes, sampling_rate, ex_var=ex_var, visual=2)
 # %%

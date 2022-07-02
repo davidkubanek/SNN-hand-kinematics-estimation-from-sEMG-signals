@@ -22,7 +22,7 @@ def default_params(**kwargs):
     pars = {}
 
     '''Hard Params'''
-    pars['N'] = 256 #no. of neurons in network
+    pars['N'] = 100 #no. of neurons in network
     pars['frac_ex'] = 0.8 #fraction of excitatory in the population 
     #sparsities of the input connections and of the net
     pars['inp_sparsity'] = 0.2
@@ -33,11 +33,11 @@ def default_params(**kwargs):
 
     '''Flexible Params'''
     #synapse weights scaling
-    pars['inp_w_scale'] = 1 #input to ex.
-    pars['ee_w_scale'] = 0.5 #ex. to ex.
+    pars['inp_w_scale'] = 0.9 #input to ex.
+    pars['ee_w_scale'] = 2 #ex. to ex.
     pars['ei_w_scale'] = 1 #ex. to in.
-    pars['ie_w_scale'] = 0.2 #in. to ex.
-    pars['ro_w_scale'] = 100 #Ex. to Read Out
+    pars['ie_w_scale'] = 0.5 #in. to ex.
+    pars['ro_w_scale'] = 120 #Ex. to Read Out
     #neuron model equations
     pars['tau_ex'] = 1*ms
     pars['tau_in'] = 10*ms
@@ -238,7 +238,7 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
 
     #if we want to tune parameters
     '''Hard Parameters'''
-    pars['N'] = 256 #no. of neurons in network
+    pars['N'] = 100 #no. of neurons in network
     pars['frac_ex'] = 0.8 #fraction of excitatory in the population
     #sparsities of the input connections and of the net
     pars['inp_sparsity'] = 0.2
@@ -248,11 +248,11 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
     pars['refractory'] = 3*ms #refractory period
     '''Flexible Parameters'''
     #synapse weights scaling
-    pars['inp_w_scale'] = 1 #input to ex.
-    pars['ee_w_scale'] = 0.5 #ex. to ex.
+    pars['inp_w_scale'] = 0.9 #input to ex.
+    pars['ee_w_scale'] = 2 #ex. to ex.
     pars['ei_w_scale'] = 1 #ex. to in.
-    pars['ie_w_scale'] = 0.2 #in. to ex.
-    pars['ro_w_scale'] = 100 #Ex. to Read Out
+    pars['ie_w_scale'] = 0.5 #in. to ex.
+    pars['ro_w_scale'] = 120 #Ex. to Read Out
     #neuron model equations
     pars['tau_ex'] = 1*ms
     pars['tau_in'] = 10*ms
@@ -373,9 +373,9 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_P.t/ms, spike_P.i, '.k')
-            plt.title('Input Population', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+            plt.title('Input Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Neuron index [dimensionless]', fontname="Palatino", fontsize=12)
             plt.yticks([int(tick) for tick in range(inp_N)]);
             #plt.yticks([int(tick)*4 for tick in range(int(max(inp_N)/4)+1)]);
             plt.show()
@@ -383,27 +383,27 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_ex.t/ms, spike_ex.i, '.k')
-            plt.title('Excitatory Population', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+            plt.title('Excitatory Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Neuron index [dimensionless]', fontname="Palatino", fontsize=12)
             #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
             plt.show()
 
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_in.t/ms, spike_in.i, '.k')
-            plt.title('Inhibitory Population', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+            plt.title('Inhibitory Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Neuron index [dimensionless]', fontname="Palatino", fontsize=12)
             #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
             plt.show()
 
             #raster plot
             fig = plt.figure(figsize=(10,7))
             plot(spike_ro.t/ms, spike_ro.i, '.k')
-            plt.title('Readout Neuron', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+            plt.title('Readout Neuron', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Neuron index [dimensionless]', fontname="Palatino", fontsize=12)
             #plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
             plt.show()
 
@@ -412,7 +412,7 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
         '''
         from scipy import ndimage
         dt = 0.1 #ms #the sampling time of PopulationRateMonitor
-        bin = 50 #ms #the desired sliding window size
+        bin = 200 #ms #the desired sliding window size
         idx = int(bin/dt) #length of window in array indeces
         #removing Hz units and cutting padding at end of pose
         pop_ex_r = np.asarray(pop_ex.rate)
@@ -436,34 +436,37 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
         in_rate = ndimage.gaussian_filter1d(in_rate, sigma=2)
         f_rate = ndimage.gaussian_filter1d(f_rate, sigma=2)
         ro_rate = ndimage.gaussian_filter1d(ro_rate, sigma=2)
-        '''
-        Plotting binned firing rates of populations
-        - subplots
-        '''
-        #two by two subplot
-        fig, axs = plt.subplots(2, 2, figsize=(10,7))
-        plt.tight_layout()
-        fig.subplots_adjust(hspace=0.4, wspace=0.2)
+
+        #readout time axis
         ro_t = np.linspace(bin, run_length, int(run_length/bin))
-        axs[0,0].plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04ccc4', label=tag)
-        axs[0,0].set_title('Input Population', fontname="Cambria", fontsize=12)
-        axs[0,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-        axs[0,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04ccc4', label=tag) #04c8e0
-        axs[0,1].set_title('Readout Neuron', fontname="Cambria", fontsize=12)
-        axs[0,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-        axs[0,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        axs[1,0].plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04ccc4', label=tag)
-        axs[1,0].set_title('Excitatory Population', fontname="Cambria", fontsize=12)
-        axs[1,0].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-        axs[1,0].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        axs[1,1].plot(np.linspace(bin, run_length, int(run_length/bin)), in_rate, color='#04ccc4', label=tag)
-        axs[1,1].set_title('Inhibitory Population', fontname="Cambria", fontsize=12)
-        axs[1,1].set_xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-        axs[1,1].set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        plt.legend();
-        # fig.savefig('Figures/Run_Sweep/'+f'run_{index}.png')
-        plt.show()
+        if True:
+            '''
+            Plotting binned firing rates of populations
+            - subplots
+            '''
+            #two by two subplot
+            fig, axs = plt.subplots(2, 2, figsize=(10,7))
+            plt.tight_layout()
+            fig.subplots_adjust(hspace=0.4, wspace=0.2)
+            axs[0,0].plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04c8e0', label=tag)
+            axs[0,0].set_title('Input Population', fontname="Palatino", fontsize=12)
+            axs[0,0].set_xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            axs[0,0].set_ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            axs[0,1].plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0', label=tag) #04c8e0
+            axs[0,1].set_title('Readout Neuron', fontname="Palatino", fontsize=12)
+            axs[0,1].set_xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            axs[0,1].set_ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            axs[1,0].plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04c8e0', label=tag)
+            axs[1,0].set_title('Excitatory Population', fontname="Palatino", fontsize=12)
+            axs[1,0].set_xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            axs[1,0].set_ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            axs[1,1].plot(np.linspace(bin, run_length, int(run_length/bin)), in_rate, color='#04c8e0', label=tag)
+            axs[1,1].set_title('Inhibitory Population', fontname="Palatino", fontsize=12)
+            axs[1,1].set_xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            axs[1,1].set_ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            plt.legend();
+            #fig.savefig('Figures/'+f'activity_run_{index}.png', dpi=800)
+            plt.show()
 
         if False:
             '''
@@ -472,58 +475,66 @@ def Net_Simulation(emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subject
             '''
             t = np.linspace(bin, run_length, int(run_length/bin))
             fig = plt.figure(figsize=(10,7))
-            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#52AD89', label=tag)
-            plt.title('Input Population Firing Rate', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Binned Avg. Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-            plt.legend()
+            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04c8e0')
+            plt.title('Input Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            #fig.savefig('Figures/'+f'activity_run_{index}_input_100N.png', dpi=800)
 
             fig = plt.figure(figsize=(10,7))
-            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#52AD89', label=tag)
-            plt.title('Ex. Population Firing Rate', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Binned Avg. Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-            plt.legend()
+            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), ex_rate, color='#04c8e0')
+            plt.title('Excitatory Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            #fig.savefig('Figures/'+f'activity_run_{index}_ex_100N.png', dpi=800)
 
             fig = plt.figure(figsize=(10,7))
-            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), in_rate, color='#52AD89', label=tag)
-            plt.title('In. Population Firing Rate', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Binned Avg. Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-            plt.legend()
+            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), in_rate, color='#04c8e0')
+            plt.title('Inhibitory Population', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            #fig.savefig('Figures/'+f'activity_run_{index}_inh_100N.png', dpi=800)
 
             fig = plt.figure(figsize=(10,7))
-            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), f_rate, color='#52AD89', label=tag)
-            plt.title('Global Population Firing Rate', fontname="Cambria", fontsize=12)
-            plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-            plt.ylabel('Binned Avg. Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-            plt.legend()
+            plt.plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0')
+            plt.title('Readout Neuron', fontname="Palatino", fontsize=12)
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            plt.ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            #fig.savefig('Figures/'+f'activity_run_{index}_ro_100N.png', dpi=800)
 
-        '''overlay activity and norm. kinematics data'''
-        fig, ax = plt.subplots(figsize=(10,7))
-        ax.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04ccc4', label='Input Population')
-        ax.plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0', label='Readout Neuron')
-        ax2=ax.twinx()
-        for sens in dom_nodes:
-            ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[sens,:]))*1000, np.ones(np.shape(hand_kin_data[sens,:]))-ndimage.gaussian_filter1d(hand_kin_data[sens,:], sigma=75), label='Node: '+str(sens), color='red', alpha=0.3)
-        
-        plt.title('Network Activity and Smoothed-Normed Hand Kinematics '+'('+tag+')', fontname="Cambria", fontsize=12)
-        plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-        ax.set_ylabel('Firing Rate [Hz]', fontname="Cambria", fontsize=12)
-        ax2.set_ylabel('Fraction of Gesture [dimensionless]', fontname="Cambria", fontsize=12)
-        plt.grid(True)
-        plt.axis('tight')
-        ax.legend(loc='upper left')
-        ax2.legend(loc='upper right')
-        # fig.savefig('Figures/'+f'run_{index}.png')
-        plt.show()
+        if True:
+            '''overlay activity and norm. kinematics data'''
+            fig, ax = plt.subplots(figsize=(10,7))
+            #ax.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04c8e0', label='Input Population', linestyle='--')
+            ax.plot(np.linspace(bin, run_length, int(run_length/bin)), ro_rate, color='#04c8e0', label='Readout Neuron')
+            ax2=ax.twinx()
+            #extracting gesture ratio from kinematics data (avg of dominant joints/nodes)
+            gesture_ratio = np.average(hand_kin_data[dom_nodes], axis=0)
+            #for sens in dom_nodes:
+            #    if sens==dom_nodes[0]:
+            #        ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[sens,:]))*1000, np.ones(np.shape(hand_kin_data[sens,:]))-ndimage.gaussian_filter1d(hand_kin_data[sens,:], sigma=75), label='Dominant Joints', color='#eb0962', alpha=0.6)
+            #    else:
+            #        ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[sens,:]))*1000, np.ones(np.shape(hand_kin_data[sens,:]))-ndimage.gaussian_filter1d(hand_kin_data[sens,:],sigma=75), color='#eb0962', alpha=0.6) #sigma=75), label='Sensor: '+str(sens))
+            ax2.plot(np.linspace(0,time_pose[index],len(gesture_ratio))*1000, ndimage.gaussian_filter1d(gesture_ratio, sigma=75), label='Hand Kinematics', color='#eb0962')
+            plt.title('Network Activity and Hand Kinematics ', fontname="Palatino", fontsize=14)#+'('+tag+')'
+            plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+            ax.set_ylabel('Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+            ax2.set_ylabel('Gesture Ratio [dimensionless]', fontname="Palatino", fontsize=12)
+            plt.grid(True)
+            plt.axis('tight')
+            ax.legend(loc='upper left')
+            ax2.legend(loc='upper right')
+            #fig.savefig('Figures/test_run_overlay_100N.png', format='png', dpi=800)
+            plt.show()
 
-        return pars, ro_rate, ro_t, hand_kin_data[dom_nodes]
+        return pars, ro_rate, ro_t, gesture_ratio
 
-    pars, ro_rate, ro_t, hand_kin_data = Run_Net(pars, net=net, time_pose=time_pose)
+    pars, ro_rate, ro_t, gesture_ratio  = Run_Net(pars, net=net, time_pose=time_pose)
 
-    return pars, ro_rate, ro_t, hand_kin_data
+    return pars, ro_rate, ro_t, gesture_ratio
 
 #pars, ro_rate, ro_t, hand_kin_data = Net_Simulation(emg_labelled, time_pose, s=3, c=6, rep=0)
 
 #emg_labelled, time_pose, s=-1, c=0, rep=2, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate, hand_kin_labelled=hand_kin_labelled
+
+# %%

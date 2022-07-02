@@ -9,13 +9,16 @@ from SNN_front_end import *
 
 #%%
 if __name__ == '__main__':
+    inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=3, c=6, rep=0, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
     #raster plot
     fig = plt.figure(figsize=(10,7))
     plt.plot(inp_spike_times, inp_indeces, '.k')
-    plt.title('Input Spikes', fontname="Cambria", fontsize=12)
-    plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-    plt.ylabel('Neuron index [dimensionless]', fontname="Cambria", fontsize=12)
+    plt.title('Input Spikes Raster Plot', fontname="Palatino", fontsize=12)
+    plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+    plt.ylabel('Neuron index [dimensionless]', fontname="Palatino", fontsize=12)
     plt.yticks([int(tick)*4 for tick in range(int(max(inp_indeces)/4)+1)]);
+    plt.xlim([0, 500])
+    #fig.savefig('Figures/input_raster.png', format='png', dpi=1200)
 
 # %%
 '''
@@ -25,14 +28,37 @@ Plot original and filtered data for a single electrode
 if __name__ == '__main__':
     # Sample rate and desired cutoff frequencies (in Hz)
     fs = 2000
-    lowcut = 100
-    highcut = 200
+    lowcut = 50
+    highcut = 100
     order=4
     data = emg_data[0]
     #Instantiate the plotter class
     p = Plots()
     p.plot_bandpass(data,  time_pose[0], order, fs, lowcut, highcut)
-    data_filtered = butter_bandpass_filter(data, lowcut, highcut, fs, order=4)
+
+#%%
+    p.plot_EMG(data, time_pose[0], 'Raw EMG Data', ylabel=None)
+
+    #I. First amplifier
+    gain_dB = 30
+    data = amplifier(data, gain_dB, plot=False, time_pose=time_pose[0], Plots_object=p)
+    p.plot_EMG(data, time_pose[0], 'Amplified', ylabel=None)
+
+    #II. Split into frequency bands
+    f_bands = [1,50,100,500,999] #frequency intervals
+    #data = cochlear_freq_split(data, f_bands, fs=2000, order=4, no_electrodes=no_electrodes)
+    
+    data = butter_bandpass_filter(data, lowcut, highcut, fs, order=4)
+    p.plot_EMG(data, time_pose[0], 'Filtered', ylabel=None)
+
+    #III. Second amplifier
+    gain_dB = 30
+    data = amplifier(data, gain_dB, plot=False, time_pose=time_pose[0], Plots_object=p)
+    p.plot_EMG(data, time_pose[0], 'Amplified', ylabel=None)
+
+    #IV. Half-rectifier
+    data = half_rectifier(data, plot=False, time_pose=time_pose[0], Plots_object=p)
+    p.plot_EMG(data, time_pose[0], 'Rectified', ylabel=None)
 
 # %%
 '''
@@ -75,7 +101,7 @@ if __name__=='__main__':
     #single subject, single class repetition: data structure with 12 channels (electrodes)
     #shape (12, samples)
     #convert to microVolts
-    index = Tag_To_Index(s=2, rep=0)
+    index = Tag_To_Index(s=13, rep=1)
     tag = Index_To_Tag(index)
     emg_data = emg_labelled[index]*1000000
     emg_data = np.swapaxes(emg_data, 0, 1)
@@ -92,7 +118,7 @@ if __name__=='__main__':
     '''Kinematics data'''
     fig = plt.figure(figsize=(10,7))
     for s in range(no_electrodes):
-        plt.plot(np.linspace(0,time_pose[index],len(hand_kin_data[s,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
+        plt.plot(np.linspace(0,time_pose[index],len(hand_kin_data[s,:])), hand_kin_data[s,:], label='Node: '+str(s), color='#eb0962')
     plt.title('Hand Kinematics')
     plt.xlabel('Time [seconds]')
     plt.ylabel('Node Angle (degrees)')
@@ -102,19 +128,20 @@ if __name__=='__main__':
 
     '''overlay emg and kinematics data'''
     fig, ax = plt.subplots(figsize=(10,7))
-    ax.plot(np.linspace(0,time_pose[index] ,len(emg_data[0,:])), emg_data[0,:], color='#52AD89', label='EMG')
+    ax.plot(np.linspace(0,time_pose[index] ,len(emg_data[0,:])), emg_data[0,:], color='#04c8e0', label='EMG')
     ax2=ax.twinx()
     for s in range(no_electrodes): #dom_nodes:
         if s in dom_nodes:
-            ax2.plot(np.linspace(0,time_pose[index] ,len(hand_kin_data[s,:])), hand_kin_data[s,:], color='#F5A442', label='DomNode'+str(s))
+            ax2.plot(np.linspace(0,time_pose[index] ,len(hand_kin_data[s,:])), hand_kin_data[s,:], color='#eb0962', label='DomNode'+str(s))
             continue
         #ax2.plot(np.linspace(0,time_pose[index],len(hand_kin_data[s,:])), hand_kin_data[s,:], label='Node: '+str(s), color='red')
 
-    plt.title('EMG and Hand Kinematics')
-    plt.xlabel('Time [seconds]')
-    ax.set_ylabel('Voltage (\u03BCV)')
-    ax2.set_ylabel('Node Angle (degrees)')
-    plt.xlabel('Time [seconds]')
+    plt.rc('font',family='Palatino')
+    plt.title('EMG and Hand Kinematics',fontname='Palatino', fontsize=14)
+    plt.xlabel('Time [seconds]',fontname='Palatino', fontsize=12)
+    ax.set_ylabel('Voltage (\u03BCV)',fontname='Palatino', fontsize=12)
+    ax2.set_ylabel('Node Angle (degrees)',fontname='Palatino', fontsize=12)
+    plt.xlabel('Time [seconds]',fontname='Palatino', fontsize=12)
     plt.grid(True)
     plt.axis('tight')
     plt.legend(loc='upper left')
@@ -166,3 +193,5 @@ if __name__=='__main__':
     for ch in range(data_filtered.shape[0]):
         p.plot_power_spectrum(xf, yf, 'Single Motion Filtered Power Spectrum', electrode=ch, power=int(np.sum(np.abs(yf)[ch])))
     
+
+

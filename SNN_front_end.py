@@ -5,6 +5,7 @@ import numpy as np
 from pyrsistent import b
 from scipy.signal import butter, lfilter, resample
 import matplotlib.pyplot as plt
+plt.rc('font',family='Palatino')
 import importlib
 import Load_Data
 #this method of import ensures that when support scripts are updated, the changes are imported in this script
@@ -56,7 +57,7 @@ elif type=='subject':
     no_electrodes = 12
     sampling_rate = 2000 #Hz
     classes = [6] #which movement to classify based on ID
-    subjects = [s+1 for s in range(3)] #subjects to extract
+    subjects = [3,13]#[s+1 for s in range(20)] #subjects to extract
     reps = 6
 
     #extract data
@@ -166,7 +167,7 @@ def SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=-1, c=0, rep=2,
     #emg_data = emg_data[pc_electrodes,:]
 
     #most influential electrodas from global offline PCA analysis
-    pc_electrodes = np.array([0, 1, 6, 7, 8, 9])
+    pc_electrodes = np.array([2,4,5,6,7,11])
     '''
     Front-end data pre-processing
     '''
@@ -185,3 +186,104 @@ def SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=-1, c=0, rep=2,
 
     return inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes
 
+
+
+#%%
+if __name__ == '__main__':
+    '''
+    For tuning the parameters of the front-end LIF neurons for spike encoding
+    We can change params in Brian_Input.py and run this section to evalution the effect on activation envelope of the input layer
+    '''
+    import importlib
+    import Brian_Input
+    importlib.reload(Brian_Input)
+    from Brian_Input import *
+    from brian2 import *
+
+    def SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=-1, c=0, rep=2, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate):
+        '''
+        Returns the input channels spike trains for a given class and repetition id
+        Input:
+            - s, c and rep: subject, class and repetition id of movement for which to get input channels spike trains
+            - type='class' or 'subject' depending on whether the data contains samples from:
+                - a single subject with many classes OR
+                - a single class with many subjects
+        '''
+        #single subject, single class repetition: data structure with 12 channels (electrodes)
+        #shape (12, samples)
+        #convert to microVolts
+        index = Tag_To_Index(s=s, c=c, rep=rep, type=type)
+        tag = Index_To_Tag(index, type=type)
+        emg_data = emg_labelled[index]*1000000
+        emg_data = np.swapaxes(emg_data, 0, 1)
+        #convert hand kinematics data to the same format
+        hand_kin_data = hand_kin_labelled[index]
+        hand_kin_data = np.swapaxes(hand_kin_data, 0, 1)
+        #get indices of 5 dominant (i.e., most varying) nodes
+        hk_std = np.std(hand_kin_data, axis=1)
+        dom_nodes = np.where(hk_std>=np.average(hk_std)+np.std(hk_std))[0] #higher than (average + std) variability
+        # dom_nodes = (-hk_std).argsort()[:5]
+        hand_kin_data = NormalizeData(hand_kin_data)
+
+        '''
+        PCA
+        '''
+        #sample = emg_data[:no_electrodes+1,:200]
+        #pc_electrodes = PCA_reduction(sample, no_electrodes, sampling_rate, ex_var=0.9, visual=0)
+        #emg_data = emg_data[pc_electrodes,:]
+
+        #most influential electrodas from global offline PCA analysis
+        pc_electrodes = np.array([0, 1, 6, 7, 8, 9])
+        '''
+        Front-end data pre-processing
+        '''
+        front_end_data = Front_End(emg_data[pc_electrodes], time_pose, no_electrodes=len(pc_electrodes))
+        print('No. of front-end channels:', front_end_data.shape[0])
+
+        '''
+        LIF Input Layer Spike Encoding
+        '''
+        #Extracting input spike trains
+        channels = front_end_data.shape[0]
+        sim_run_time = time_pose[index]*1000 #sim time directly related to length of injected current
+        #alternatively, but slower
+        #sim_run_time = np.max(time_pose[:channels])*1000 #ms #defined such that simulation time is always longer or equal to the gesture time
+        inp_spike_times, inp_indeces = Input_Spikes(front_end_data[:channels], sim_run_time, sampling_rate, R=1, scale=1000000, visual=False, Plots_object=p)
+
+        return inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes
+
+    rep = 0
+    inp_spike_times, inp_indeces, index, tag, hand_kin_data, dom_nodes = SNN_Full_Input(emg_labelled, hand_kin_labelled, time_pose, s=13, c=6, rep=rep, type=type, subjects=subjects, classes=classes, reps=reps, no_electrodes=no_electrodes, sampling_rate=sampling_rate)
+
+    start_scope()
+
+    P = SpikeGeneratorGroup(24, inp_indeces, inp_spike_times*ms, name='P')
+
+    #input spiking population
+    spike_P = SpikeMonitor(P, name='spike_P')
+    pop_P = PopulationRateMonitor(P, name='pop_P')
+    run_length = time_pose[index]*1000 #ms #duration of sim
+
+    run(run_length*ms)
+
+    from scipy import ndimage
+    dt = 0.1 #ms #the sampling time of PopulationRateMonitor
+    bin = 200 #ms #the desired sliding window size
+    idx = int(bin/dt) #length of window in array indeces
+    #removing Hz units and cutting padding at end of pose
+    pop_P_r = np.asarray(pop_P.rate)
+    p_rate = []
+    for b in range(int(run_length/bin)):
+        p_rate += [np.average(pop_P_r[b*idx:b*idx+idx])]
+    #Gaussian smoothing
+    p_rate = ndimage.gaussian_filter1d(p_rate, sigma=2)
+        
+
+    t = np.linspace(bin, run_length, int(run_length/bin))
+    fig = plt.figure(figsize=(10,7))
+    plt.plot(np.linspace(bin, run_length, int(run_length/bin)), p_rate, color='#04c8e0', label=tag)
+    plt.title('Input Population Firing Rate', fontname="Palatino", fontsize=12)
+    plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+    plt.ylabel('Binned Avg. Firing Rate [Hz]', fontname="Palatino", fontsize=12)
+    plt.legend()
+# %%

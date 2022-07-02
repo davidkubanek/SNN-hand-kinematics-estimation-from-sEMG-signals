@@ -23,12 +23,22 @@ def default_pars(**kwargs):
 
   # typical neuron parameters#
   pars['V_th'] = -55.     # spike threshold [mV]
+  pars['V_reset'] = -65.  # reset potential [mV]
+  pars['tau_m'] = 10.     # membrane time constant [ms]
+  pars['g_L'] = 10.       # leak conductance [nS]
+  pars['V_init'] = -75.   # initial potential [mV]
+  pars['E_L'] = -75.      # leak reversal potential [mV]
+  pars['tref'] = 2.       # refractory time (ms)
+  '''
+  pars['V_th'] = -55.     # spike threshold [mV]
   pars['V_reset'] = -75.  # reset potential [mV]
   pars['tau_m'] = 10.     # membrane time constant [ms]
   pars['g_L'] = 10.       # leak conductance [nS]
   pars['V_init'] = -75.   # initial potential [mV]
   pars['E_L'] = -75.      # leak reversal potential [mV]
   pars['tref'] = 2.       # refractory time (ms)
+  '''
+
 
   # simulation parameters #
   pars['T'] = 400.  # Total duration of simulation [ms]
@@ -155,13 +165,14 @@ def Input_Spikes(input_current, sim_run_time, sampling_rate, R=1, scale=1000000,
       #plot the neuron excitation and spikes
       fig = plt.figure(figsize=(10,7))
       plt.plot(pars['range_t'],v, color='#52AD89')
-      plt.title('Neuron Excitation', fontname="Cambria", fontsize=12)
-      plt.xlabel('Time [ms]', fontname="Cambria", fontsize=12)
-      plt.ylabel('Voltage [mV]', fontname="Cambria", fontsize=12)
+      plt.title('Neuron Excitation', fontname="Palatino", fontsize=12)
+      plt.xlabel('Time [ms]', fontname="Palatino", fontsize=12)
+      plt.ylabel('Voltage [mV]', fontname="Palatino", fontsize=12)
       for spike in rec_spike_times:
           plt.axvline(spike, ls='--', lw=3, color='#AD5276')
       plt.show()
       
+  print('V_th [mV]:', pars['V_th'], '\nV_reset [mV]:', pars['V_reset'], '\ntau [ms]:',pars['tau_m'], '\nrefractory [ms]:',pars['tref'], '\nTime [ms]:', pars['T'])
   return np.array(inp_spike_times), np.array(inp_indeces)
 
 # %%

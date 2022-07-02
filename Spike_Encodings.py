@@ -11,9 +11,13 @@ Can display spike encoding and signal reconstruction.
 #%%
 import numpy as np
 import matplotlib.pyplot as plt
+plt.rc('font',family='Palatino')
 import scipy.io as spio
 import os
-from Load_Data import sample_data
+import importlib
+import Load_Data 
+importlib.reload(Load_Data)
+from Load_Data import *
 
 
 
@@ -208,33 +212,39 @@ def plot_encoding_bi_recon(data_sample, sampling_rate, UP_spike_times, DOWN_spik
     fig, (ax1, ax2, ax3) = plt.subplots(3,1,figsize=(10,7), sharex=True)
     # fig.tight_layout()
     #original signal
-    ax1.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample)), data_sample*1000000, color='black') #in microVolts
-    ax1.set_title('raw EMG data')
-    ax1.set_ylabel('Voltage (\u03BCV)')
-    #spike raster plot
-    ax2.eventplot([UP_spike_times, DOWN_spike_times], color= 'black', linelengths = 0.5)
-    ax2.set_title('Spike Encoding Raster Plot')
-    ax2.set_yticks([0,1])
-    ax2.set_yticklabels(['DOWN', 'UP'])
-    ax2.set_ylabel('Neuron activation')
+    ax1.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample))*1000, data_sample*1000000, color='black') #in microVolts
+    ax1.set_title('Raw EMG Data', fontsize=12)
+    ax1.set_ylabel('Voltage [\u03BCV]', fontsize=12)
+    #spike raster plot BIPOLAR
+    # ax2.eventplot([UP_spike_times, DOWN_spike_times], color= 'black', linelengths = 0.5)
+    # ax2.set_title('Spike Encoding Raster Plot')
+    # ax2.set_yticks([0,1])
+    # ax2.set_yticklabels(['DOWN', 'UP'])
+    # ax2.set_ylabel('Neuron activation')
+    #spike raster plot UNIPOLAR
+    ax2.eventplot(UP_spike_times*1000, color= 'black', linelengths = 0.5)
+    ax2.eventplot(DOWN_spike_times*1000, color= 'black', linelengths = 0.5)
+    ax2.set_yticks([])
+    ax2.set_title('Spike Encoding Raster Plot', fontsize=12)
+    #ax2.set_ylabel('Neuron activation', fontsize=12)
     # ax2.set_xlabel('Spike time (s)')
     #reconstructed signal
-    ax3.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample)), reconstr_data*1000000, color='black') #in microVolts
-    ax3.set_title('Reconstructed Signal')
-    ax3.set_ylabel('Voltage (\u03BCV)')
+    ax3.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample))*1000, reconstr_data*1000000, color='black') #in microVolts
+    ax3.set_title('Reconstructed Signal', fontsize=12)
+    ax3.set_ylabel('Voltage [\u03BCV]',fontsize=12)
     ax3.set_ylim(ax1.get_ylim())
-    plt.xlabel('Time (s)')
-    # fig.savefig('EMG_spike_encoding_recon.svg', format='svg', dpi=1200)
+    plt.xlabel('Time [ms]', fontsize=12)
+    fig.savefig('Figures/EMG_spike_encoding_recon.png', format='png', dpi=800)
     plt.show()
     
     fig2 = plt.figure(figsize=(14,7))
-    plt.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample)), data_sample*1000000, color='black', label='original') #in microVolts
-    plt.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample)), reconstr_data*1000000, color='red', linestyle='--', label='reconstructed') #in microVolts
-    plt.title('Signal Reconstruction')
-    plt.ylabel('Voltage (\u03BCV)')
-    plt.xlabel('Time (s)')
+    plt.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample))*1000, data_sample*1000000, color='black', label='original') #in microVolts
+    plt.plot(np.linspace(0, len(data_sample)/sampling_rate, len(data_sample))*1000, reconstr_data*1000000, color='#eb0962', linestyle='--', label='reconstructed') #in microVolts
+    plt.title('Signal Reconstruction', fontsize=14)
+    plt.ylabel('Voltage [\u03BCV]', fontsize=12)
+    plt.xlabel('Time [ms]', fontsize=12)
     plt.legend()
-    # fig2.savefig('EMG_origin_recon.svg', format='svg', dpi=1200)
+    fig2.savefig('Figures/EMG_origin_recon.png', format='png', dpi=800)
     plt.show()
  
 
@@ -246,13 +256,13 @@ Testing hub
 if __name__ == "__main__":
     sampling_rate = 2000 #Hz
     #load sample data for one subject, one class
-    file_name = 'S11_E1_A1.mat'
+    file_name = 'S13_E1_A1.mat'
     class_ID = 2
     emg_pose_1, time_pose_1 = sample_data(file_name, class_ID)
-    data_sample = emg_pose_1[:500,0]
+    data_sample = emg_pose_1[2000:2300,0]
     # plot_EMG(emg_pose_1, no_electrodes=no_electrodes, pose='1')
     # UP_spike_times, DOWN_spike_times, UP_spikes, DOWN_spikes, spikes, V_th = TBR_encod(data_sample, sampling_rate, f=1, refractory=3)
-    UP_spike_times, DOWN_spike_times, UP_spikes, DOWN_spikes, spikes, V_th = SF_encod(data_sample, sampling_rate, f=1, refractory=0)
+    UP_spike_times, DOWN_spike_times, UP_spikes, DOWN_spikes, spikes, V_th = SF_encod(data_sample, sampling_rate, f=2, refractory=0)
 
 
 

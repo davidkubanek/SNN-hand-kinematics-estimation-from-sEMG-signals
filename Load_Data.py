@@ -79,9 +79,9 @@ def load_data(subjects, classes, sampling_rate, no_electrodes, extract_features=
     #  windows
     # data_path = 'C:\\Users\\David\\Projects\\Data'
     #  mac (internal storage)
-    # data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
+    data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
     # mac (external hard drive storage)
-    data_path = '/Volumes/Kubánek UCL/Data/thesis_emg'
+    # data_path = '/Volumes/Kubánek UCL/Data/thesis_emg'
 
     subjects_labels = [str(s) for s in subjects]
     #target variable stores class ID for each EMG data stream
@@ -188,8 +188,10 @@ def sample_data(file_name = 'S11_E1_A1.mat', class_ID=1, extract_features=False,
         
     '''
     #explicit path to data folder
-    data_path = 'C:\\Users\\David\\Projects\\Data'
-    file_name = '\\'+file_name #relative path from current script directory to data file
+    # data_path = 'C:\\Users\\David\\Projects\\Data'
+    #  mac (internal storage)
+    data_path = '/Users/david/Documents/Code/Data/EMG_data_NinaPro_VII'
+    file_name = '/'+file_name #relative path from current script directory to data file
     abs_file_path = data_path + file_name #absolute path to data file
     #load data from MATLAB file
     mat = (spio.loadmat(abs_file_path, squeeze_me=True))
