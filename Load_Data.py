@@ -3,7 +3,7 @@ Created on April 03 14:54:55 2022
 
 @author: David
 
-Can load data for all subjects for all classes.
+Can load data from online NinaPro DB7 database for all subjects for all classes.
 Can also load data for a single subject in a single class.
 Can do data extraction straight on after data load.
 """

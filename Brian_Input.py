@@ -1,7 +1,7 @@
 #%%
 '''
 Holds functions generating spike encoding.
-Represents the last layer of the front-ent.
+Represents the last layer of the front-end.
 Encodes the processed time-series signal into a series of spike trains: LIF input neurons.
 '''
 import importlib
@@ -29,17 +29,7 @@ def default_pars(**kwargs):
   pars['V_init'] = -75.   # initial potential [mV]
   pars['E_L'] = -75.      # leak reversal potential [mV]
   pars['tref'] = 2.       # refractory time (ms)
-  '''
-  pars['V_th'] = -55.     # spike threshold [mV]
-  pars['V_reset'] = -75.  # reset potential [mV]
-  pars['tau_m'] = 10.     # membrane time constant [ms]
-  pars['g_L'] = 10.       # leak conductance [nS]
-  pars['V_init'] = -75.   # initial potential [mV]
-  pars['E_L'] = -75.      # leak reversal potential [mV]
-  pars['tref'] = 2.       # refractory time (ms)
-  '''
-
-
+ 
   # simulation parameters #
   pars['T'] = 400.  # Total duration of simulation [ms]
   pars['dt'] = .1   # Simulation time step [ms]

@@ -5,7 +5,7 @@ Created on April 03 14:54:55 2022
 
 Can load data collected using the custom BioWolf EMG device (our data).
 
-all subjects for all classes.
+All subjects for all classes.
 Can also load data for a single subject in a single class.
 Can do data extraction straight on after data load.
 """
